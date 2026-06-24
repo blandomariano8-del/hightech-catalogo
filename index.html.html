@@ -104,58 +104,97 @@ body { font-family: 'Inter', sans-serif; background: var(--gray-50); color: var(
 /* ── HERO ── */
 .hero {
   background: var(--navy);
-  padding: 52px 40px 0;
-  display: flex; align-items: flex-end; justify-content: space-between;
-  gap: 32px; overflow: hidden; position: relative; min-height: 260px;
+  padding: 52px 40px 52px;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 32px; overflow: hidden; position: relative; min-height: 280px;
+}
+/* Arco azul — firma visual de HIGHTECH */
+.hero::after {
+  content: '';
+  position: absolute; top: -120px; right: -80px;
+  width: 520px; height: 520px; border-radius: 50%;
+  background: var(--blue);
+  opacity: .13; pointer-events: none;
 }
 .hero::before {
   content: '';
-  position: absolute; top: -60px; right: 200px;
-  width: 480px; height: 480px; border-radius: 50%;
-  background: radial-gradient(circle, rgba(37,80,232,0.35) 0%, transparent 70%);
+  position: absolute; top: -60px; right: 60px;
+  width: 380px; height: 380px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(37,80,232,0.28) 0%, transparent 70%);
   pointer-events: none;
 }
-.hero-left { position: relative; z-index: 2; max-width: 480px; padding-bottom: 48px; }
+/* Líneas decorativas estilo posts */
+.hero-arc {
+  position: absolute; right: 0; top: 0; bottom: 0; width: 420px;
+  overflow: hidden; pointer-events: none; z-index: 1;
+}
+.hero-arc::before {
+  content: '';
+  position: absolute; top: -80px; right: -60px;
+  width: 420px; height: 420px; border-radius: 50%;
+  border: 40px solid var(--blue); opacity: .22;
+}
+.hero-arc::after {
+  content: '';
+  position: absolute; top: -20px; right: -100px;
+  width: 340px; height: 340px; border-radius: 50%;
+  border: 24px solid var(--blue-light); opacity: .10;
+}
+
+.hero-left { position: relative; z-index: 2; max-width: 520px; }
 .hero-eyebrow {
   display: inline-flex; align-items: center; gap: 7px;
   background: rgba(37,80,232,0.18); border: 1px solid rgba(37,80,232,0.4);
   color: var(--blue-light); font-size: 11px; font-weight: 700;
   letter-spacing: 1.2px; text-transform: uppercase;
-  padding: 5px 12px; border-radius: 20px; margin-bottom: 18px;
+  padding: 5px 12px; border-radius: 20px; margin-bottom: 20px;
 }
 .hero-eyebrow-dot { width: 6px; height: 6px; background: var(--blue-light); border-radius: 50%; animation: pulse 2s infinite; }
-@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(1.4)} }
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(1.6)} }
 .hero-title {
-  font-size: 46px; font-weight: 900; line-height: 1.05;
-  color: var(--white); letter-spacing: -1.5px; margin-bottom: 14px;
+  font-size: 50px; font-weight: 900; line-height: 1.02;
+  color: var(--white); letter-spacing: -2px; margin-bottom: 16px;
 }
 .hero-title span { color: var(--blue-light); }
 .hero-sub {
-  font-size: 15px; color: rgba(255,255,255,0.6); line-height: 1.6;
-  margin-bottom: 28px; font-weight: 400; max-width: 380px;
+  font-size: 15px; color: rgba(255,255,255,0.55); line-height: 1.65;
+  margin-bottom: 28px; font-weight: 400; max-width: 400px;
 }
 .hero-badges { display: flex; gap: 10px; flex-wrap: wrap; }
 .hero-badge {
   display: flex; align-items: center; gap: 7px;
   background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12);
   color: rgba(255,255,255,0.8); font-size: 12px; font-weight: 600;
-  padding: 7px 14px; border-radius: 8px;
+  padding: 7px 14px; border-radius: 8px; backdrop-filter: blur(4px);
 }
+
+/* Lado derecho — tarjetas de producto flotantes */
 .hero-right {
   position: relative; z-index: 2; flex-shrink: 0;
-  display: flex; align-items: flex-end; gap: -12px;
+  display: flex; flex-direction: column; gap: 10px; align-items: flex-end;
 }
-.hero-phone {
-  font-size: 120px; line-height: 1; filter: drop-shadow(0 20px 40px rgba(37,80,232,0.4));
-  animation: float 4s ease-in-out infinite;
+.hero-card {
+  background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 14px; padding: 14px 18px;
+  display: flex; align-items: center; gap: 14px;
+  backdrop-filter: blur(8px); min-width: 220px;
 }
-.hero-phone-2 {
-  font-size: 80px; line-height: 1; margin-bottom: 16px; margin-left: -8px;
-  filter: drop-shadow(0 12px 24px rgba(37,80,232,0.3));
-  animation: float 4s ease-in-out infinite; animation-delay: .6s;
-  opacity: .85;
+.hero-card:nth-child(2) { margin-right: 24px; }
+.hero-card-icon { font-size: 32px; line-height: 1; }
+.hero-card-info { display: flex; flex-direction: column; gap: 2px; }
+.hero-card-name { font-size: 13px; font-weight: 700; color: var(--white); }
+.hero-card-sub { font-size: 11px; color: rgba(255,255,255,0.45); }
+.hero-card-price { font-size: 14px; font-weight: 800; color: var(--blue-light); margin-top: 2px; }
+.hero-card-badge {
+  font-size: 9px; font-weight: 700; padding: 2px 7px; border-radius: 6px;
+  background: var(--green); color: var(--white); letter-spacing: 0.5px;
+  align-self: flex-start;
 }
-@keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-12px)} }
+
+@keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+.hero-card { animation: float 4s ease-in-out infinite; }
+.hero-card:nth-child(2) { animation-delay: .8s; }
+.hero-card:nth-child(3) { animation-delay: 1.6s; }
 
 /* ── FILTROS / CATEGORÍAS ── */
 .filters-bar {
@@ -444,22 +483,22 @@ body { font-family: 'Inter', sans-serif; background: var(--gray-50); color: var(
   .navbar-top { padding: 0 14px; height: 52px; }
   .navbar-cats { display: none; }
   .nav-search-input { width: 130px; }
-  .hero { padding: 32px 20px 0; min-height: 200px; }
-  .hero-title { font-size: 30px; }
-  .hero-phone { font-size: 80px; }
-  .hero-phone-2 { font-size: 54px; }
+  .hero { padding: 32px 20px; min-height: auto; }
+  .hero-title { font-size: 32px; letter-spacing: -1px; }
+  .hero-right { display: none; }
+  .hero-arc { display: none; }
 }
 @media(max-width: 600px) {
   .navbar-name { font-size: 13px; }
   .products-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
   .products-section { padding: 0 14px 100px; }
   .toolbar { padding: 12px 14px; }
-  .filters-bar { padding: 0 14px; }
   .cart-panel { width: 100vw; }
   .btn-faq { display: none; }
-  .hero-right { display: none; }
-  .hero { padding-bottom: 32px; }
-  .hero-title { font-size: 28px; letter-spacing: -1px; }
+  .hero-title { font-size: 28px; }
+  .hero-sub { font-size: 13px; }
+  .hero-badges { gap: 7px; }
+  .hero-badge { font-size: 11px; padding: 6px 10px; }
 }
 @media(max-width: 360px) {
   .products-grid { grid-template-columns: 1fr; }
@@ -509,6 +548,7 @@ body { font-family: 'Inter', sans-serif; background: var(--gray-50); color: var(
 
 <!-- HERO -->
 <section class="hero">
+  <div class="hero-arc"></div>
   <div class="hero-left">
     <div class="hero-eyebrow">
       <span class="hero-eyebrow-dot"></span>
@@ -525,8 +565,33 @@ body { font-family: 'Inter', sans-serif; background: var(--gray-50); color: var(
     </div>
   </div>
   <div class="hero-right">
-    <span class="hero-phone-2">🎧</span>
-    <span class="hero-phone">📱</span>
+    <div class="hero-card">
+      <div class="hero-card-icon">📱</div>
+      <div class="hero-card-info">
+        <span class="hero-card-badge">EN STOCK</span>
+        <div class="hero-card-name">iPhone 16 128GB</div>
+        <div class="hero-card-sub">Sellado · Nuevo</div>
+        <div class="hero-card-price">USD $750</div>
+      </div>
+    </div>
+    <div class="hero-card">
+      <div class="hero-card-icon">🎧</div>
+      <div class="hero-card-info">
+        <span class="hero-card-badge">EN STOCK</span>
+        <div class="hero-card-name">AirPods Pro 2da Gen</div>
+        <div class="hero-card-sub">Sellados · Nuevo</div>
+        <div class="hero-card-price">USD $230</div>
+      </div>
+    </div>
+    <div class="hero-card">
+      <div class="hero-card-icon">📲</div>
+      <div class="hero-card-info">
+        <span class="hero-card-badge" style="background:var(--blue)">VERIFICADO</span>
+        <div class="hero-card-name">iPhone 15 128GB</div>
+        <div class="hero-card-sub">Usado · Impecable</div>
+        <div class="hero-card-price">USD $560</div>
+      </div>
+    </div>
   </div>
 </section>
 
