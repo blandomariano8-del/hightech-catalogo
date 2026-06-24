@@ -737,68 +737,27 @@ body { font-family: 'Inter', sans-serif; background: var(--gray-50); color: var(
 // ═══════════════════════════════════════
 // CONFIG — Solo tocá esto
 // ═══════════════════════════════════════
-// ID del Google Sheet (de la URL de edición)
-const SHEET_ID = "1_0YMtQ_dwdpOIVSZGnsGHizViXuYG21bqgD9RPBbcmU";
-const SHEET_NAME = "Hoja1"; // nombre de la hoja
-// URL JSON pública — no necesita API key ni proxy
-const SHEETS_JSON_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=${SHEET_NAME}`;
-const IMAGES_BASE_URL = ""; // URL base de tus imágenes en Drive (cuando las tengas)
-
+const IMAGES_BASE_URL = ""; // URL base imágenes Drive (cuando las tengas)
 const CAT_EMOJI  = { iphones:"📱", airpods:"🎧", accesorios:"🔌", usados:"📲" };
 const CAT_LABELS = { iphones:"iPhones", airpods:"AirPods", accesorios:"Accesorios", usados:"Usados verificados" };
 
 // ═══════════════════════════════════════
+// PRODUCTOS — Editá acá o usá el script
+// de sincronización con Google Sheets
+// ═══════════════════════════════════════
+let PRODUCTOS = [
+  { id:1,  cat:"iphones",  nombre:"iPhone 17 Pro Max 256GB", sub:"Sellado · Nuevo", disponibilidad:"stock",    precioStock:1300, precioEnc:1280, imagen:"", caracteristicas:"Orange"  },
+  { id:2,  cat:"iphones",  nombre:"iPhone 17 Pro Max 256GB", sub:"Sellado · Nuevo", disponibilidad:"stock",    precioStock:1300, precioEnc:1280, imagen:"", caracteristicas:"Blue"    },
+  { id:3,  cat:"iphones",  nombre:"iPhone 17 Pro Max 256GB", sub:"Sellado · Nuevo", disponibilidad:"stock",    precioStock:1300, precioEnc:1280, imagen:"", caracteristicas:"Silver"  },
+  { id:4,  cat:"airpods",  nombre:"AirPods Pro 2ª Gen",      sub:"Sellado · Nuevo", disponibilidad:"stock",    precioStock:250,  precioEnc:230,  imagen:"", caracteristicas:"White"   },
+  { id:5,  cat:"usados",   nombre:"iPhone 15 128GB",         sub:"Usado · Verificado", disponibilidad:"stock", precioStock:600,  precioEnc:null, imagen:"", caracteristicas:"Black · Batería 89%" },
+].map(p => ({ ...p, emoji: CAT_EMOJI[p.cat] || "📦" }));
+
+// ═══════════════════════════════════════
 // CARGA DESDE GOOGLE SHEETS
 // ═══════════════════════════════════════
-let PRODUCTOS = [];
 
-function parseGVizJSON(raw) {
-  // Google Visualization JSON viene envuelto en /*O_o*/\ngoogle.visualization.Query.setResponse(...)
-  const json = JSON.parse(raw.match(/google\.visualization\.Query\.setResponse\((.+)\)/s)[1]);
-  const cols = json.table.cols.map(c => c.label.toLowerCase().trim());
-  return json.table.rows.map((row, i) => {
-    const get = (col) => {
-      const idx = cols.indexOf(col);
-      if (idx === -1) return "";
-      const cell = row.c[idx];
-      return cell && cell.v !== null ? String(cell.v).trim() : "";
-    };
-    const cat = get("categoria").toLowerCase();
-    const ps  = get("preciostock");
-    const pe  = get("precioencargue");
-    return {
-      id:              parseInt(get("id")) || (i + 1),
-      cat,
-      nombre:          get("nombre"),
-      sub:             get("sub"),
-      disponibilidad:  (get("disponibilidad") || "stock").toLowerCase(),
-      precioStock:     ps ? parseFloat(ps) : null,
-      precioEnc:       pe ? parseFloat(pe) : null,
-      imagen:          get("imagen"),
-      caracteristicas: get("caracteristicas"),
-      emoji:           CAT_EMOJI[cat] || "📦",
-    };
-  }).filter(p => p.nombre);
-}
 
-async function cargarProductos() {
-  const section = document.getElementById("productsSection");
-  section.innerHTML = `<div class="empty-state"><div style="font-size:48px;animation:spin 1s linear infinite;display:inline-block">⟳</div><p style="color:var(--gray-400);margin-top:12px;font-size:14px">Cargando productos...</p></div>`;
-  try {
-    // Google Visualization API — no necesita proxy ni API key
-    const res = await fetch(SHEETS_JSON_URL + "&t=" + Date.now());
-    if (!res.ok) throw new Error("Error al cargar");
-    const raw = await res.text();
-    PRODUCTOS = parseGVizJSON(raw);
-    renderProducts();
-    updateCartUI();
-  } catch(err) {
-    section.innerHTML = `<div class="empty-state"><div class="empty-state-icon">⚠️</div><h3>No se pudieron cargar los productos</h3><p>Revisá tu conexión o recargá la página</p><button onclick="cargarProductos()" style="margin-top:16px;padding:10px 20px;background:var(--blue);color:#fff;border:none;border-radius:8px;cursor:pointer;font-size:14px;font-weight:700">Reintentar</button></div>`;
-  }
-}
-const _spinStyle = document.createElement("style");
-_spinStyle.textContent = "@keyframes spin { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }";
-document.head.appendChild(_spinStyle);
 
 
 // ─── ESTADO ───────────────────────────
@@ -806,7 +765,13 @@ let cart = {}; // { id: qty }
 let currentCat = "todos";
 let pedidoConfirmado = null;
 
-// ─── RENDER ───────────────────────────
+function driveUrl(url) {
+  if (!url) return "";
+  // Convierte URL de Drive a URL directa de imagen
+  const match = url.match(/\/file\/d\/([a-zA-Z0-9_-]+)/);
+  if (match) return `https://drive.google.com/uc?export=view&id=${match[1]}`;
+  return url;
+}
 function getFiltered() {
   let list = [...PRODUCTOS];
   const q = document.getElementById("searchInput").value.toLowerCase().trim();
@@ -888,7 +853,7 @@ function productCard(p) {
        </div>`;
 
   return `<div class="product-card ${noDisp?'out-of-stock':''}" id="card-${p.id}">
-    <div class="product-img">${p.emoji}${badge}</div>
+    <div class="product-img">${p.imagen ? `<img src="${driveUrl(p.imagen)}" alt="${p.nombre}" onerror="this.parentElement.innerHTML='${p.emoji}${badge}'"/>` : p.emoji}${badge}</div>
     <div class="product-info">
       <div class="product-cat">${CAT_LABELS[p.cat]}</div>
       <div class="product-name">${p.nombre}</div>
@@ -900,12 +865,11 @@ function productCard(p) {
 }
 
 function updateCounts() {
-  const cats = ["iphones","airpods","accesorios","usados"];
-  const total = PRODUCTOS.length;
-  document.getElementById("count-todos").textContent = total;
+  const cats = ["todos","iphones","airpods","accesorios","usados"];
   cats.forEach(c => {
     const el = document.getElementById(`count-${c}`);
-    if (el) el.textContent = PRODUCTOS.filter(p=>p.cat===c).length;
+    if (!el) return;
+    el.textContent = c === "todos" ? PRODUCTOS.length : PRODUCTOS.filter(p=>p.cat===c).length;
   });
 }
 
@@ -1129,7 +1093,8 @@ function showToast(msg) {
 }
 
 // ─── INIT ─────────────────────────────
-cargarProductos();
+renderProducts();
+updateCartUI();
 </script>
 </body>
 </html>
