@@ -33,28 +33,57 @@
 html { scroll-behavior: smooth; }
 body { font-family: 'Inter', sans-serif; background: var(--gray-50); color: var(--gray-800); min-height: 100vh; }
 
-/* ── NAVBAR ── */
-.navbar {
-  position: sticky; top: 0; z-index: 100;
-  background: var(--navy);
+/* ── NAVBAR TOP ── */
+.navbar-top {
+  background: var(--navy); height: 56px;
   display: flex; align-items: center; justify-content: space-between;
-  padding: 0 20px; height: 60px;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.25);
+  padding: 0 28px; position: sticky; top: 0; z-index: 100;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.3);
 }
-.navbar-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.navbar-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; flex-shrink: 0; }
 .navbar-logo {
-  width: 34px; height: 34px; background: var(--white);
-  border-radius: 8px; display: flex; align-items: center; justify-content: center;
-  font-weight: 900; font-size: 13px; color: var(--navy); letter-spacing: -0.5px;
+  width: 36px; height: 36px; background: var(--white);
+  border-radius: 9px; display: flex; align-items: center; justify-content: center;
+  font-weight: 900; font-size: 12px; color: var(--navy); letter-spacing: -0.5px;
 }
-.navbar-name { color: var(--white); font-weight: 800; font-size: 15px; letter-spacing: 0.3px; }
+.navbar-name { color: var(--white); font-weight: 800; font-size: 15px; letter-spacing: 0.5px; }
 .navbar-name span { color: var(--blue-light); }
-.navbar-right { display: flex; align-items: center; gap: 12px; }
+
+/* ── NAV CATEGORÍAS (estilo Cells Home) ── */
+.navbar-cats {
+  display: flex; align-items: center; gap: 2px;
+  margin: 0 24px; flex: 1; overflow-x: auto;
+}
+.navbar-cats::-webkit-scrollbar { display: none; }
+.nav-cat {
+  padding: 6px 14px; border-radius: 6px; font-size: 13px; font-weight: 600;
+  color: rgba(255,255,255,0.75); background: none; border: none; cursor: pointer;
+  white-space: nowrap; transition: all .18s; font-family: 'Inter', sans-serif;
+  display: flex; align-items: center; gap: 5px;
+}
+.nav-cat:hover { color: var(--white); background: rgba(255,255,255,0.1); }
+.nav-cat.active { background: var(--blue); color: var(--white); }
+.nav-cat.highlight { background: var(--blue); color: var(--white); }
+
+.navbar-right { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+
+/* Search en navbar */
+.nav-search-wrap { position: relative; }
+.nav-search-input {
+  background: rgba(255,255,255,0.1); border: 1.5px solid rgba(255,255,255,0.15);
+  color: var(--white); padding: 7px 12px 7px 34px;
+  border-radius: 8px; font-size: 13px; font-family: 'Inter', sans-serif;
+  outline: none; width: 200px; transition: all .2s;
+}
+.nav-search-input::placeholder { color: rgba(255,255,255,0.45); }
+.nav-search-input:focus { background: rgba(255,255,255,0.18); border-color: rgba(255,255,255,0.4); width: 240px; }
+.nav-search-icon { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: rgba(255,255,255,0.5); font-size: 15px; pointer-events: none; }
+
 .btn-faq {
-  background: none; border: 1px solid rgba(255,255,255,0.2);
-  color: rgba(255,255,255,0.7); padding: 6px 12px; border-radius: 6px;
+  background: none; border: 1.5px solid rgba(255,255,255,0.2);
+  color: rgba(255,255,255,0.7); padding: 6px 12px; border-radius: 7px;
   font-size: 12px; font-weight: 600; cursor: pointer; transition: all .2s;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Inter', sans-serif; white-space: nowrap;
 }
 .btn-faq:hover { background: rgba(255,255,255,0.1); color: var(--white); }
 .btn-cart {
@@ -62,7 +91,7 @@ body { font-family: 'Inter', sans-serif; background: var(--gray-50); color: var(
   border: none; padding: 8px 16px; border-radius: 8px;
   font-size: 13px; font-weight: 700; cursor: pointer;
   display: flex; align-items: center; gap: 8px; transition: all .2s;
-  font-family: 'Inter', sans-serif; position: relative;
+  font-family: 'Inter', sans-serif;
 }
 .btn-cart:hover { background: var(--blue-light); transform: translateY(-1px); }
 .cart-badge {
@@ -71,6 +100,62 @@ body { font-family: 'Inter', sans-serif; background: var(--gray-50); color: var(
   display: flex; align-items: center; justify-content: center;
   font-size: 11px; font-weight: 800; line-height: 1;
 }
+
+/* ── HERO ── */
+.hero {
+  background: var(--navy);
+  padding: 52px 40px 0;
+  display: flex; align-items: flex-end; justify-content: space-between;
+  gap: 32px; overflow: hidden; position: relative; min-height: 260px;
+}
+.hero::before {
+  content: '';
+  position: absolute; top: -60px; right: 200px;
+  width: 480px; height: 480px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(37,80,232,0.35) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero-left { position: relative; z-index: 2; max-width: 480px; padding-bottom: 48px; }
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 7px;
+  background: rgba(37,80,232,0.18); border: 1px solid rgba(37,80,232,0.4);
+  color: var(--blue-light); font-size: 11px; font-weight: 700;
+  letter-spacing: 1.2px; text-transform: uppercase;
+  padding: 5px 12px; border-radius: 20px; margin-bottom: 18px;
+}
+.hero-eyebrow-dot { width: 6px; height: 6px; background: var(--blue-light); border-radius: 50%; animation: pulse 2s infinite; }
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(1.4)} }
+.hero-title {
+  font-size: 46px; font-weight: 900; line-height: 1.05;
+  color: var(--white); letter-spacing: -1.5px; margin-bottom: 14px;
+}
+.hero-title span { color: var(--blue-light); }
+.hero-sub {
+  font-size: 15px; color: rgba(255,255,255,0.6); line-height: 1.6;
+  margin-bottom: 28px; font-weight: 400; max-width: 380px;
+}
+.hero-badges { display: flex; gap: 10px; flex-wrap: wrap; }
+.hero-badge {
+  display: flex; align-items: center; gap: 7px;
+  background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12);
+  color: rgba(255,255,255,0.8); font-size: 12px; font-weight: 600;
+  padding: 7px 14px; border-radius: 8px;
+}
+.hero-right {
+  position: relative; z-index: 2; flex-shrink: 0;
+  display: flex; align-items: flex-end; gap: -12px;
+}
+.hero-phone {
+  font-size: 120px; line-height: 1; filter: drop-shadow(0 20px 40px rgba(37,80,232,0.4));
+  animation: float 4s ease-in-out infinite;
+}
+.hero-phone-2 {
+  font-size: 80px; line-height: 1; margin-bottom: 16px; margin-left: -8px;
+  filter: drop-shadow(0 12px 24px rgba(37,80,232,0.3));
+  animation: float 4s ease-in-out infinite; animation-delay: .6s;
+  opacity: .85;
+}
+@keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-12px)} }
 
 /* ── FILTROS / CATEGORÍAS ── */
 .filters-bar {
@@ -355,14 +440,26 @@ body { font-family: 'Inter', sans-serif; background: var(--gray-50); color: var(
 .empty-state p { font-size: 14px; color: var(--gray-400); }
 
 /* ── RESPONSIVE ── */
+@media(max-width: 768px) {
+  .navbar-top { padding: 0 14px; height: 52px; }
+  .navbar-cats { display: none; }
+  .nav-search-input { width: 130px; }
+  .hero { padding: 32px 20px 0; min-height: 200px; }
+  .hero-title { font-size: 30px; }
+  .hero-phone { font-size: 80px; }
+  .hero-phone-2 { font-size: 54px; }
+}
 @media(max-width: 600px) {
-  .navbar { padding: 0 14px; }
   .navbar-name { font-size: 13px; }
   .products-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
   .products-section { padding: 0 14px 100px; }
   .toolbar { padding: 12px 14px; }
   .filters-bar { padding: 0 14px; }
   .cart-panel { width: 100vw; }
+  .btn-faq { display: none; }
+  .hero-right { display: none; }
+  .hero { padding-bottom: 32px; }
+  .hero-title { font-size: 28px; letter-spacing: -1px; }
 }
 @media(max-width: 360px) {
   .products-grid { grid-template-columns: 1fr; }
@@ -381,14 +478,28 @@ body { font-family: 'Inter', sans-serif; background: var(--gray-50); color: var(
 </head>
 <body>
 
-<!-- NAVBAR -->
-<nav class="navbar">
+<!-- NAVBAR TOP -->
+<nav class="navbar-top">
   <a class="navbar-brand" href="#">
     <div class="navbar-logo">HT</div>
     <span class="navbar-name">HIGHTECH <span>ROSARIO</span></span>
   </a>
+
+  <!-- CATEGORÍAS estilo Cells Home -->
+  <div class="navbar-cats">
+    <button class="nav-cat active" data-cat="todos" onclick="filterCat(this)">Todos</button>
+    <button class="nav-cat" data-cat="iphones" onclick="filterCat(this)">📱 iPhones</button>
+    <button class="nav-cat" data-cat="airpods" onclick="filterCat(this)">🎧 AirPods</button>
+    <button class="nav-cat" data-cat="accesorios" onclick="filterCat(this)">🔌 Accesorios</button>
+    <button class="nav-cat" data-cat="usados" onclick="filterCat(this)">✅ Usados</button>
+  </div>
+
   <div class="navbar-right">
-    <button class="btn-faq" onclick="openFaq()">Preguntas frecuentes</button>
+    <div class="nav-search-wrap">
+      <span class="nav-search-icon">⌕</span>
+      <input type="text" class="nav-search-input" id="searchInput" placeholder="Buscar..." oninput="renderProducts()"/>
+    </div>
+    <button class="btn-faq" onclick="openFaq()">FAQ</button>
     <button class="btn-cart" onclick="openCart()">
       🛒 Pedido
       <span class="cart-badge" id="cartBadge">0</span>
@@ -396,31 +507,31 @@ body { font-family: 'Inter', sans-serif; background: var(--gray-50); color: var(
   </div>
 </nav>
 
-<!-- FILTROS -->
-<div class="filters-bar" id="filtersBar">
-  <button class="filter-btn active" data-cat="todos" onclick="filterCat(this)">
-    Todos <span class="filter-count" id="count-todos"></span>
-  </button>
-  <button class="filter-btn" data-cat="iphones" onclick="filterCat(this)">
-    iPhones <span class="filter-count" id="count-iphones"></span>
-  </button>
-  <button class="filter-btn" data-cat="airpods" onclick="filterCat(this)">
-    AirPods <span class="filter-count" id="count-airpods"></span>
-  </button>
-  <button class="filter-btn" data-cat="accesorios" onclick="filterCat(this)">
-    Accesorios <span class="filter-count" id="count-accesorios"></span>
-  </button>
-  <button class="filter-btn" data-cat="usados" onclick="filterCat(this)">
-    Usados <span class="filter-count" id="count-usados"></span>
-  </button>
-</div>
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">
+      <span class="hero-eyebrow-dot"></span>
+      Stock disponible · Rosario y todo el país
+    </div>
+    <h1 class="hero-title">
+      Tu próximo<br><span>iPhone</span><br>empieza acá.
+    </h1>
+    <p class="hero-sub">Sellados, usados verificados y accesorios Apple. Garantía escrita, envíos seguros y atención real.</p>
+    <div class="hero-badges">
+      <span class="hero-badge">🛡️ Garantía escrita</span>
+      <span class="hero-badge">🚚 Envíos a todo el país</span>
+      <span class="hero-badge">✅ Equipos verificados</span>
+    </div>
+  </div>
+  <div class="hero-right">
+    <span class="hero-phone-2">🎧</span>
+    <span class="hero-phone">📱</span>
+  </div>
+</section>
 
 <!-- TOOLBAR -->
 <div class="toolbar">
-  <div class="search-wrap">
-    <span class="search-icon">⌕</span>
-    <input type="text" class="search-input" id="searchInput" placeholder="Buscar producto..." oninput="renderProducts()"/>
-  </div>
   <select class="sort-select" id="sortSelect" onchange="renderProducts()">
     <option value="default">Orden original</option>
     <option value="price-asc">Precio: menor a mayor</option>
@@ -894,7 +1005,7 @@ function cerrarSuccess() {
 
 // ─── FILTROS ──────────────────────────
 function filterCat(btn) {
-  document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+  document.querySelectorAll(".nav-cat").forEach(b => b.classList.remove("active"));
   btn.classList.add("active");
   currentCat = btn.dataset.cat;
   document.getElementById("searchInput").value = "";
