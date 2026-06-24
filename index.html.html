@@ -735,41 +735,66 @@ body { font-family: 'Inter', sans-serif; background: var(--gray-50); color: var(
 
 <script>
 // ═══════════════════════════════════════
-// PRODUCTOS — Editá desde acá
+// CONFIG — Solo tocá esto
 // ═══════════════════════════════════════
-const PRODUCTOS = [
-  // iPhones
-  { id:1,  cat:"iphones",    emoji:"📱", nombre:"iPhone 16 128GB",         sub:"Sellado · Nuevo",          disponibilidad:"stock",    precioStock:750,  precioEnc:720  },
-  { id:2,  cat:"iphones",    emoji:"📱", nombre:"iPhone 16 256GB",         sub:"Sellado · Nuevo",          disponibilidad:"stock",    precioStock:820,  precioEnc:790  },
-  { id:3,  cat:"iphones",    emoji:"📱", nombre:"iPhone 16 Pro 256GB",     sub:"Sellado · Nuevo",          disponibilidad:"encargue", precioStock:null, precioEnc:1050 },
-  { id:4,  cat:"iphones",    emoji:"📱", nombre:"iPhone 16 Pro Max 256GB", sub:"Sellado · Nuevo",          disponibilidad:"encargue", precioStock:null, precioEnc:1200 },
-  { id:5,  cat:"iphones",    emoji:"📱", nombre:"iPhone 15 128GB",         sub:"Sellado · Nuevo",          disponibilidad:"stock",    precioStock:650,  precioEnc:620  },
-  { id:6,  cat:"iphones",    emoji:"📱", nombre:"iPhone 15 Pro 256GB",     sub:"Sellado · Nuevo",          disponibilidad:"stock",    precioStock:900,  precioEnc:870  },
-  { id:7,  cat:"iphones",    emoji:"📱", nombre:"iPhone 14 128GB",         sub:"Sellado · Nuevo",          disponibilidad:"stock",    precioStock:520,  precioEnc:500  },
-  // AirPods
-  { id:8,  cat:"airpods",    emoji:"🎧", nombre:"AirPods 4ta Gen",         sub:"Sellados · Nuevo",         disponibilidad:"stock",    precioStock:160,  precioEnc:150  },
-  { id:9,  cat:"airpods",    emoji:"🎧", nombre:"AirPods Pro 2da Gen",     sub:"Sellados · Nuevo",         disponibilidad:"stock",    precioStock:230,  precioEnc:220  },
-  { id:10, cat:"airpods",    emoji:"🎧", nombre:"AirPods Max",             sub:"Sellados · Nuevo",         disponibilidad:"encargue", precioStock:null, precioEnc:490  },
-  // Accesorios
-  { id:11, cat:"accesorios", emoji:"🔌", nombre:"Cargador Apple 20W USB-C",sub:"Original sellado",        disponibilidad:"stock",    precioStock:35,   precioEnc:32   },
-  { id:12, cat:"accesorios", emoji:"🔌", nombre:"Cable USB-C 1m",          sub:"Original Apple",           disponibilidad:"stock",    precioStock:28,   precioEnc:25   },
-  { id:13, cat:"accesorios", emoji:"🔋", nombre:"MagSafe Charger 15W",     sub:"Original Apple",           disponibilidad:"stock",    precioStock:55,   precioEnc:50   },
-  { id:14, cat:"accesorios", emoji:"🏷️", nombre:"AirTag",                  sub:"Pack x1",                  disponibilidad:"stock",    precioStock:40,   precioEnc:38   },
-  { id:15, cat:"accesorios", emoji:"📦", nombre:"Funda iPhone 16",         sub:"Silicona MagSafe",         disponibilidad:"stock",    precioStock:22,   precioEnc:20   },
-  // Usados
-  { id:16, cat:"usados",     emoji:"📲", nombre:"iPhone 13 128GB",         sub:"Usado · Verificado",       disponibilidad:"stock",    precioStock:380,  precioEnc:null },
-  { id:17, cat:"usados",     emoji:"📲", nombre:"iPhone 14 128GB",         sub:"Usado · Verificado",       disponibilidad:"stock",    precioStock:450,  precioEnc:null },
-  { id:18, cat:"usados",     emoji:"📲", nombre:"iPhone 15 128GB",         sub:"Usado · Verificado",       disponibilidad:"stock",    precioStock:560,  precioEnc:null },
-  { id:19, cat:"usados",     emoji:"📲", nombre:"iPhone 12 64GB",          sub:"Usado · Verificado",       disponibilidad:"stock",    precioStock:290,  precioEnc:null },
-  { id:20, cat:"usados",     emoji:"🎧", nombre:"AirPods 3ra Gen",         sub:"Usado · Impecable",        disponibilidad:"stock",    precioStock:95,   precioEnc:null },
-];
+const SHEETS_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTOG9_qpSa4qxZmemW4KQaiZ1JSwMH8d4_5Y1KMOmAYMiDFXFgONcN79bNFANd0z6dKjbjInBPORIBM/pub?gid=0&single=true&output=csv";
+const IMAGES_BASE_URL = ""; // URL base de tus imágenes en Drive (cuando las tengas)
 
-const CAT_LABELS = {
-  iphones:    "iPhones",
-  airpods:    "AirPods",
-  accesorios: "Accesorios",
-  usados:     "Usados verificados",
-};
+const CAT_EMOJI  = { iphones:"📱", airpods:"🎧", accesorios:"🔌", usados:"📲" };
+const CAT_LABELS = { iphones:"iPhones", airpods:"AirPods", accesorios:"Accesorios", usados:"Usados verificados" };
+
+// ═══════════════════════════════════════
+// CARGA DESDE GOOGLE SHEETS
+// ═══════════════════════════════════════
+let PRODUCTOS = [];
+
+function parseCSV(text) {
+  const lines = text.trim().split("\n");
+  const headers = lines[0].split(",").map(h => h.trim().replace(/^"|"$/g,"").toLowerCase());
+  return lines.slice(1).map((line, i) => {
+    const cols = []; let cur = ""; let inQ = false;
+    for (const c of line) {
+      if (c === '"') { inQ = !inQ; }
+      else if (c === ',' && !inQ) { cols.push(cur.trim()); cur = ""; }
+      else { cur += c; }
+    }
+    cols.push(cur.trim());
+    const row = {};
+    headers.forEach((h, idx) => { row[h] = (cols[idx] || "").replace(/^"|"$/g, "").trim(); });
+    const cat = (row.categoria || "").toLowerCase();
+    return {
+      id:              parseInt(row.id) || (i + 1),
+      cat,
+      nombre:          row.nombre || "",
+      sub:             row.sub || "",
+      disponibilidad:  (row.disponibilidad || "stock").toLowerCase(),
+      precioStock:     row.preciostock ? parseFloat(row.preciostock) : null,
+      precioEnc:       row.precioencargue ? parseFloat(row.precioencargue) : null,
+      imagen:          row.imagen || "",
+      caracteristicas: row.caracteristicas || "",
+      emoji:           CAT_EMOJI[cat] || "📦",
+    };
+  }).filter(p => p.nombre);
+}
+
+async function cargarProductos() {
+  const section = document.getElementById("productsSection");
+  section.innerHTML = `<div class="empty-state"><div style="font-size:48px;animation:spin 1s linear infinite;display:inline-block">⟳</div><p style="color:var(--gray-400);margin-top:12px;font-size:14px">Cargando productos...</p></div>`;
+  try {
+    const proxy = "https://api.allorigins.win/get?url=" + encodeURIComponent(SHEETS_CSV_URL);
+    const res = await fetch(proxy);
+    const data = await res.json();
+    PRODUCTOS = parseCSV(data.contents);
+    renderProducts();
+    updateCartUI();
+  } catch(err) {
+    section.innerHTML = `<div class="empty-state"><div class="empty-state-icon">⚠️</div><h3>No se pudieron cargar los productos</h3><p>Revisá tu conexión o recargá la página</p><button onclick="cargarProductos()" style="margin-top:16px;padding:10px 20px;background:var(--blue);color:#fff;border:none;border-radius:8px;cursor:pointer;font-size:14px;font-weight:700">Reintentar</button></div>`;
+  }
+}
+const _spinStyle = document.createElement("style");
+_spinStyle.textContent = "@keyframes spin { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }";
+document.head.appendChild(_spinStyle);
+
 
 // ─── ESTADO ───────────────────────────
 let cart = {}; // { id: qty }
@@ -1099,8 +1124,7 @@ function showToast(msg) {
 }
 
 // ─── INIT ─────────────────────────────
-renderProducts();
-updateCartUI();
+cargarProductos();
 </script>
 </body>
 </html>
