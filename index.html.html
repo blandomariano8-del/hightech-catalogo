@@ -268,7 +268,8 @@ body { font-family: 'Inter', sans-serif; background: var(--gray-50); color: var(
   display: flex; align-items: center; justify-content: center;
   font-size: 48px; position: relative; overflow: hidden;
 }
-.product-img img { width: 80%; height: 80%; object-fit: contain; }
+.product-img img { width: 80%; height: 80%; object-fit: contain; opacity: 0; transition: opacity .3s; }
+.img-fallback { font-size: 48px; line-height: 1; }
 .badge-stock {
   position: absolute; top: 8px; right: 8px;
   background: var(--green); color: var(--white);
@@ -746,11 +747,11 @@ const CAT_LABELS = { iphones:"iPhones", airpods:"AirPods", accesorios:"Accesorio
 // de sincronización con Google Sheets
 // ═══════════════════════════════════════
 let PRODUCTOS = [
-  { id:1,  cat:"iphones",  nombre:"iPhone 17 Pro Max 256GB", sub:"Sellado · Nuevo", disponibilidad:"stock",    precioStock:1300, precioEnc:1280, imagen:"", caracteristicas:"Orange"  },
-  { id:2,  cat:"iphones",  nombre:"iPhone 17 Pro Max 256GB", sub:"Sellado · Nuevo", disponibilidad:"stock",    precioStock:1300, precioEnc:1280, imagen:"", caracteristicas:"Blue"    },
-  { id:3,  cat:"iphones",  nombre:"iPhone 17 Pro Max 256GB", sub:"Sellado · Nuevo", disponibilidad:"stock",    precioStock:1300, precioEnc:1280, imagen:"", caracteristicas:"Silver"  },
-  { id:4,  cat:"airpods",  nombre:"AirPods Pro 2ª Gen",      sub:"Sellado · Nuevo", disponibilidad:"stock",    precioStock:250,  precioEnc:230,  imagen:"", caracteristicas:"White"   },
-  { id:5,  cat:"usados",   nombre:"iPhone 15 128GB",         sub:"Usado · Verificado", disponibilidad:"stock", precioStock:600,  precioEnc:null, imagen:"", caracteristicas:"Black · Batería 89%" },
+  { id:1, cat:"iphones", nombre:"iPhone 17 Pro Max 256GB", sub:"Sellado · Nuevo", disponibilidad:"stock",    precioStock:1300, precioEnc:1280, imagen:"./img/iphone17-pro-orange.jpg", caracteristicas:"Orange"              },
+  { id:2, cat:"iphones", nombre:"iPhone 17 Pro Max 256GB", sub:"Sellado · Nuevo", disponibilidad:"stock",    precioStock:1300, precioEnc:1280, imagen:"./img/iphone17-pro-blue.jpg",   caracteristicas:"Blue"                },
+  { id:3, cat:"iphones", nombre:"iPhone 17 Pro Max 256GB", sub:"Sellado · Nuevo", disponibilidad:"stock",    precioStock:1300, precioEnc:1280, imagen:"",                              caracteristicas:"Silver"              },
+  { id:4, cat:"airpods", nombre:"AirPods Pro 2ª Gen",      sub:"Sellado · Nuevo", disponibilidad:"stock",    precioStock:250,  precioEnc:230,  imagen:"./img/airpods-pro-2.jpg",       caracteristicas:"White"               },
+  { id:5, cat:"usados",  nombre:"iPhone 15 128GB",         sub:"Usado · Verificado", disponibilidad:"stock", precioStock:600,  precioEnc:null, imagen:"./img/iphone15-usado.jpg",      caracteristicas:"Black · Batería 89%" },
 ].map(p => ({ ...p, emoji: CAT_EMOJI[p.cat] || "📦" }));
 
 // ═══════════════════════════════════════
@@ -767,9 +768,10 @@ let pedidoConfirmado = null;
 
 function driveUrl(url) {
   if (!url) return "";
-  // Convierte URL de Drive a URL directa de imagen
+  // Si es URL de Drive, la convierte a URL directa
   const match = url.match(/\/file\/d\/([a-zA-Z0-9_-]+)/);
   if (match) return `https://drive.google.com/uc?export=view&id=${match[1]}`;
+  // Si es ruta local o URL directa, la usa tal cual
   return url;
 }
 function getFiltered() {
@@ -853,7 +855,7 @@ function productCard(p) {
        </div>`;
 
   return `<div class="product-card ${noDisp?'out-of-stock':''}" id="card-${p.id}">
-    <div class="product-img">${p.imagen ? `<img src="${driveUrl(p.imagen)}" alt="${p.nombre}" onerror="this.parentElement.innerHTML='${p.emoji}${badge}'"/>` : p.emoji}${badge}</div>
+    <div class="product-img" id="img-${p.id}">${p.imagen ? `<img src="${driveUrl(p.imagen)}" alt="${p.nombre}" onload="this.style.opacity=1" onerror="this.style.display='none';document.getElementById('fb-${p.id}').style.display='block'"/>` : ""}${badge}<span class="img-fallback" id="fb-${p.id}" style="${p.imagen ? 'display:none' : ''}">${p.emoji}</span></div>
     <div class="product-info">
       <div class="product-cat">${CAT_LABELS[p.cat]}</div>
       <div class="product-name">${p.nombre}</div>
