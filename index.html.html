@@ -781,10 +781,11 @@ async function cargarProductos() {
   const section = document.getElementById("productsSection");
   section.innerHTML = `<div class="empty-state"><div style="font-size:48px;animation:spin 1s linear infinite;display:inline-block">⟳</div><p style="color:var(--gray-400);margin-top:12px;font-size:14px">Cargando productos...</p></div>`;
   try {
-    const proxy = "https://api.allorigins.win/get?url=" + encodeURIComponent(SHEETS_CSV_URL);
-    const res = await fetch(proxy);
-    const data = await res.json();
-    PRODUCTOS = parseCSV(data.contents);
+    // Fetch directo — funciona en Vercel sin proxy
+    const res = await fetch(SHEETS_CSV_URL, { cache: "no-store" });
+    if (!res.ok) throw new Error("Error al cargar");
+    const csvText = await res.text();
+    PRODUCTOS = parseCSV(csvText);
     renderProducts();
     updateCartUI();
   } catch(err) {
