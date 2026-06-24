@@ -737,7 +737,11 @@ body { font-family: 'Inter', sans-serif; background: var(--gray-50); color: var(
 // ═══════════════════════════════════════
 // CONFIG — Solo tocá esto
 // ═══════════════════════════════════════
-const SHEETS_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTOG9_qpSa4qxZmemW4KQaiZ1JSwMH8d4_5Y1KMOmAYMiDFXFgONcN79bNFANd0z6dKjbjInBPORIBM/pub?gid=0&single=true&output=csv";
+// ID del Google Sheet (de la URL de edición)
+const SHEET_ID = "1_0YMtQ_dwdpOIVSZGnsGHizViXuYG21bqgD9RPBbcmU";
+const SHEET_NAME = "Hoja1"; // nombre de la hoja
+// URL JSON pública — no necesita API key ni proxy
+const SHEETS_JSON_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=${SHEET_NAME}`;
 const IMAGES_BASE_URL = ""; // URL base de tus imágenes en Drive (cuando las tengas)
 
 const CAT_EMOJI  = { iphones:"📱", airpods:"🎧", accesorios:"🔌", usados:"📲" };
@@ -748,30 +752,30 @@ const CAT_LABELS = { iphones:"iPhones", airpods:"AirPods", accesorios:"Accesorio
 // ═══════════════════════════════════════
 let PRODUCTOS = [];
 
-function parseCSV(text) {
-  const lines = text.trim().split("\n");
-  const headers = lines[0].split(",").map(h => h.trim().replace(/^"|"$/g,"").toLowerCase());
-  return lines.slice(1).map((line, i) => {
-    const cols = []; let cur = ""; let inQ = false;
-    for (const c of line) {
-      if (c === '"') { inQ = !inQ; }
-      else if (c === ',' && !inQ) { cols.push(cur.trim()); cur = ""; }
-      else { cur += c; }
-    }
-    cols.push(cur.trim());
-    const row = {};
-    headers.forEach((h, idx) => { row[h] = (cols[idx] || "").replace(/^"|"$/g, "").trim(); });
-    const cat = (row.categoria || "").toLowerCase();
+function parseGVizJSON(raw) {
+  // Google Visualization JSON viene envuelto en /*O_o*/\ngoogle.visualization.Query.setResponse(...)
+  const json = JSON.parse(raw.match(/google\.visualization\.Query\.setResponse\((.+)\)/s)[1]);
+  const cols = json.table.cols.map(c => c.label.toLowerCase().trim());
+  return json.table.rows.map((row, i) => {
+    const get = (col) => {
+      const idx = cols.indexOf(col);
+      if (idx === -1) return "";
+      const cell = row.c[idx];
+      return cell && cell.v !== null ? String(cell.v).trim() : "";
+    };
+    const cat = get("categoria").toLowerCase();
+    const ps  = get("preciostock");
+    const pe  = get("precioencargue");
     return {
-      id:              parseInt(row.id) || (i + 1),
+      id:              parseInt(get("id")) || (i + 1),
       cat,
-      nombre:          row.nombre || "",
-      sub:             row.sub || "",
-      disponibilidad:  (row.disponibilidad || "stock").toLowerCase(),
-      precioStock:     row.preciostock ? parseFloat(row.preciostock) : null,
-      precioEnc:       row.precioencargue ? parseFloat(row.precioencargue) : null,
-      imagen:          row.imagen || "",
-      caracteristicas: row.caracteristicas || "",
+      nombre:          get("nombre"),
+      sub:             get("sub"),
+      disponibilidad:  (get("disponibilidad") || "stock").toLowerCase(),
+      precioStock:     ps ? parseFloat(ps) : null,
+      precioEnc:       pe ? parseFloat(pe) : null,
+      imagen:          get("imagen"),
+      caracteristicas: get("caracteristicas"),
       emoji:           CAT_EMOJI[cat] || "📦",
     };
   }).filter(p => p.nombre);
@@ -781,11 +785,11 @@ async function cargarProductos() {
   const section = document.getElementById("productsSection");
   section.innerHTML = `<div class="empty-state"><div style="font-size:48px;animation:spin 1s linear infinite;display:inline-block">⟳</div><p style="color:var(--gray-400);margin-top:12px;font-size:14px">Cargando productos...</p></div>`;
   try {
-    // Fetch directo — funciona en Vercel sin proxy
-    const res = await fetch(SHEETS_CSV_URL, { cache: "no-store" });
+    // Google Visualization API — no necesita proxy ni API key
+    const res = await fetch(SHEETS_JSON_URL + "&t=" + Date.now());
     if (!res.ok) throw new Error("Error al cargar");
-    const csvText = await res.text();
-    PRODUCTOS = parseCSV(csvText);
+    const raw = await res.text();
+    PRODUCTOS = parseGVizJSON(raw);
     renderProducts();
     updateCartUI();
   } catch(err) {
