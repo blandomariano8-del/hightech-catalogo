@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>HIGHTECH Rosario — Catálogo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --navy: #0D1B2A;
+  --navy2: #16213E;
+  --blue: #2550E8;
+  --blue-light: #3A67FF;
+  --blue-pale: #EEF2FF;
+  --white: #FFFFFF;
+  --gray-50: #F8F9FA;
+  --gray-100: #F1F3F5;
+  --gray-200: #E9ECEF;
+  --gray-400: #9CA3AF;
+  --gray-600: #6B7280;
+  --gray-800: #1F2937;
+  --green: #10B981;
+  --red: #EF4444;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+  --shadow: 0 4px 16px rgba(0,0,0,0.10);
+  --shadow-lg: 0 8px 32px rgba(0,0,0,0.15);
+  --radius: 14px;
+  --radius-sm: 8px;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Inter', sans-serif; background: var(--gray-50); color: var(--gray-800); min-height: 100vh; }
+
+/* ── NAVBAR ── */
+.navbar {
+  position: sticky; top: 0; z-index: 100;
+  background: var(--navy);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 20px; height: 60px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.25);
+}
+.navbar-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.navbar-logo {
+  width: 34px; height: 34px; background: var(--white);
+  border-radius: 8px; display: flex; align-items: center; justify-content: center;
+  font-weight: 900; font-size: 13px; color: var(--navy); letter-spacing: -0.5px;
+}
+.navbar-name { color: var(--white); font-weight: 800; font-size: 15px; letter-spacing: 0.3px; }
+.navbar-name span { color: var(--blue-light); }
+.navbar-right { display: flex; align-items: center; gap: 12px; }
+.btn-faq {
+  background: none; border: 1px solid rgba(255,255,255,0.2);
+  color: rgba(255,255,255,0.7); padding: 6px 12px; border-radius: 6px;
+  font-size: 12px; font-weight: 600; cursor: pointer; transition: all .2s;
+  font-family: 'Inter', sans-serif;
+}
+.btn-faq:hover { background: rgba(255,255,255,0.1); color: var(--white); }
+.btn-cart {
+  background: var(--blue); color: var(--white);
+  border: none; padding: 8px 16px; border-radius: 8px;
+  font-size: 13px; font-weight: 700; cursor: pointer;
+  display: flex; align-items: center; gap: 8px; transition: all .2s;
+  font-family: 'Inter', sans-serif; position: relative;
+}
+.btn-cart:hover { background: var(--blue-light); transform: translateY(-1px); }
+.cart-badge {
+  background: var(--white); color: var(--blue);
+  border-radius: 50%; width: 20px; height: 20px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 800; line-height: 1;
+}
+
+/* ── FILTROS / CATEGORÍAS ── */
+.filters-bar {
+  background: var(--white); border-bottom: 1px solid var(--gray-200);
+  padding: 0 20px; position: sticky; top: 60px; z-index: 90;
+  display: flex; align-items: center; gap: 0; overflow-x: auto;
+}
+.filters-bar::-webkit-scrollbar { display: none; }
+.filter-btn {
+  padding: 14px 18px; font-size: 13px; font-weight: 600;
+  color: var(--gray-600); border: none; background: none; cursor: pointer;
+  white-space: nowrap; border-bottom: 3px solid transparent;
+  transition: all .2s; font-family: 'Inter', sans-serif;
+  display: flex; align-items: center; gap: 6px;
+}
+.filter-btn:hover { color: var(--blue); }
+.filter-btn.active { color: var(--blue); border-bottom-color: var(--blue); }
+.filter-count {
+  background: var(--blue-pale); color: var(--blue);
+  font-size: 10px; font-weight: 700; padding: 2px 6px; border-radius: 10px;
+}
+
+/* ── SEARCH & SORT ── */
+.toolbar {
+  padding: 16px 20px; display: flex; gap: 12px; align-items: center;
+  background: var(--gray-50);
+}
+.search-wrap { position: relative; flex: 1; max-width: 360px; }
+.search-icon { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--gray-400); font-size: 15px; }
+.search-input {
+  width: 100%; padding: 9px 12px 9px 36px;
+  border: 1.5px solid var(--gray-200); border-radius: var(--radius-sm);
+  font-size: 13px; font-family: 'Inter', sans-serif;
+  background: var(--white); transition: border .2s; outline: none;
+}
+.search-input:focus { border-color: var(--blue); }
+.sort-select {
+  padding: 9px 12px; border: 1.5px solid var(--gray-200);
+  border-radius: var(--radius-sm); font-size: 13px; font-family: 'Inter', sans-serif;
+  background: var(--white); cursor: pointer; outline: none; color: var(--gray-800);
+}
+
+/* ── GRID DE PRODUCTOS ── */
+.products-section { padding: 0 20px 100px; }
+.cat-label {
+  font-size: 11px; font-weight: 700; letter-spacing: 1.5px;
+  color: var(--gray-400); text-transform: uppercase;
+  padding: 24px 0 12px; border-bottom: 1px solid var(--gray-200); margin-bottom: 16px;
+  display: flex; align-items: center; gap: 10px;
+}
+.cat-label::after { content: ''; flex: 1; height: 1px; background: var(--gray-200); }
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 14px; margin-bottom: 8px;
+}
+
+.product-card {
+  background: var(--white); border-radius: var(--radius);
+  box-shadow: var(--shadow-sm); overflow: hidden;
+  border: 1.5px solid var(--gray-200); transition: all .2s;
+  display: flex; flex-direction: column;
+}
+.product-card:hover { box-shadow: var(--shadow); border-color: var(--blue); transform: translateY(-2px); }
+.product-card.out-of-stock { opacity: .55; }
+
+.product-img {
+  width: 100%; aspect-ratio: 1;
+  background: linear-gradient(135deg, #F1F3F5 0%, #E9ECEF 100%);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 48px; position: relative; overflow: hidden;
+}
+.product-img img { width: 80%; height: 80%; object-fit: contain; }
+.badge-stock {
+  position: absolute; top: 8px; right: 8px;
+  background: var(--green); color: var(--white);
+  font-size: 9px; font-weight: 700; padding: 3px 7px; border-radius: 10px;
+  letter-spacing: 0.5px;
+}
+.badge-encargue {
+  position: absolute; top: 8px; right: 8px;
+  background: var(--navy); color: var(--white);
+  font-size: 9px; font-weight: 700; padding: 3px 7px; border-radius: 10px;
+  letter-spacing: 0.5px;
+}
+.badge-agotado {
+  position: absolute; top: 8px; right: 8px;
+  background: var(--gray-400); color: var(--white);
+  font-size: 9px; font-weight: 700; padding: 3px 7px; border-radius: 10px;
+}
+
+.product-info { padding: 12px; flex: 1; display: flex; flex-direction: column; gap: 4px; }
+.product-cat { font-size: 9px; font-weight: 700; letter-spacing: 1px; color: var(--blue); text-transform: uppercase; }
+.product-name { font-size: 13px; font-weight: 700; color: var(--navy); line-height: 1.3; }
+.product-sub { font-size: 11px; color: var(--gray-600); }
+.product-price { font-size: 16px; font-weight: 800; color: var(--navy); margin-top: 6px; }
+.product-price-enc { font-size: 11px; color: var(--gray-400); font-weight: 500; }
+
+.product-actions { padding: 0 12px 12px; display: flex; gap: 6px; align-items: center; }
+.qty-control {
+  display: flex; align-items: center; gap: 0;
+  border: 1.5px solid var(--gray-200); border-radius: var(--radius-sm); overflow: hidden;
+  flex: 1;
+}
+.qty-btn {
+  width: 32px; height: 32px; border: none; background: var(--gray-100);
+  font-size: 16px; cursor: pointer; color: var(--gray-800);
+  display: flex; align-items: center; justify-content: center;
+  transition: background .15s; font-family: 'Inter', sans-serif;
+}
+.qty-btn:hover:not(:disabled) { background: var(--blue-pale); color: var(--blue); }
+.qty-btn:disabled { opacity: .3; cursor: not-allowed; }
+.qty-num {
+  flex: 1; text-align: center; font-size: 13px; font-weight: 700;
+  color: var(--navy); border: none; background: var(--white);
+  font-family: 'Inter', sans-serif; min-width: 28px;
+}
+.btn-add {
+  width: 32px; height: 32px; background: var(--blue); color: var(--white);
+  border: none; border-radius: var(--radius-sm); cursor: pointer;
+  font-size: 18px; display: flex; align-items: center; justify-content: center;
+  transition: all .2s; font-weight: 700;
+}
+.btn-add:hover { background: var(--blue-light); transform: scale(1.08); }
+.btn-add.added { background: var(--green); }
+
+/* ── PANEL CARRITO ── */
+.cart-overlay {
+  position: fixed; inset: 0; background: rgba(0,0,0,0.45);
+  z-index: 200; opacity: 0; pointer-events: none; transition: opacity .25s;
+}
+.cart-overlay.open { opacity: 1; pointer-events: all; }
+.cart-panel {
+  position: fixed; right: 0; top: 0; bottom: 0; width: 420px; max-width: 100vw;
+  background: var(--white); z-index: 201; display: flex; flex-direction: column;
+  transform: translateX(100%); transition: transform .3s cubic-bezier(.4,0,.2,1);
+  box-shadow: -8px 0 40px rgba(0,0,0,0.2);
+}
+.cart-panel.open { transform: translateX(0); }
+.cart-header {
+  padding: 20px; border-bottom: 1px solid var(--gray-200);
+  display: flex; align-items: center; justify-content: space-between;
+  background: var(--navy);
+}
+.cart-header h2 { color: var(--white); font-size: 17px; font-weight: 800; }
+.btn-close {
+  background: rgba(255,255,255,0.1); border: none; color: var(--white);
+  width: 32px; height: 32px; border-radius: 50%; cursor: pointer; font-size: 18px;
+  display: flex; align-items: center; justify-content: center; transition: background .2s;
+}
+.btn-close:hover { background: rgba(255,255,255,0.25); }
+.cart-body { flex: 1; overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 10px; }
+.cart-empty {
+  flex: 1; display: flex; flex-direction: column; align-items: center;
+  justify-content: center; gap: 12px; color: var(--gray-400); padding: 40px 0;
+}
+.cart-empty-icon { font-size: 56px; opacity: .4; }
+.cart-empty p { font-size: 14px; font-weight: 500; }
+.cart-item {
+  display: flex; gap: 12px; align-items: center;
+  padding: 12px; background: var(--gray-50); border-radius: var(--radius-sm);
+  border: 1px solid var(--gray-200);
+}
+.cart-item-emoji { font-size: 28px; width: 44px; height: 44px; background: var(--white); border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.cart-item-info { flex: 1; min-width: 0; }
+.cart-item-name { font-size: 13px; font-weight: 700; color: var(--navy); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.cart-item-sub { font-size: 11px; color: var(--gray-400); }
+.cart-item-price { font-size: 14px; font-weight: 800; color: var(--blue); white-space: nowrap; }
+.cart-item-qty {
+  display: flex; align-items: center; gap: 6px;
+  background: var(--white); border: 1px solid var(--gray-200);
+  border-radius: 6px; padding: 2px 6px;
+}
+.cart-item-qty button {
+  background: none; border: none; font-size: 15px; cursor: pointer;
+  color: var(--gray-600); width: 20px; display: flex; align-items: center; justify-content: center;
+  font-family: 'Inter', sans-serif;
+}
+.cart-item-qty span { font-size: 13px; font-weight: 700; min-width: 20px; text-align: center; }
+.btn-remove { background: none; border: none; color: var(--gray-400); cursor: pointer; font-size: 16px; padding: 4px; }
+.btn-remove:hover { color: var(--red); }
+
+.cart-footer { padding: 16px; border-top: 1px solid var(--gray-200); background: var(--white); }
+.cart-totals { margin-bottom: 14px; display: flex; flex-direction: column; gap: 6px; }
+.total-row { display: flex; justify-content: space-between; font-size: 13px; color: var(--gray-600); }
+.total-row.main { font-size: 17px; font-weight: 800; color: var(--navy); }
+.total-row span:last-child { font-weight: 700; }
+.btn-checkout {
+  width: 100%; padding: 14px; background: var(--blue); color: var(--white);
+  border: none; border-radius: var(--radius-sm); font-size: 15px; font-weight: 800;
+  cursor: pointer; transition: all .2s; font-family: 'Inter', sans-serif;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+}
+.btn-checkout:hover { background: var(--blue-light); transform: translateY(-1px); }
+.btn-checkout:disabled { opacity: .5; cursor: not-allowed; transform: none; }
+
+/* ── MODAL CHECKOUT ── */
+.modal-overlay {
+  position: fixed; inset: 0; background: rgba(0,0,0,0.55);
+  z-index: 300; display: none; align-items: center; justify-content: center;
+  padding: 20px;
+}
+.modal-overlay.open { display: flex; }
+.modal {
+  background: var(--white); border-radius: 18px; width: 100%; max-width: 480px;
+  max-height: 90vh; overflow-y: auto; box-shadow: var(--shadow-lg);
+}
+.modal-header {
+  padding: 20px 24px; background: var(--navy); border-radius: 18px 18px 0 0;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.modal-header h2 { color: var(--white); font-size: 17px; font-weight: 800; }
+.modal-body { padding: 24px; display: flex; flex-direction: column; gap: 16px; }
+.form-group { display: flex; flex-direction: column; gap: 6px; }
+.form-label { font-size: 12px; font-weight: 700; color: var(--gray-600); letter-spacing: 0.5px; text-transform: uppercase; }
+.form-input, .form-select, .form-textarea {
+  padding: 11px 14px; border: 1.5px solid var(--gray-200); border-radius: var(--radius-sm);
+  font-size: 14px; font-family: 'Inter', sans-serif; outline: none;
+  transition: border .2s; color: var(--gray-800); width: 100%;
+}
+.form-input:focus, .form-select:focus, .form-textarea:focus { border-color: var(--blue); }
+.form-input.error, .form-select.error { border-color: var(--red); }
+.form-hint { font-size: 11px; color: var(--gray-400); }
+.form-error { font-size: 11px; color: var(--red); display: none; }
+.form-error.show { display: block; }
+.form-textarea { resize: vertical; min-height: 70px; }
+.modal-footer { padding: 0 24px 24px; display: flex; flex-direction: column; gap: 10px; }
+.btn-confirm {
+  width: 100%; padding: 14px; background: var(--blue); color: var(--white);
+  border: none; border-radius: var(--radius-sm); font-size: 15px; font-weight: 800;
+  cursor: pointer; font-family: 'Inter', sans-serif; transition: all .2s;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+}
+.btn-confirm:hover { background: var(--blue-light); }
+.btn-cancel-modal {
+  width: 100%; padding: 12px; background: none; color: var(--gray-600);
+  border: 1.5px solid var(--gray-200); border-radius: var(--radius-sm);
+  font-size: 14px; font-weight: 600; cursor: pointer; font-family: 'Inter', sans-serif;
+  transition: all .2s;
+}
+.btn-cancel-modal:hover { border-color: var(--gray-400); color: var(--gray-800); }
+
+/* ── MODAL CONFIRMADO ── */
+.modal-success { text-align: center; padding: 32px 24px; display: flex; flex-direction: column; align-items: center; gap: 14px; }
+.success-icon { font-size: 64px; }
+.modal-success h2 { font-size: 22px; font-weight: 800; color: var(--navy); }
+.modal-success p { font-size: 14px; color: var(--gray-600); line-height: 1.6; max-width: 320px; }
+.btn-whatsapp {
+  padding: 14px 28px; background: #25D366; color: var(--white);
+  border: none; border-radius: var(--radius-sm); font-size: 15px; font-weight: 800;
+  cursor: pointer; font-family: 'Inter', sans-serif; width: 100%;
+  display: flex; align-items: center; justify-content: center; gap: 10px; transition: all .2s;
+}
+.btn-whatsapp:hover { background: #1ebe5d; }
+.btn-ver-pedido {
+  padding: 12px; background: none; color: var(--blue);
+  border: 1.5px solid var(--blue); border-radius: var(--radius-sm);
+  font-size: 14px; font-weight: 700; cursor: pointer; font-family: 'Inter', sans-serif;
+  width: 100%; transition: all .2s;
+}
+.btn-ver-pedido:hover { background: var(--blue-pale); }
+
+/* ── MODAL FAQ ── */
+.faq-list { display: flex; flex-direction: column; }
+.faq-item { border-bottom: 1px solid var(--gray-200); }
+.faq-question {
+  padding: 16px 0; font-size: 14px; font-weight: 700; color: var(--navy);
+  cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+  list-style: none; gap: 12px;
+}
+.faq-question::-webkit-details-marker { display: none; }
+.faq-answer { font-size: 13px; color: var(--gray-600); line-height: 1.7; padding-bottom: 16px; }
+
+/* ── EMPTY STATE ── */
+.empty-state {
+  text-align: center; padding: 80px 20px;
+  display: flex; flex-direction: column; align-items: center; gap: 14px;
+}
+.empty-state-icon { font-size: 64px; opacity: .3; }
+.empty-state h3 { font-size: 18px; font-weight: 700; color: var(--gray-600); }
+.empty-state p { font-size: 14px; color: var(--gray-400); }
+
+/* ── RESPONSIVE ── */
+@media(max-width: 600px) {
+  .navbar { padding: 0 14px; }
+  .navbar-name { font-size: 13px; }
+  .products-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .products-section { padding: 0 14px 100px; }
+  .toolbar { padding: 12px 14px; }
+  .filters-bar { padding: 0 14px; }
+  .cart-panel { width: 100vw; }
+}
+@media(max-width: 360px) {
+  .products-grid { grid-template-columns: 1fr; }
+}
+
+/* ── TOAST ── */
+.toast {
+  position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(80px);
+  background: var(--navy); color: var(--white); padding: 12px 20px;
+  border-radius: 10px; font-size: 13px; font-weight: 600; z-index: 500;
+  transition: transform .3s cubic-bezier(.4,0,.2,1); white-space: nowrap;
+  pointer-events: none; box-shadow: var(--shadow-lg);
+}
+.toast.show { transform: translateX(-50%) translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <a class="navbar-brand" href="#">
+    <div class="navbar-logo">HT</div>
+    <span class="navbar-name">HIGHTECH <span>ROSARIO</span></span>
+  </a>
+  <div class="navbar-right">
+    <button class="btn-faq" onclick="openFaq()">Preguntas frecuentes</button>
+    <button class="btn-cart" onclick="openCart()">
+      🛒 Pedido
+      <span class="cart-badge" id="cartBadge">0</span>
+    </button>
+  </div>
+</nav>
+
+<!-- FILTROS -->
+<div class="filters-bar" id="filtersBar">
+  <button class="filter-btn active" data-cat="todos" onclick="filterCat(this)">
+    Todos <span class="filter-count" id="count-todos"></span>
+  </button>
+  <button class="filter-btn" data-cat="iphones" onclick="filterCat(this)">
+    iPhones <span class="filter-count" id="count-iphones"></span>
+  </button>
+  <button class="filter-btn" data-cat="airpods" onclick="filterCat(this)">
+    AirPods <span class="filter-count" id="count-airpods"></span>
+  </button>
+  <button class="filter-btn" data-cat="accesorios" onclick="filterCat(this)">
+    Accesorios <span class="filter-count" id="count-accesorios"></span>
+  </button>
+  <button class="filter-btn" data-cat="usados" onclick="filterCat(this)">
+    Usados <span class="filter-count" id="count-usados"></span>
+  </button>
+</div>
+
+<!-- TOOLBAR -->
+<div class="toolbar">
+  <div class="search-wrap">
+    <span class="search-icon">⌕</span>
+    <input type="text" class="search-input" id="searchInput" placeholder="Buscar producto..." oninput="renderProducts()"/>
+  </div>
+  <select class="sort-select" id="sortSelect" onchange="renderProducts()">
+    <option value="default">Orden original</option>
+    <option value="price-asc">Precio: menor a mayor</option>
+    <option value="price-desc">Precio: mayor a menor</option>
+    <option value="name">Nombre A–Z</option>
+  </select>
+</div>
+
+<!-- PRODUCTOS -->
+<div class="products-section" id="productsSection"></div>
+
+<!-- CARRITO OVERLAY + PANEL -->
+<div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
+<div class="cart-panel" id="cartPanel">
+  <div class="cart-header">
+    <h2>🛒 Tu pedido</h2>
+    <button class="btn-close" onclick="closeCart()">✕</button>
+  </div>
+  <div class="cart-body" id="cartBody"></div>
+  <div class="cart-footer">
+    <div class="cart-totals" id="cartTotals"></div>
+    <button class="btn-checkout" id="btnCheckout" onclick="openCheckout()" disabled>
+      Confirmar pedido →
+    </button>
+  </div>
+</div>
+
+<!-- MODAL CHECKOUT -->
+<div class="modal-overlay" id="checkoutModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h2>Completá tus datos</h2>
+      <button class="btn-close" onclick="closeCheckout()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label class="form-label">Nombre y Apellido *</label>
+        <input type="text" class="form-input" id="fNombre" placeholder="Ej: Juan García"/>
+        <span class="form-error" id="errNombre">Campo obligatorio</span>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Teléfono *</label>
+        <input type="tel" class="form-input" id="fTelefono" placeholder="Ej: 3413001234"/>
+        <span class="form-hint">Solo números, sin guiones ni espacios</span>
+        <span class="form-error" id="errTelefono">Ingresá un teléfono válido</span>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Forma de pago *</label>
+        <select class="form-select" id="fPago">
+          <option value="">— Seleccioná una opción —</option>
+          <option value="Efectivo en pesos">Efectivo en pesos</option>
+          <option value="Efectivo en dólares">Efectivo en dólares</option>
+          <option value="Transferencia bancaria">Transferencia bancaria</option>
+          <option value="Crypto (USDT / Binance Pay)">Crypto (USDT / Binance Pay)</option>
+        </select>
+        <span class="form-error" id="errPago">Seleccioná una forma de pago</span>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Forma de entrega *</label>
+        <select class="form-select" id="fEntrega">
+          <option value="">— Seleccioná una opción —</option>
+          <option value="Envío a todo el país">Envío a todo el país</option>
+          <option value="Retiro en Rosario">Retiro en Rosario</option>
+        </select>
+        <span class="form-error" id="errEntrega">Seleccioná una forma de entrega</span>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Observaciones</label>
+        <textarea class="form-textarea" id="fObs" placeholder="Color, modelo, consulta especial..."></textarea>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-confirm" onclick="confirmarPedido()">✅ Confirmar pedido</button>
+      <button class="btn-cancel-modal" onclick="closeCheckout()">Volver al carrito</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL CONFIRMADO -->
+<div class="modal-overlay" id="successModal">
+  <div class="modal">
+    <div class="modal-success">
+      <div class="success-icon">✅</div>
+      <h2>¡Pedido confirmado!</h2>
+      <p>Avisanos por WhatsApp para coordinar el pago y la entrega. Guardá el detalle de tu pedido.</p>
+      <button class="btn-whatsapp" onclick="enviarWhatsapp()">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Avisarnos por WhatsApp
+      </button>
+      <button class="btn-ver-pedido" onclick="verPedidoPDF()">📄 Ver / guardar mi pedido</button>
+      <button class="btn-cancel-modal" onclick="cerrarSuccess()">Cerrar</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL FAQ -->
+<div class="modal-overlay" id="faqModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h2>Preguntas frecuentes</h2>
+      <button class="btn-close" onclick="closeFaq()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="faq-list">
+        <details class="faq-item">
+          <summary class="faq-question">¿Hacen envíos? <span>›</span></summary>
+          <p class="faq-answer">Sí, realizamos envíos seguros a todo el país por Correo Argentino, Andreani u otros transportes. El costo de envío es a cargo del cliente.</p>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-question">¿Los equipos tienen garantía? <span>›</span></summary>
+          <p class="faq-answer">Sí. Los equipos sellados cuentan con garantía oficial de 12 meses. Los equipos usados cuentan con garantía propia de 30 días.</p>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-question">¿Qué medios de pago aceptan? <span>›</span></summary>
+          <p class="faq-answer">Aceptamos efectivo (pesos o dólares), transferencia bancaria y crypto (USDT / Binance Pay).</p>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-question">¿Qué es el precio por encargue? <span>›</span></summary>
+          <p class="faq-answer">El precio por encargue aplica a productos que no tenemos en stock inmediato pero podemos conseguir en un plazo corto. El precio puede variar respecto al stock disponible.</p>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-question">¿Los equipos usados son confiables? <span>›</span></summary>
+          <p class="faq-answer">Sí. Todos los equipos usados son revisados punto por punto (batería, cámaras, pantalla y funcionamiento) antes de ser publicados.</p>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-question">¿Cómo confirmo mi pedido? <span>›</span></summary>
+          <p class="faq-answer">Agregá los productos al carrito, completá tus datos y tocá "Confirmar pedido". Luego avisanos por WhatsApp para coordinar el pago y la entrega.</p>
+        </details>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ═══════════════════════════════════════
+// PRODUCTOS — Editá desde acá
+// ═══════════════════════════════════════
+const PRODUCTOS = [
+  // iPhones
+  { id:1,  cat:"iphones",    emoji:"📱", nombre:"iPhone 16 128GB",         sub:"Sellado · Nuevo",          disponibilidad:"stock",    precioStock:750,  precioEnc:720  },
+  { id:2,  cat:"iphones",    emoji:"📱", nombre:"iPhone 16 256GB",         sub:"Sellado · Nuevo",          disponibilidad:"stock",    precioStock:820,  precioEnc:790  },
+  { id:3,  cat:"iphones",    emoji:"📱", nombre:"iPhone 16 Pro 256GB",     sub:"Sellado · Nuevo",          disponibilidad:"encargue", precioStock:null, precioEnc:1050 },
+  { id:4,  cat:"iphones",    emoji:"📱", nombre:"iPhone 16 Pro Max 256GB", sub:"Sellado · Nuevo",          disponibilidad:"encargue", precioStock:null, precioEnc:1200 },
+  { id:5,  cat:"iphones",    emoji:"📱", nombre:"iPhone 15 128GB",         sub:"Sellado · Nuevo",          disponibilidad:"stock",    precioStock:650,  precioEnc:620  },
+  { id:6,  cat:"iphones",    emoji:"📱", nombre:"iPhone 15 Pro 256GB",     sub:"Sellado · Nuevo",          disponibilidad:"stock",    precioStock:900,  precioEnc:870  },
+  { id:7,  cat:"iphones",    emoji:"📱", nombre:"iPhone 14 128GB",         sub:"Sellado · Nuevo",          disponibilidad:"stock",    precioStock:520,  precioEnc:500  },
+  // AirPods
+  { id:8,  cat:"airpods",    emoji:"🎧", nombre:"AirPods 4ta Gen",         sub:"Sellados · Nuevo",         disponibilidad:"stock",    precioStock:160,  precioEnc:150  },
+  { id:9,  cat:"airpods",    emoji:"🎧", nombre:"AirPods Pro 2da Gen",     sub:"Sellados · Nuevo",         disponibilidad:"stock",    precioStock:230,  precioEnc:220  },
+  { id:10, cat:"airpods",    emoji:"🎧", nombre:"AirPods Max",             sub:"Sellados · Nuevo",         disponibilidad:"encargue", precioStock:null, precioEnc:490  },
+  // Accesorios
+  { id:11, cat:"accesorios", emoji:"🔌", nombre:"Cargador Apple 20W USB-C",sub:"Original sellado",        disponibilidad:"stock",    precioStock:35,   precioEnc:32   },
+  { id:12, cat:"accesorios", emoji:"🔌", nombre:"Cable USB-C 1m",          sub:"Original Apple",           disponibilidad:"stock",    precioStock:28,   precioEnc:25   },
+  { id:13, cat:"accesorios", emoji:"🔋", nombre:"MagSafe Charger 15W",     sub:"Original Apple",           disponibilidad:"stock",    precioStock:55,   precioEnc:50   },
+  { id:14, cat:"accesorios", emoji:"🏷️", nombre:"AirTag",                  sub:"Pack x1",                  disponibilidad:"stock",    precioStock:40,   precioEnc:38   },
+  { id:15, cat:"accesorios", emoji:"📦", nombre:"Funda iPhone 16",         sub:"Silicona MagSafe",         disponibilidad:"stock",    precioStock:22,   precioEnc:20   },
+  // Usados
+  { id:16, cat:"usados",     emoji:"📲", nombre:"iPhone 13 128GB",         sub:"Usado · Verificado",       disponibilidad:"stock",    precioStock:380,  precioEnc:null },
+  { id:17, cat:"usados",     emoji:"📲", nombre:"iPhone 14 128GB",         sub:"Usado · Verificado",       disponibilidad:"stock",    precioStock:450,  precioEnc:null },
+  { id:18, cat:"usados",     emoji:"📲", nombre:"iPhone 15 128GB",         sub:"Usado · Verificado",       disponibilidad:"stock",    precioStock:560,  precioEnc:null },
+  { id:19, cat:"usados",     emoji:"📲", nombre:"iPhone 12 64GB",          sub:"Usado · Verificado",       disponibilidad:"stock",    precioStock:290,  precioEnc:null },
+  { id:20, cat:"usados",     emoji:"🎧", nombre:"AirPods 3ra Gen",         sub:"Usado · Impecable",        disponibilidad:"stock",    precioStock:95,   precioEnc:null },
+];
+
+const CAT_LABELS = {
+  iphones:    "iPhones",
+  airpods:    "AirPods",
+  accesorios: "Accesorios",
+  usados:     "Usados verificados",
+};
+
+// ─── ESTADO ───────────────────────────
+let cart = {}; // { id: qty }
+let currentCat = "todos";
+let pedidoConfirmado = null;
+
+// ─── RENDER ───────────────────────────
+function getFiltered() {
+  let list = [...PRODUCTOS];
+  const q = document.getElementById("searchInput").value.toLowerCase().trim();
+  if (currentCat !== "todos") list = list.filter(p => p.cat === currentCat);
+  if (q) list = list.filter(p =>
+    p.nombre.toLowerCase().includes(q) || p.sub.toLowerCase().includes(q)
+  );
+  const sort = document.getElementById("sortSelect").value;
+  if (sort === "price-asc") list.sort((a,b) => (a.precioStock||a.precioEnc||0) - (b.precioStock||b.precioEnc||0));
+  if (sort === "price-desc") list.sort((a,b) => (b.precioStock||b.precioEnc||0) - (a.precioStock||a.precioEnc||0));
+  if (sort === "name") list.sort((a,b) => a.nombre.localeCompare(b.nombre));
+  return list;
+}
+
+function renderProducts() {
+  const list = getFiltered();
+  const section = document.getElementById("productsSection");
+
+  if (!list.length) {
+    section.innerHTML = `<div class="empty-state">
+      <div class="empty-state-icon">🔍</div>
+      <h3>Sin resultados</h3>
+      <p>No encontramos productos para tu búsqueda.</p>
+    </div>`;
+    return;
+  }
+
+  const byCat = {};
+  list.forEach(p => {
+    if (!byCat[p.cat]) byCat[p.cat] = [];
+    byCat[p.cat].push(p);
+  });
+
+  let html = "";
+  const catOrder = ["iphones","airpods","accesorios","usados"];
+  catOrder.forEach(cat => {
+    if (!byCat[cat]) return;
+    html += `<div class="cat-label">${CAT_LABELS[cat]}</div>`;
+    html += `<div class="products-grid">`;
+    byCat[cat].forEach(p => { html += productCard(p); });
+    html += `</div>`;
+  });
+  section.innerHTML = html;
+  updateCounts();
+}
+
+function productCard(p) {
+  const qty = cart[p.id] || 0;
+  const noDisp = p.disponibilidad === "agotado";
+
+  let badge = "";
+  if (p.disponibilidad === "stock") badge = `<span class="badge-stock">EN STOCK</span>`;
+  else if (p.disponibilidad === "encargue") badge = `<span class="badge-encargue">ENCARGUE</span>`;
+  else badge = `<span class="badge-agotado">AGOTADO</span>`;
+
+  let precios = "";
+  if (p.precioStock) precios += `<div class="product-price">USD $${p.precioStock}</div>`;
+  if (p.precioEnc && p.precioStock) precios += `<div class="product-price-enc">Encargue: USD $${p.precioEnc}</div>`;
+  if (p.precioEnc && !p.precioStock) precios += `<div class="product-price">USD $${p.precioEnc} <span style="font-size:11px;font-weight:500;color:var(--gray-400)">(encargue)</span></div>`;
+
+  const actions = noDisp
+    ? `<div class="product-actions"><span style="font-size:12px;color:var(--gray-400);padding:8px 0">No disponible</span></div>`
+    : qty === 0
+    ? `<div class="product-actions">
+        <div class="qty-control" style="flex:1;justify-content:center">
+          <button class="qty-btn" disabled>−</button>
+          <span class="qty-num">0</span>
+          <button class="qty-btn" disabled>+</button>
+        </div>
+        <button class="btn-add" onclick="addItem(${p.id})">+</button>
+       </div>`
+    : `<div class="product-actions">
+        <div class="qty-control">
+          <button class="qty-btn" onclick="changeQty(${p.id},-1)">−</button>
+          <span class="qty-num">${qty}</span>
+          <button class="qty-btn" onclick="changeQty(${p.id},1)">+</button>
+        </div>
+        <button class="btn-add added" onclick="changeQty(${p.id},1)">✓</button>
+       </div>`;
+
+  return `<div class="product-card ${noDisp?'out-of-stock':''}" id="card-${p.id}">
+    <div class="product-img">${p.emoji}${badge}</div>
+    <div class="product-info">
+      <div class="product-cat">${CAT_LABELS[p.cat]}</div>
+      <div class="product-name">${p.nombre}</div>
+      <div class="product-sub">${p.sub}</div>
+      ${precios}
+    </div>
+    ${actions}
+  </div>`;
+}
+
+function updateCounts() {
+  const cats = ["iphones","airpods","accesorios","usados"];
+  const total = PRODUCTOS.length;
+  document.getElementById("count-todos").textContent = total;
+  cats.forEach(c => {
+    const el = document.getElementById(`count-${c}`);
+    if (el) el.textContent = PRODUCTOS.filter(p=>p.cat===c).length;
+  });
+}
+
+// ─── CARRITO ──────────────────────────
+function addItem(id) {
+  cart[id] = 1;
+  showToast("✓ Agregado al pedido");
+  renderProducts();
+  updateCartUI();
+}
+function changeQty(id, delta) {
+  const q = (cart[id] || 0) + delta;
+  if (q <= 0) delete cart[id];
+  else cart[id] = q;
+  renderProducts();
+  updateCartUI();
+}
+function removeFromCart(id) {
+  delete cart[id];
+  renderProducts();
+  updateCartUI();
+  renderCartPanel();
+}
+
+function updateCartUI() {
+  const total = Object.values(cart).reduce((a,b)=>a+b,0);
+  document.getElementById("cartBadge").textContent = total;
+  document.getElementById("btnCheckout").disabled = total === 0;
+  renderCartPanel();
+}
+
+function renderCartPanel() {
+  const body = document.getElementById("cartBody");
+  const totals = document.getElementById("cartTotals");
+  const items = Object.entries(cart);
+
+  if (!items.length) {
+    body.innerHTML = `<div class="cart-empty">
+      <div class="cart-empty-icon">🛒</div>
+      <p>El pedido está vacío</p>
+    </div>`;
+    totals.innerHTML = "";
+    return;
+  }
+
+  let subtotal = 0;
+  let html = "";
+  items.forEach(([id, qty]) => {
+    const p = PRODUCTOS.find(x => x.id == id);
+    if (!p) return;
+    const precio = p.precioStock || p.precioEnc || 0;
+    subtotal += precio * qty;
+    html += `<div class="cart-item">
+      <div class="cart-item-emoji">${p.emoji}</div>
+      <div class="cart-item-info">
+        <div class="cart-item-name">${p.nombre}</div>
+        <div class="cart-item-sub">${p.sub}</div>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px;flex-shrink:0">
+        <div class="cart-item-price">USD $${(precio*qty).toFixed(0)}</div>
+        <div class="cart-item-qty">
+          <button onclick="changeQty(${p.id},-1)">−</button>
+          <span>${qty}</span>
+          <button onclick="changeQty(${p.id},1)">+</button>
+        </div>
+      </div>
+      <button class="btn-remove" onclick="removeFromCart(${p.id})">🗑</button>
+    </div>`;
+  });
+  body.innerHTML = html;
+  totals.innerHTML = `
+    <div class="total-row"><span>Subtotal</span><span>USD $${subtotal.toFixed(0)}</span></div>
+    <div class="total-row"><span style="font-size:11px;color:var(--gray-400)">Envío a coordinar</span><span style="font-size:11px;color:var(--gray-400)">—</span></div>
+    <div class="total-row main"><span>Total</span><span>USD $${subtotal.toFixed(0)}</span></div>`;
+}
+
+function openCart() {
+  renderCartPanel();
+  document.getElementById("cartOverlay").classList.add("open");
+  document.getElementById("cartPanel").classList.add("open");
+}
+function closeCart() {
+  document.getElementById("cartOverlay").classList.remove("open");
+  document.getElementById("cartPanel").classList.remove("open");
+}
+
+// ─── CHECKOUT ─────────────────────────
+function openCheckout() {
+  closeCart();
+  document.getElementById("checkoutModal").classList.add("open");
+}
+function closeCheckout() {
+  document.getElementById("checkoutModal").classList.remove("open");
+}
+
+function confirmarPedido() {
+  const nombre = document.getElementById("fNombre").value.trim();
+  const tel    = document.getElementById("fTelefono").value.trim();
+  const pago   = document.getElementById("fPago").value;
+  const entrega= document.getElementById("fEntrega").value;
+  const obs    = document.getElementById("fObs").value.trim();
+
+  let valid = true;
+  const show = (id, show) => {
+    document.getElementById(id).classList.toggle("show", show);
+  };
+  const err = (inputId, errId, cond) => {
+    document.getElementById(inputId).classList.toggle("error", cond);
+    show(errId, cond);
+    if (cond) valid = false;
+  };
+  err("fNombre","errNombre", !nombre);
+  err("fTelefono","errTelefono", !tel || !/^\d{6,15}$/.test(tel));
+  err("fPago","errPago", !pago);
+  err("fEntrega","errEntrega", !entrega);
+  if (!valid) return;
+
+  pedidoConfirmado = { nombre, tel, pago, entrega, obs, items: {...cart} };
+  closeCheckout();
+  document.getElementById("successModal").classList.add("open");
+}
+
+function enviarWhatsapp() {
+  if (!pedidoConfirmado) return;
+  const { nombre, tel, pago, entrega, obs, items } = pedidoConfirmado;
+  let msg = `🛒 *Nuevo pedido — HIGHTECH Rosario*\n\n`;
+  msg += `👤 *Cliente:* ${nombre}\n`;
+  msg += `📞 *Teléfono:* ${tel}\n`;
+  msg += `💳 *Pago:* ${pago}\n`;
+  msg += `🚚 *Entrega:* ${entrega}\n\n`;
+  msg += `*Productos:*\n`;
+  let total = 0;
+  Object.entries(items).forEach(([id, qty]) => {
+    const p = PRODUCTOS.find(x => x.id == id);
+    if (!p) return;
+    const precio = p.precioStock || p.precioEnc || 0;
+    msg += `• ${p.nombre} x${qty} — USD $${(precio*qty).toFixed(0)}\n`;
+    total += precio * qty;
+  });
+  msg += `\n*Total: USD $${total.toFixed(0)}*`;
+  if (obs) msg += `\n\n📝 *Obs:* ${obs}`;
+  const wa = `https://wa.me/5493415000000?text=${encodeURIComponent(msg)}`;
+  window.open(wa, "_blank");
+}
+
+function verPedidoPDF() {
+  if (!pedidoConfirmado) return;
+  const { nombre, tel, pago, entrega, obs, items } = pedidoConfirmado;
+  let rows = "";
+  let total = 0;
+  Object.entries(items).forEach(([id, qty]) => {
+    const p = PRODUCTOS.find(x => x.id == id);
+    if (!p) return;
+    const precio = p.precioStock || p.precioEnc || 0;
+    total += precio * qty;
+    rows += `<tr><td>${p.nombre}</td><td style="text-align:center">${qty}</td><td style="text-align:right">USD $${(precio*qty).toFixed(0)}</td></tr>`;
+  });
+  const html = `<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Pedido HIGHTECH</title>
+  <style>body{font-family:sans-serif;padding:32px;color:#0D1B2A;max-width:500px;margin:0 auto}
+  h1{font-size:22px;margin-bottom:4px}p{margin:0;font-size:13px;color:#555}
+  table{width:100%;border-collapse:collapse;margin-top:20px}
+  th{background:#0D1B2A;color:#fff;padding:10px;text-align:left;font-size:12px}
+  td{padding:10px;border-bottom:1px solid #eee;font-size:13px}
+  .total{font-weight:900;font-size:16px;text-align:right;padding-top:12px}
+  .info{margin-top:16px;font-size:12px;color:#666;line-height:1.8}
+  </style></head><body>
+  <h1>⚡ HIGHTECH Rosario</h1>
+  <p>Detalle de pedido</p>
+  <div class="info">
+    <b>Cliente:</b> ${nombre}<br>
+    <b>Teléfono:</b> ${tel}<br>
+    <b>Pago:</b> ${pago}<br>
+    <b>Entrega:</b> ${entrega}
+    ${obs ? `<br><b>Obs:</b> ${obs}` : ""}
+  </div>
+  <table><thead><tr><th>Producto</th><th style="text-align:center">Cant.</th><th style="text-align:right">Subtotal</th></tr></thead>
+  <tbody>${rows}</tbody></table>
+  <div class="total">Total: USD $${total.toFixed(0)}</div>
+  </body></html>`;
+  const w = window.open("", "_blank");
+  w.document.write(html);
+  w.document.close();
+  setTimeout(() => w.print(), 400);
+}
+
+function cerrarSuccess() {
+  document.getElementById("successModal").classList.remove("open");
+  cart = {};
+  renderProducts();
+  updateCartUI();
+}
+
+// ─── FILTROS ──────────────────────────
+function filterCat(btn) {
+  document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+  btn.classList.add("active");
+  currentCat = btn.dataset.cat;
+  document.getElementById("searchInput").value = "";
+  renderProducts();
+}
+
+// ─── FAQ ──────────────────────────────
+function openFaq() { document.getElementById("faqModal").classList.add("open"); }
+function closeFaq() { document.getElementById("faqModal").classList.remove("open"); }
+document.getElementById("faqModal").addEventListener("click", e => {
+  if (e.target === document.getElementById("faqModal")) closeFaq();
+});
+document.getElementById("checkoutModal").addEventListener("click", e => {
+  if (e.target === document.getElementById("checkoutModal")) closeCheckout();
+});
+document.getElementById("successModal").addEventListener("click", e => {
+  if (e.target === document.getElementById("successModal")) cerrarSuccess();
+});
+
+// ─── TOAST ────────────────────────────
+function showToast(msg) {
+  const t = document.getElementById("toast");
+  t.textContent = msg;
+  t.classList.add("show");
+  setTimeout(() => t.classList.remove("show"), 2000);
+}
+
+// ─── INIT ─────────────────────────────
+renderProducts();
+updateCartUI();
+</script>
+</body>
+</html>
