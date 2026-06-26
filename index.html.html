@@ -181,6 +181,13 @@ body { font-family: 'Inter', sans-serif; background: var(--gray-50); color: var(
 }
 .hero-card:nth-child(2) { margin-right: 24px; }
 .hero-card-icon { font-size: 32px; line-height: 1; }
+.hero-card-img {
+  width: 52px; height: 52px; border-radius: 10px;
+  overflow: hidden; background: rgba(255,255,255,0.12);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.hero-card-img img { width: 100%; height: 100%; object-fit: contain; }
 .hero-card-info { display: flex; flex-direction: column; gap: 2px; }
 .hero-card-name { font-size: 13px; font-weight: 700; color: var(--white); }
 .hero-card-sub { font-size: 11px; color: rgba(255,255,255,0.45); }
@@ -565,35 +572,7 @@ body { font-family: 'Inter', sans-serif; background: var(--gray-50); color: var(
       <span class="hero-badge">✅ Equipos verificados</span>
     </div>
   </div>
-  <div class="hero-right">
-    <div class="hero-card">
-      <div class="hero-card-icon">📱</div>
-      <div class="hero-card-info">
-        <span class="hero-card-badge">EN STOCK</span>
-        <div class="hero-card-name">iPhone 16 128GB</div>
-        <div class="hero-card-sub">Sellado · Nuevo</div>
-        <div class="hero-card-price">USD $750</div>
-      </div>
-    </div>
-    <div class="hero-card">
-      <div class="hero-card-icon">🎧</div>
-      <div class="hero-card-info">
-        <span class="hero-card-badge">EN STOCK</span>
-        <div class="hero-card-name">AirPods Pro 2da Gen</div>
-        <div class="hero-card-sub">Sellados · Nuevo</div>
-        <div class="hero-card-price">USD $230</div>
-      </div>
-    </div>
-    <div class="hero-card">
-      <div class="hero-card-icon">📲</div>
-      <div class="hero-card-info">
-        <span class="hero-card-badge" style="background:var(--blue)">VERIFICADO</span>
-        <div class="hero-card-name">iPhone 15 128GB</div>
-        <div class="hero-card-sub">Usado · Impecable</div>
-        <div class="hero-card-price">USD $560</div>
-      </div>
-    </div>
-  </div>
+  <div class="hero-right" id="heroCards"></div>
 </section>
 
 <!-- TOOLBAR -->
@@ -1094,8 +1073,34 @@ function showToast(msg) {
   setTimeout(() => t.classList.remove("show"), 2000);
 }
 
+// ─── HERO CARDS ───────────────────────
+function renderHeroCards() {
+  const disponibles = PRODUCTOS.filter(p => p.disponibilidad !== "agotado");
+  const picks = disponibles.slice(0, 3);
+  const container = document.getElementById("heroCards");
+  if (!container) return;
+  container.innerHTML = picks.map((p, i) => {
+    const precio = p.precioStock || p.precioEnc;
+    const badgeTxt = p.disponibilidad === "stock" ? "EN STOCK" : "ENCARGUE";
+    const badgeBg  = p.disponibilidad === "usados" ? "var(--blue)" : "var(--green)";
+    const iconHtml = p.imagen
+      ? `<div class="hero-card-img"><img src="${driveUrl(p.imagen)}" alt="${p.nombre}"/></div>`
+      : `<div class="hero-card-icon">${p.emoji}</div>`;
+    return `<div class="hero-card" style="animation-delay:${i * 0.8}s">
+      ${iconHtml}
+      <div class="hero-card-info">
+        <span class="hero-card-badge" style="background:${badgeBg}">${badgeTxt}</span>
+        <div class="hero-card-name">${p.nombre}</div>
+        <div class="hero-card-sub">${p.sub}</div>
+        <div class="hero-card-price">USD $${precio}</div>
+      </div>
+    </div>`;
+  }).join("");
+}
+
 // ─── INIT ─────────────────────────────
 renderProducts();
+renderHeroCards();
 updateCartUI();
 </script>
 </body>
