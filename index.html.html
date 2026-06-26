@@ -1075,8 +1075,7 @@ function showToast(msg) {
 
 // ─── HERO CARDS ───────────────────────
 function renderHeroCards() {
-  const disponibles = PRODUCTOS.filter(p => p.disponibilidad !== "agotado");
-  const picks = disponibles.slice(0, 3);
+  const picks = [3, 4, 5].map(id => PRODUCTOS.find(p => p.id === id)).filter(Boolean);
   const container = document.getElementById("heroCards");
   if (!container) return;
   container.innerHTML = picks.map((p, i) => {
