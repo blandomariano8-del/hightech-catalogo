@@ -706,6 +706,8 @@ body { font-family: 'Inter', sans-serif; background: var(--gray-50); color: var(
     <button class="nav-cat" data-cat="airpods" onclick="filterCat(this)">🎧 AirPods</button>
     <button class="nav-cat" data-cat="accesorios" onclick="filterCat(this)">🔌 Accesorios</button>
     <button class="nav-cat" data-cat="usados" onclick="filterCat(this)">✅ Usados</button>
+    <button class="nav-cat" data-cat="stock" onclick="filterCat(this)">🟢 En Stock</button>
+    <button class="nav-cat" data-cat="encargue" onclick="filterCat(this)">⏳ Encargue</button>
   </div>
 
   <div class="navbar-right">
@@ -741,11 +743,6 @@ body { font-family: 'Inter', sans-serif; background: var(--gray-50); color: var(
   </div>
   <div class="hero-right" id="heroCards"></div>
 </section>
-
-<!-- SECCIÓN EN STOCK -->
-<div id="stockSection"></div>
-<!-- SECCIÓN ENCARGUE -->
-<div id="encargueSection"></div>
 
 <!-- TOOLBAR -->
 <div class="toolbar">
@@ -944,7 +941,9 @@ function driveUrl(url) {
 function getFiltered() {
   let list = [...PRODUCTOS];
   const q = document.getElementById("searchInput").value.toLowerCase().trim();
-  if (currentCat !== "todos") list = list.filter(p => p.cat === currentCat);
+  if (currentCat === "stock") list = list.filter(p => p.disponibilidad === "stock");
+  else if (currentCat === "encargue") list = list.filter(p => p.disponibilidad === "encargue");
+  else if (currentCat !== "todos") list = list.filter(p => p.cat === currentCat);
   if (q) list = list.filter(p =>
     p.nombre.toLowerCase().includes(q) || p.sub.toLowerCase().includes(q)
   );
@@ -1444,8 +1443,6 @@ function renderHeroCards() {
 }
 
 // ─── INIT ─────────────────────────────
-renderStockSection();
-renderEncargueSection();
 renderProducts();
 renderHeroCards();
 updateCartUI();
