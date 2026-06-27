@@ -512,6 +512,99 @@ body { font-family: 'Inter', sans-serif; background: var(--gray-50); color: var(
   .products-grid { grid-template-columns: 1fr; }
 }
 
+/* ── MODAL DETALLE PRODUCTO ── */
+.detail-overlay {
+  position: fixed; inset: 0; background: rgba(0,0,0,0.55);
+  z-index: 300; display: none; align-items: center; justify-content: center; padding: 20px;
+}
+.detail-overlay.open { display: flex; }
+.detail-modal {
+  background: var(--white); border-radius: 18px;
+  width: 100%; max-width: 760px; max-height: 90vh;
+  overflow: hidden; box-shadow: var(--shadow-lg); display: flex; flex-direction: column;
+}
+.detail-header {
+  padding: 16px 20px; background: var(--navy); border-radius: 18px 18px 0 0;
+  display: flex; align-items: center; justify-content: space-between; flex-shrink: 0;
+}
+.detail-header h2 {
+  color: var(--white); font-size: 15px; font-weight: 800;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: calc(100% - 48px);
+}
+.detail-body { display: flex; flex: 1; overflow: hidden; }
+.detail-img-col {
+  width: 320px; flex-shrink: 0;
+  background: linear-gradient(135deg, #F1F3F5 0%, #E9ECEF 100%);
+  display: flex; align-items: center; justify-content: center;
+  padding: 32px; position: relative;
+}
+.detail-img-col img { width: 100%; max-height: 300px; object-fit: contain; }
+.detail-img-emoji { font-size: 80px; line-height: 1; }
+.detail-img-badge {
+  position: absolute; top: 12px; right: 12px;
+  font-size: 10px; font-weight: 700; padding: 4px 9px; border-radius: 10px;
+  letter-spacing: 0.5px; color: var(--white);
+}
+.detail-info-col {
+  flex: 1; padding: 24px; display: flex; flex-direction: column; gap: 14px; overflow-y: auto;
+}
+.detail-cat-tag {
+  font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+  color: var(--blue); background: var(--blue-pale); padding: 4px 10px;
+  border-radius: 6px; width: fit-content;
+}
+.detail-name { font-size: 20px; font-weight: 900; color: var(--navy); line-height: 1.2; }
+.detail-sub { font-size: 13px; color: var(--gray-600); margin-top: 4px; }
+.detail-price-main { font-size: 26px; font-weight: 900; color: var(--navy); }
+.detail-price-enc { font-size: 12px; color: var(--gray-400); margin-top: 2px; }
+.detail-specs {
+  background: var(--gray-50); border-radius: 10px; padding: 14px 16px;
+  display: flex; flex-direction: column; gap: 0;
+}
+.detail-spec-row {
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: 13px; padding: 8px 0; border-bottom: 1px solid var(--gray-200);
+}
+.detail-spec-row:last-child { border-bottom: none; padding-bottom: 0; }
+.detail-spec-row:first-child { padding-top: 0; }
+.detail-spec-label { color: var(--gray-600); font-weight: 500; }
+.detail-spec-value { font-weight: 700; color: var(--navy); text-align: right; }
+.detail-actions {
+  display: flex; gap: 10px; align-items: center; margin-top: auto; padding-top: 8px;
+}
+.detail-qty {
+  display: flex; align-items: center;
+  border: 1.5px solid var(--gray-200); border-radius: var(--radius-sm); overflow: hidden;
+}
+.detail-qty-btn {
+  width: 38px; height: 42px; border: none; background: var(--gray-100);
+  font-size: 18px; cursor: pointer; color: var(--gray-800);
+  display: flex; align-items: center; justify-content: center;
+  transition: background .15s; font-family: 'Inter', sans-serif;
+}
+.detail-qty-btn:hover { background: var(--blue-pale); color: var(--blue); }
+.detail-qty-num {
+  width: 42px; text-align: center; font-size: 15px; font-weight: 700;
+  color: var(--navy); background: var(--white);
+}
+.btn-detail-add {
+  flex: 1; padding: 12px; background: var(--blue); color: var(--white);
+  border: none; border-radius: var(--radius-sm); font-size: 14px; font-weight: 800;
+  cursor: pointer; font-family: 'Inter', sans-serif; transition: all .2s;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+}
+.btn-detail-add:hover { background: var(--blue-light); }
+.btn-detail-add.added { background: var(--green); }
+.product-card-top { cursor: pointer; display: flex; flex-direction: column; }
+@media(max-width: 640px) {
+  .detail-overlay { padding: 0; align-items: flex-end; }
+  .detail-modal { border-radius: 20px 20px 0 0; max-height: 92vh; }
+  .detail-body { flex-direction: column; overflow-y: auto; }
+  .detail-img-col { width: 100%; height: 200px; padding: 20px; }
+  .detail-img-col img { max-height: 160px; }
+  .detail-info-col { overflow-y: visible; }
+}
+
 /* ── TOAST ── */
 .toast {
   position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(80px);
@@ -710,6 +803,17 @@ body { font-family: 'Inter', sans-serif; background: var(--gray-50); color: var(
   </div>
 </div>
 
+<!-- MODAL DETALLE PRODUCTO -->
+<div class="detail-overlay" id="detailModal" onclick="if(event.target===this)closeDetail()">
+  <div class="detail-modal">
+    <div class="detail-header">
+      <h2 id="detailTitle">Detalle del producto</h2>
+      <button class="btn-close" onclick="closeDetail()">✕</button>
+    </div>
+    <div class="detail-body" id="detailContent"></div>
+  </div>
+</div>
+
 <!-- TOAST -->
 <div class="toast" id="toast"></div>
 
@@ -839,12 +943,14 @@ function productCard(p) {
        </div>`;
 
   return `<div class="product-card ${noDisp?'out-of-stock':''}" id="card-${p.id}">
-    <div class="product-img" id="img-${p.id}">${p.imagen ? `<img src="${driveUrl(p.imagen)}" alt="${p.nombre}" onload="this.style.opacity=1" onerror="this.style.display='none';document.getElementById('fb-${p.id}').style.display='block'"/>` : ""}${badge}<span class="img-fallback" id="fb-${p.id}" style="${p.imagen ? 'display:none' : ''}">${p.emoji}</span></div>
-    <div class="product-info">
-      <div class="product-cat">${CAT_LABELS[p.cat]}</div>
-      <div class="product-name">${p.nombre}</div>
-      <div class="product-sub">${p.sub}</div>
-      ${precios}
+    <div class="product-card-top" onclick="openDetail(${p.id})">
+      <div class="product-img" id="img-${p.id}">${p.imagen ? `<img src="${driveUrl(p.imagen)}" alt="${p.nombre}" onload="this.style.opacity=1" onerror="this.style.display='none';document.getElementById('fb-${p.id}').style.display='block'"/>` : ""}${badge}<span class="img-fallback" id="fb-${p.id}" style="${p.imagen ? 'display:none' : ''}">${p.emoji}</span></div>
+      <div class="product-info">
+        <div class="product-cat">${CAT_LABELS[p.cat]}</div>
+        <div class="product-name">${p.nombre}</div>
+        <div class="product-sub">${p.sub}</div>
+        ${precios}
+      </div>
     </div>
     ${actions}
   </div>`;
@@ -1076,6 +1182,102 @@ function showToast(msg) {
   t.textContent = msg;
   t.classList.add("show");
   setTimeout(() => t.classList.remove("show"), 2000);
+}
+
+// ─── DETALLE PRODUCTO ─────────────────
+let detailQty = 1;
+let detailProdId = null;
+
+function openDetail(id) {
+  const p = PRODUCTOS.find(x => x.id === id);
+  if (!p) return;
+  detailProdId = id;
+  detailQty = Math.max(1, cart[id] || 1);
+
+  document.getElementById("detailTitle").textContent = p.nombre;
+
+  const badgeColor = { stock:"var(--green)", encargue:"var(--navy)", agotado:"var(--gray-400)" };
+  const badgeTxt   = { stock:"EN STOCK", encargue:"ENCARGUE", agotado:"AGOTADO" };
+
+  const imgHtml = p.imagen
+    ? `<img src="${driveUrl(p.imagen)}" alt="${p.nombre}"/>`
+    : `<div class="detail-img-emoji">${p.emoji}</div>`;
+
+  let precios = "";
+  if (p.precioStock) precios += `<div class="detail-price-main">USD $${p.precioStock}</div>`;
+  if (p.precioEnc && p.precioStock) precios += `<div class="detail-price-enc">Precio por encargue: USD $${p.precioEnc}</div>`;
+  if (p.precioEnc && !p.precioStock) precios += `<div class="detail-price-main">USD $${p.precioEnc} <span style="font-size:14px;font-weight:500;color:var(--gray-400)">(encargue)</span></div>`;
+
+  const specs = [];
+  const storageMatch = p.nombre.match(/(\d+GB)/);
+  if (storageMatch) specs.push({ l:"Almacenamiento", v:storageMatch[1] });
+  specs.push({ l:"Condición", v:p.sub });
+  if (p.caracteristicas) {
+    p.caracteristicas.split("·").forEach(c => {
+      c = c.trim(); if (!c) return;
+      const isBat = /bater[ií]/i.test(c);
+      specs.push({ l: isBat ? "Batería" : "Color", v: isBat ? c.replace(/bater[ií]a\s*/i,"").trim() : c });
+    });
+  }
+  const specsHtml = `<div class="detail-specs">${specs.map(s =>
+    `<div class="detail-spec-row"><span class="detail-spec-label">${s.l}</span><span class="detail-spec-value">${s.v}</span></div>`
+  ).join("")}</div>`;
+
+  const noDisp = p.disponibilidad === "agotado";
+  const inCart = !!cart[id];
+  const actionsHtml = noDisp
+    ? `<div style="font-size:13px;color:var(--gray-400);padding:8px 0;text-align:center">No disponible</div>`
+    : `<div class="detail-actions">
+        <div class="detail-qty">
+          <button class="detail-qty-btn" onclick="changeDetailQty(-1)">−</button>
+          <span class="detail-qty-num" id="detailQtyNum">${detailQty}</span>
+          <button class="detail-qty-btn" onclick="changeDetailQty(1)">+</button>
+        </div>
+        <button class="btn-detail-add ${inCart?'added':''}" id="btnDetailAdd" onclick="addFromDetail()">
+          ${inCart ? "✓ En el pedido" : "+ Agregar al pedido"}
+        </button>
+      </div>`;
+
+  document.getElementById("detailContent").innerHTML = `
+    <div class="detail-img-col">
+      ${imgHtml}
+      <span class="detail-img-badge" style="background:${badgeColor[p.disponibilidad]||'var(--gray-400)'}">
+        ${badgeTxt[p.disponibilidad]||''}
+      </span>
+    </div>
+    <div class="detail-info-col">
+      <span class="detail-cat-tag">${CAT_LABELS[p.cat]}</span>
+      <div>
+        <div class="detail-name">${p.nombre}</div>
+        <div class="detail-sub">${p.sub}</div>
+      </div>
+      ${precios}
+      ${specsHtml}
+      ${actionsHtml}
+    </div>`;
+
+  document.getElementById("detailModal").classList.add("open");
+}
+
+function closeDetail() {
+  document.getElementById("detailModal").classList.remove("open");
+  detailProdId = null;
+}
+
+function changeDetailQty(delta) {
+  detailQty = Math.max(1, detailQty + delta);
+  const el = document.getElementById("detailQtyNum");
+  if (el) el.textContent = detailQty;
+}
+
+function addFromDetail() {
+  if (!detailProdId) return;
+  cart[detailProdId] = detailQty;
+  updateCartUI();
+  renderProducts();
+  const btn = document.getElementById("btnDetailAdd");
+  if (btn) { btn.classList.add("added"); btn.innerHTML = "✓ En el pedido"; }
+  showToast("✓ Agregado al pedido");
 }
 
 // ─── HERO CARDS ───────────────────────
