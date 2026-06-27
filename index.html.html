@@ -203,6 +203,44 @@ body { font-family: 'Inter', sans-serif; background: var(--gray-50); color: var(
 .hero-card:nth-child(2) { animation-delay: .8s; }
 .hero-card:nth-child(3) { animation-delay: 1.6s; }
 
+/* ── HERO FEATURE CARD (A2) ── */
+.hero-feature {
+  position: relative; width: 300px;
+  background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 22px; padding: 16px; backdrop-filter: blur(8px);
+  box-shadow: 0 18px 40px rgba(0,0,0,0.35);
+}
+.hero-feature-badge {
+  position: absolute; top: 14px; left: 14px; z-index: 2;
+  background: var(--red); color: var(--white);
+  font-size: 11px; font-weight: 800; letter-spacing: 0.5px;
+  padding: 5px 11px; border-radius: 999px;
+}
+.hero-feature-img {
+  width: 100%; height: 256px; border-radius: 14px; overflow: hidden;
+  background: var(--white); display: flex; align-items: center; justify-content: center;
+}
+.hero-feature-img img { width: 100%; height: 100%; object-fit: contain; }
+.hero-feature-body { padding: 14px 6px 4px; }
+.hero-feature-name { color: var(--white); font-size: 16px; font-weight: 800; }
+.hero-feature-meta { display: flex; align-items: center; gap: 7px; margin-top: 5px; font-size: 12px; font-weight: 600; }
+.hero-feature-swatch {
+  width: 11px; height: 11px; border-radius: 50%;
+  background: linear-gradient(135deg, #F4F5F7, #C9CDD4);
+  border: 1px solid rgba(255,255,255,0.4); display: inline-block; flex-shrink: 0;
+}
+.hero-feature-price { display: flex; align-items: baseline; gap: 8px; margin-top: 12px; }
+.hero-feature-price b { color: var(--white); font-size: 26px; font-weight: 900; letter-spacing: -1px; }
+.hero-feature-price s { color: rgba(255,255,255,0.4); font-size: 14px; }
+.hero-feature-btn {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  width: 100%; margin-top: 14px; padding: 12px; border: none;
+  background: var(--white); color: var(--navy);
+  font-size: 14px; font-weight: 800; font-family: 'Inter', sans-serif;
+  border-radius: 11px; cursor: pointer; transition: all .2s;
+}
+.hero-feature-btn:hover { background: var(--blue-pale); transform: translateY(-1px); }
+
 /* ── FILTROS / CATEGORÍAS ── */
 .filters-bar {
   background: var(--white); border-bottom: 1px solid var(--gray-200);
@@ -835,7 +873,7 @@ const CAT_LABELS = { iphones:"iPhones", airpods:"AirPods", accesorios:"Accesorio
 let PRODUCTOS = [
   { id:1, cat:"iphones", nombre:"iPhone 17 Pro Max 256GB", sub:"Sellado · Nuevo", disponibilidad:"stock",    precioStock:1300, precioEnc:1280, imagen:"./img/iphone17-pro-orange.jpg.png", caracteristicas:"Orange"              },
   { id:2, cat:"iphones", nombre:"iPhone 17 Pro Max 256GB", sub:"Sellado · Nuevo", disponibilidad:"stock",    precioStock:1300, precioEnc:1280, imagen:"./img/iphone17-pro-blue.jpg.png",   caracteristicas:"Blue"                },
-  { id:3, cat:"iphones", nombre:"iPhone 17 Pro Max 256GB", sub:"Sellado · Nuevo", disponibilidad:"stock",    precioStock:1300, precioEnc:1280, imagen:"./img/iphone17-pro-silver.webp",     caracteristicas:"Silver"              },
+  { id:3, cat:"iphones", nombre:"iPhone 17 Pro Max 256GB", sub:"Sellado · Nuevo", disponibilidad:"stock",    precioStock:1270, precioEnc:null,  imagen:"./img/iphone17-pro-silver.webp",     caracteristicas:"Silver"              },
   { id:4, cat:"airpods", nombre:"AirPods Pro 2ª Gen",      sub:"Sellado · Nuevo", disponibilidad:"stock",    precioStock:250,  precioEnc:230,  imagen:"./img/airpods-pro-2.jpg.png",       caracteristicas:"White"               },
   { id:5, cat:"usados",  nombre:"iPhone 15 128GB",         sub:"Usado · Verificado", disponibilidad:"stock", precioStock:600,  precioEnc:null, imagen:"./img/iphone15-usado.jpg.png",      caracteristicas:"Black · Batería 89%" },
   { id:6, cat:"usados",  nombre:"iPhone 15 128GB",         sub:"Usado · Verificado", disponibilidad:"stock", precioStock:550,  precioEnc:null, imagen:"https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-15.jpg", caracteristicas:"Batería 86%" },
@@ -1288,26 +1326,25 @@ function addFromDetail() {
 
 // ─── HERO CARDS ───────────────────────
 function renderHeroCards() {
-  const picks = [3, 4, 5].map(id => PRODUCTOS.find(p => p.id === id)).filter(Boolean);
   const container = document.getElementById("heroCards");
   if (!container) return;
-  container.innerHTML = picks.map((p, i) => {
-    const precio = p.precioStock || p.precioEnc;
-    const badgeTxt = p.disponibilidad === "stock" ? "EN STOCK" : "ENCARGUE";
-    const badgeBg  = p.disponibilidad === "usados" ? "var(--blue)" : "var(--green)";
-    const iconHtml = p.imagen
-      ? `<div class="hero-card-img"><img src="${driveUrl(p.imagen)}" alt="${p.nombre}"/></div>`
-      : `<div class="hero-card-icon">${p.emoji}</div>`;
-    return `<div class="hero-card" style="animation-delay:${i * 0.8}s">
-      ${iconHtml}
-      <div class="hero-card-info">
-        <span class="hero-card-badge" style="background:${badgeBg}">${badgeTxt}</span>
-        <div class="hero-card-name">${p.nombre}</div>
-        <div class="hero-card-sub">${p.sub}</div>
-        <div class="hero-card-price">USD $${precio}</div>
+  container.innerHTML = `
+    <div class="hero-feature">
+      <span class="hero-feature-badge">OFERTA</span>
+      <div class="hero-feature-img">
+        <img src="./img/iphone-17-pro-silver.png" alt="iPhone 17 Pro Silver" onerror="this.parentNode.innerHTML='<span style=&quot;font-size:64px&quot;>📱</span>'"/>
+      </div>
+      <div class="hero-feature-body">
+        <div class="hero-feature-name">iPhone 17 Pro · 256GB</div>
+        <div class="hero-feature-meta">
+          <span class="hero-feature-swatch"></span>
+          <span style="color:rgba(255,255,255,0.85)">Silver</span>
+          <span style="color:var(--blue-light)">· Sellado · Garantía 12 meses</span>
+        </div>
+        <div class="hero-feature-price"><b>USD 1.270</b><s>1.300</s></div>
+        <button class="hero-feature-btn" onclick="openDetail(3)">Ver producto →</button>
       </div>
     </div>`;
-  }).join("");
 }
 
 // ─── INIT ─────────────────────────────
