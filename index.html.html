@@ -321,12 +321,6 @@ body { font-family: 'Inter', sans-serif; background: var(--gray-50); color: var(
   font-size: 9px; font-weight: 700; padding: 3px 7px; border-radius: 10px;
   letter-spacing: 0.5px;
 }
-.badge-encargue {
-  position: absolute; top: 8px; right: 8px;
-  background: var(--navy); color: var(--white);
-  font-size: 9px; font-weight: 700; padding: 3px 7px; border-radius: 10px;
-  letter-spacing: 0.5px;
-}
 .badge-agotado {
   position: absolute; top: 8px; right: 8px;
   background: var(--gray-400); color: var(--white);
@@ -338,7 +332,6 @@ body { font-family: 'Inter', sans-serif; background: var(--gray-50); color: var(
 .product-name { font-size: 13px; font-weight: 700; color: var(--navy); line-height: 1.3; }
 .product-sub { font-size: 11px; color: var(--gray-600); }
 .product-price { font-size: 16px; font-weight: 800; color: var(--navy); margin-top: 6px; }
-.product-price-enc { font-size: 11px; color: var(--gray-400); font-weight: 500; }
 
 .product-actions { padding: 0 12px 12px; display: flex; gap: 6px; align-items: center; }
 .qty-control {
@@ -595,7 +588,6 @@ body { font-family: 'Inter', sans-serif; background: var(--gray-50); color: var(
 .detail-name { font-size: 20px; font-weight: 900; color: var(--navy); line-height: 1.2; }
 .detail-sub { font-size: 13px; color: var(--gray-600); margin-top: 4px; }
 .detail-price-main { font-size: 26px; font-weight: 900; color: var(--navy); }
-.detail-price-enc { font-size: 12px; color: var(--gray-400); margin-top: 2px; }
 .detail-specs {
   background: var(--gray-50); border-radius: 10px; padding: 14px 16px;
   display: flex; flex-direction: column; gap: 0;
@@ -671,8 +663,7 @@ body { font-family: 'Inter', sans-serif; background: var(--gray-50); color: var(
     <button class="nav-cat" data-cat="airpods" onclick="filterCat(this)">🎧 AirPods</button>
     <button class="nav-cat" data-cat="accesorios" onclick="filterCat(this)">🔌 Accesorios</button>
     <button class="nav-cat" data-cat="usados" onclick="filterCat(this)">✅ Usados</button>
-    <button class="nav-cat" data-cat="stock" onclick="filterCat(this)">🟢 En Stock</button>
-    <button class="nav-cat" data-cat="encargue" onclick="filterCat(this)">⏳ Encargue</button>
+    <button class="nav-cat" data-cat="disponible" onclick="filterCat(this)">🟢 En Stock</button>
   </div>
 
   <div class="navbar-right">
@@ -828,10 +819,6 @@ body { font-family: 'Inter', sans-serif; background: var(--gray-50); color: var(
           <p class="faq-answer">Aceptamos efectivo (pesos o dólares), transferencia bancaria y crypto (USDT / Binance Pay).</p>
         </details>
         <details class="faq-item">
-          <summary class="faq-question">¿Qué es el precio por encargue? <span>›</span></summary>
-          <p class="faq-answer">El precio por encargue aplica a productos que no tenemos en stock inmediato pero podemos conseguir en un plazo corto. El precio puede variar respecto al stock disponible.</p>
-        </details>
-        <details class="faq-item">
           <summary class="faq-question">¿Los equipos usados son confiables? <span>›</span></summary>
           <p class="faq-answer">Sí. Todos los equipos usados son revisados punto por punto (batería, cámaras, pantalla y funcionamiento) antes de ser publicados.</p>
         </details>
@@ -872,18 +859,18 @@ const CAT_LABELS = { iphones:"iPhones", airpods:"AirPods", accesorios:"Accesorio
 // ═══════════════════════════════════════
 let PRODUCTOS = [
   /* ── SELLADOS ── */
-  { id:1,  cat:"iphones", nombre:"iPhone 17 128GB",         sub:"Sellado · Nuevo",    disponibilidad:"stock", precioStock:950,  precioEnc:null, imagen:"./img/iphone17-white.jpg",        caracteristicas:"White"                          },
-  { id:2,  cat:"iphones", nombre:"iPhone 17 Pro 256GB",     sub:"Sellado · Nuevo",    disponibilidad:"stock", precioStock:1250, precioEnc:null, imagen:"./img/iphone17-pro-orange.jpg",   caracteristicas:"Cosmic Orange"                  },
-  { id:3,  cat:"iphones", nombre:"iPhone 17 Pro 256GB",     sub:"Sellado · Nuevo",    disponibilidad:"stock", precioStock:1250, precioEnc:null, imagen:"./img/iphone17-pro-silver.jpg",   caracteristicas:"Silver"                         },
-  { id:4,  cat:"iphones", nombre:"iPhone 17 Pro 256GB",     sub:"Sellado · Nuevo",    disponibilidad:"stock", precioStock:1250, precioEnc:null, imagen:"./img/iphone17-pro-blue.jpg",     caracteristicas:"Deep Blue"                      },
-  { id:5,  cat:"iphones", nombre:"iPhone 17 Pro Max 256GB", sub:"Sellado · Nuevo",    disponibilidad:"stock", precioStock:1350, precioEnc:null, imagen:"./img/iphone17-pm-silver.jpg",    caracteristicas:"Silver"                         },
-  { id:6,  cat:"iphones", nombre:"iPhone 17 Pro Max 256GB", sub:"Sellado · Nuevo",    disponibilidad:"stock", precioStock:1350, precioEnc:null, imagen:"./img/iphone17-pm-blue.jpg",      caracteristicas:"Blue Titanium"                  },
+  { id:1,  cat:"iphones", nombre:"iPhone 17 128GB",         sub:"Sellado · Nuevo",    disponibilidad:"disponible", precioStock:950,  imagen:"./img/iphone17-white.jpg",        caracteristicas:"White"                          },
+  { id:2,  cat:"iphones", nombre:"iPhone 17 Pro 256GB",     sub:"Sellado · Nuevo",    disponibilidad:"disponible", precioStock:1250, imagen:"./img/iphone17-pro-orange.jpg",   caracteristicas:"Cosmic Orange"                  },
+  { id:3,  cat:"iphones", nombre:"iPhone 17 Pro 256GB",     sub:"Sellado · Nuevo",    disponibilidad:"disponible", precioStock:1250, imagen:"./img/iphone17-pro-silver.jpg",   caracteristicas:"Silver"                         },
+  { id:4,  cat:"iphones", nombre:"iPhone 17 Pro 256GB",     sub:"Sellado · Nuevo",    disponibilidad:"disponible", precioStock:1250, imagen:"./img/iphone17-pro-blue.jpg",     caracteristicas:"Deep Blue"                      },
+  { id:5,  cat:"iphones", nombre:"iPhone 17 Pro Max 256GB", sub:"Sellado · Nuevo",    disponibilidad:"disponible", precioStock:1350, imagen:"./img/iphone17-pm-silver.jpg",    caracteristicas:"Silver"                         },
+  { id:6,  cat:"iphones", nombre:"iPhone 17 Pro Max 256GB", sub:"Sellado · Nuevo",    disponibilidad:"disponible", precioStock:1350, imagen:"./img/iphone17-pm-blue.jpg",      caracteristicas:"Blue Titanium"                  },
   /* ── USADOS ── */
-  { id:7,  cat:"usados",  nombre:"iPhone 15 128GB",         sub:"Usado · Verificado", disponibilidad:"stock", precioStock:490,  precioEnc:null, imagen:"./img/iphone15-pink.jpg",         caracteristicas:"Pink · Batería 80%"             },
-  { id:8,  cat:"usados",  nombre:"iPhone 15 128GB",         sub:"Usado · Verificado", disponibilidad:"stock", precioStock:500,  precioEnc:null, imagen:"./img/iphone15-black.jpg",        caracteristicas:"Black · Batería 100%"           },
-  { id:9,  cat:"usados",  nombre:"iPhone 15 Pro 128GB",     sub:"Usado · Verificado", disponibilidad:"stock", precioStock:610,  precioEnc:null, imagen:"./img/iphone15-pro-blue.jpg",     caracteristicas:"Blue Titanium · Batería 87%"    },
-  { id:10, cat:"usados",  nombre:"iPhone 15 Pro 128GB",     sub:"Usado · Verificado", disponibilidad:"stock", precioStock:610,  precioEnc:null, imagen:"./img/iphone15-pro-natural.jpg",  caracteristicas:"Natural Titanium · Batería 86%" },
-  { id:11, cat:"usados",  nombre:"iPhone 16 128GB",         sub:"Usado · Verificado", disponibilidad:"stock", precioStock:650,  precioEnc:null, imagen:"./img/iphone16-ultramarine.jpg",  caracteristicas:"Ultramarine · Batería 100%"     },
+  { id:7,  cat:"usados",  nombre:"iPhone 15 128GB",         sub:"Usado · Verificado", disponibilidad:"disponible", precioStock:490,  imagen:"./img/iphone15-pink.jpg",         caracteristicas:"Pink · Batería 80%"             },
+  { id:8,  cat:"usados",  nombre:"iPhone 15 128GB",         sub:"Usado · Verificado", disponibilidad:"disponible", precioStock:500,  imagen:"./img/iphone15-black.jpg",        caracteristicas:"Black · Batería 100%"           },
+  { id:9,  cat:"usados",  nombre:"iPhone 15 Pro 128GB",     sub:"Usado · Verificado", disponibilidad:"disponible", precioStock:610,  imagen:"./img/iphone15-pro-blue.jpg",     caracteristicas:"Blue Titanium · Batería 87%"    },
+  { id:10, cat:"usados",  nombre:"iPhone 15 Pro 128GB",     sub:"Usado · Verificado", disponibilidad:"disponible", precioStock:610,  imagen:"./img/iphone15-pro-natural.jpg",  caracteristicas:"Natural Titanium · Batería 86%" },
+  { id:11, cat:"usados",  nombre:"iPhone 16 128GB",         sub:"Usado · Verificado", disponibilidad:"disponible", precioStock:650,  imagen:"./img/iphone16-ultramarine.jpg",  caracteristicas:"Ultramarine · Batería 100%"     },
 ].map(p => ({ ...p, emoji: CAT_EMOJI[p.cat] || "📦" }));
 
 // ═══════════════════════════════════════
@@ -907,17 +894,16 @@ function driveUrl(url) {
   return url;
 }
 function getFiltered() {
-  let list = [...PRODUCTOS];
+  let list = PRODUCTOS.filter(p => p.disponibilidad !== "vendido");
   const q = document.getElementById("searchInput").value.toLowerCase().trim();
-  if (currentCat === "stock") list = list.filter(p => p.disponibilidad === "stock");
-  else if (currentCat === "encargue") list = list.filter(p => p.disponibilidad === "encargue");
+  if (currentCat === "disponible") list = list.filter(p => p.disponibilidad === "disponible");
   else if (currentCat !== "todos") list = list.filter(p => p.cat === currentCat);
   if (q) list = list.filter(p =>
     p.nombre.toLowerCase().includes(q) || p.sub.toLowerCase().includes(q)
   );
   const sort = document.getElementById("sortSelect").value;
-  if (sort === "price-asc") list.sort((a,b) => (a.precioStock||a.precioEnc||0) - (b.precioStock||b.precioEnc||0));
-  if (sort === "price-desc") list.sort((a,b) => (b.precioStock||b.precioEnc||0) - (a.precioStock||a.precioEnc||0));
+  if (sort === "price-asc") list.sort((a,b) => (a.precioStock||0) - (b.precioStock||0));
+  if (sort === "price-desc") list.sort((a,b) => (b.precioStock||0) - (a.precioStock||0));
   if (sort === "name") list.sort((a,b) => a.nombre.localeCompare(b.nombre));
   return list;
 }
@@ -959,14 +945,11 @@ function productCard(p) {
   const noDisp = p.disponibilidad === "agotado";
 
   let badge = "";
-  if (p.disponibilidad === "stock") badge = `<span class="badge-stock">EN STOCK</span>`;
-  else if (p.disponibilidad === "encargue") badge = `<span class="badge-encargue">ENCARGUE</span>`;
+  if (p.disponibilidad === "disponible") badge = `<span class="badge-stock">EN STOCK</span>`;
   else badge = `<span class="badge-agotado">AGOTADO</span>`;
 
   let precios = "";
   if (p.precioStock) precios += `<div class="product-price">USD $${p.precioStock}</div>`;
-  if (p.precioEnc && p.precioStock) precios += `<div class="product-price-enc">Encargue: USD $${p.precioEnc}</div>`;
-  if (p.precioEnc && !p.precioStock) precios += `<div class="product-price">USD $${p.precioEnc} <span style="font-size:11px;font-weight:500;color:var(--gray-400)">(encargue)</span></div>`;
 
   const actions = noDisp
     ? `<div class="product-actions"><span style="font-size:12px;color:var(--gray-400);padding:8px 0">No disponible</span></div>`
@@ -1058,7 +1041,7 @@ function renderCartPanel() {
   items.forEach(([id, qty]) => {
     const p = PRODUCTOS.find(x => x.id == id);
     if (!p) return;
-    const precio = p.precioStock || p.precioEnc || 0;
+    const precio = p.precioStock || 0;
     subtotal += precio * qty;
     html += `<div class="cart-item">
       <div class="cart-item-emoji">${p.emoji}</div>
@@ -1143,7 +1126,7 @@ function enviarWhatsapp() {
   Object.entries(items).forEach(([id, qty]) => {
     const p = PRODUCTOS.find(x => x.id == id);
     if (!p) return;
-    const precio = p.precioStock || p.precioEnc || 0;
+    const precio = p.precioStock || 0;
     msg += `• ${p.nombre} x${qty} — USD $${(precio*qty).toFixed(0)}\n`;
     total += precio * qty;
   });
@@ -1161,7 +1144,7 @@ function verPedidoPDF() {
   Object.entries(items).forEach(([id, qty]) => {
     const p = PRODUCTOS.find(x => x.id == id);
     if (!p) return;
-    const precio = p.precioStock || p.precioEnc || 0;
+    const precio = p.precioStock || 0;
     total += precio * qty;
     rows += `<tr><td>${p.nombre}</td><td style="text-align:center">${qty}</td><td style="text-align:right">USD $${(precio*qty).toFixed(0)}</td></tr>`;
   });
@@ -1243,8 +1226,8 @@ function openDetail(id) {
 
   document.getElementById("detailTitle").textContent = p.nombre;
 
-  const badgeColor = { stock:"var(--green)", encargue:"var(--navy)", agotado:"var(--gray-400)" };
-  const badgeTxt   = { stock:"EN STOCK", encargue:"ENCARGUE", agotado:"AGOTADO" };
+  const badgeColor = { disponible:"var(--green)", agotado:"var(--gray-400)" };
+  const badgeTxt   = { disponible:"EN STOCK", agotado:"AGOTADO" };
 
   const imgHtml = p.imagen
     ? `<img src="${driveUrl(p.imagen)}" alt="${p.nombre}"/>`
@@ -1252,8 +1235,6 @@ function openDetail(id) {
 
   let precios = "";
   if (p.precioStock) precios += `<div class="detail-price-main">USD $${p.precioStock}</div>`;
-  if (p.precioEnc && p.precioStock) precios += `<div class="detail-price-enc">Precio por encargue: USD $${p.precioEnc}</div>`;
-  if (p.precioEnc && !p.precioStock) precios += `<div class="detail-price-main">USD $${p.precioEnc} <span style="font-size:14px;font-weight:500;color:var(--gray-400)">(encargue)</span></div>`;
 
   const specs = [];
   const storageMatch = p.nombre.match(/(\d+GB)/);
