@@ -897,6 +897,7 @@ function getFiltered() {
   let list = PRODUCTOS.filter(p => p.disponibilidad !== "vendido");
   const q = document.getElementById("searchInput").value.toLowerCase().trim();
   if (currentCat === "sellados") list = list.filter(p => p.cat === "iphones");
+  else if (currentCat === "accesorios") list = list.filter(p => p.cat === "accesorios" || p.cat === "airpods");
   else if (currentCat !== "todos") list = list.filter(p => p.cat === currentCat);
   if (q) list = list.filter(p =>
     p.nombre.toLowerCase().includes(q) || p.sub.toLowerCase().includes(q)
