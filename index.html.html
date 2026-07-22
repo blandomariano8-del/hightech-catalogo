@@ -659,11 +659,10 @@ body { font-family: 'Inter', sans-serif; background: var(--gray-50); color: var(
   <!-- CATEGORÍAS estilo Cells Home -->
   <div class="navbar-cats">
     <button class="nav-cat active" data-cat="todos" onclick="filterCat(this)">Todos</button>
-    <button class="nav-cat" data-cat="iphones" onclick="filterCat(this)">iPhones</button>
+    <button class="nav-cat" data-cat="sellados" onclick="filterCat(this)">Sellados</button>
+    <button class="nav-cat" data-cat="usados" onclick="filterCat(this)">Usados</button>
     <button class="nav-cat" data-cat="airpods" onclick="filterCat(this)">AirPods</button>
     <button class="nav-cat" data-cat="accesorios" onclick="filterCat(this)">Accesorios</button>
-    <button class="nav-cat" data-cat="usados" onclick="filterCat(this)">Usados</button>
-    <button class="nav-cat" data-cat="disponible" onclick="filterCat(this)">En Stock</button>
   </div>
 
   <div class="navbar-right">
@@ -898,7 +897,7 @@ function driveUrl(url) {
 function getFiltered() {
   let list = PRODUCTOS.filter(p => p.disponibilidad !== "vendido");
   const q = document.getElementById("searchInput").value.toLowerCase().trim();
-  if (currentCat === "disponible") list = list.filter(p => p.disponibilidad === "disponible");
+  if (currentCat === "sellados") list = list.filter(p => p.cat === "iphones");
   else if (currentCat !== "todos") list = list.filter(p => p.cat === currentCat);
   if (q) list = list.filter(p =>
     p.nombre.toLowerCase().includes(q) || p.sub.toLowerCase().includes(q)
