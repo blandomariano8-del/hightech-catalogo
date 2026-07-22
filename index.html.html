@@ -6,7 +6,7 @@
 <title>HIGHTECH Rosario — Catálogo</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Sora:wght@700;800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
 <style>
 :root {
   --navy: #0D1B2A;
@@ -522,10 +522,10 @@ body { font-family: 'Inter', sans-serif; background: var(--gray-50); color: var(
   .navbar-top { padding: 0 14px; height: 52px; }
   .navbar-cats { display: none; }
   .nav-search-input { width: 130px; }
-  .ht-hero-title { font-size: 32px !important; letter-spacing: -0.01em !important; }
-  .ht-hero-wrap { padding: 40px 20px 16px !important; }
-  .ht-hero-sub { font-size: 15px !important; }
-  .ht-hero-cats { grid-template-columns: 1fr !important; padding: 20px 20px 36px !important; gap: 14px !important; }
+  .hero { padding: 32px 20px; min-height: auto; }
+  .hero-title { font-size: 32px; letter-spacing: -1px; }
+  .hero-right { display: none; }
+  .hero-arc { display: none; }
 }
 @media(max-width: 600px) {
   .navbar-name { font-size: 13px; }
@@ -680,48 +680,24 @@ body { font-family: 'Inter', sans-serif; background: var(--gray-50); color: var(
 </nav>
 
 <!-- HERO -->
-<section style="background:var(--navy);">
-  <div class="ht-hero-wrap" style="position:relative; max-width:1320px; margin:0 auto; padding:56px 32px 20px 48px; overflow:hidden;">
-    <div style="position:absolute; left:50%; top:-140px; transform:translateX(-50%); width:700px; height:600px; background:radial-gradient(circle at center, rgba(37,80,232,0.30), rgba(37,80,232,0) 62%); pointer-events:none;"></div>
-    <div style="position:relative; text-align:center;">
-      <h1 class="ht-hero-title" style="margin:0 0 16px; color:#fff; font-family:'Sora',sans-serif; font-weight:800; font-size:50px; line-height:1.05; letter-spacing:-0.02em;">Todo lo que buscás,<br><span style="background:linear-gradient(120deg,#4A78FF,#8FB0FF); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;">en un solo lugar</span></h1>
-      <p class="ht-hero-sub" style="margin:0 auto; color:#9FB0C3; font-size:18px; line-height:1.6; max-width:480px;">iPhones, AirPods y accesorios originales, con garantía y envío a todo el país.</p>
+<section class="hero">
+  <div class="hero-arc"></div>
+  <div class="hero-left">
+    <div class="hero-eyebrow">
+      <span class="hero-eyebrow-dot"></span>
+      Stock disponible · Rosario y todo el país
+    </div>
+    <h1 class="hero-title">
+      Tu próximo<br><span>iPhone</span><br>empieza acá.
+    </h1>
+    <p class="hero-sub">Sellados, usados verificados y accesorios Apple. Garantía escrita, envíos seguros y atención real.</p>
+    <div class="hero-badges">
+      <span class="hero-badge">🛡️ Garantía escrita</span>
+      <span class="hero-badge">🚚 Envíos a todo el país</span>
+      <span class="hero-badge">✅ Equipos verificados</span>
     </div>
   </div>
-  <div class="ht-hero-cats" style="max-width:1320px; margin:0 auto; display:grid; grid-template-columns:repeat(3,1fr); gap:20px; padding:36px 32px 48px;">
-    <div onclick="filterCatByName('iphones')" style="cursor:pointer; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.1); border-radius:22px; padding:30px 26px; display:flex; flex-direction:column; align-items:center; text-align:center; transition:border-color .2s;" onmouseover="this.style.borderColor='rgba(74,120,255,0.5)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.1)'">
-      <div style="width:180px; height:200px; display:flex; align-items:center; justify-content:center; margin-bottom:20px;">
-        <img src="./img/iphone17-pro-silver.jpg" alt="iPhone" style="width:100%; height:100%; object-fit:contain;">
-      </div>
-      <div style="color:#fff; font-size:19px; font-weight:800; font-family:'Sora',sans-serif;">iPhones</div>
-      <div style="color:#9FB0C3; font-size:14px; margin-top:6px;">Sellados y usados verificados</div>
-      <span style="margin-top:18px; color:#8FB0FF; font-size:14px; font-weight:700;">Explorar →</span>
-    </div>
-    <div onclick="filterCatByName('airpods')" style="cursor:pointer; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.1); border-radius:22px; padding:30px 26px; display:flex; flex-direction:column; align-items:center; text-align:center; transition:border-color .2s;" onmouseover="this.style.borderColor='rgba(74,120,255,0.5)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.1)'">
-      <div style="width:180px; height:200px; display:flex; align-items:center; justify-content:center; margin-bottom:20px;">
-        <img src="./img/airpods-pro-2.jpg.png" alt="AirPods" style="width:100%; height:100%; object-fit:contain;">
-      </div>
-      <div style="color:#fff; font-size:19px; font-weight:800; font-family:'Sora',sans-serif;">AirPods</div>
-      <div style="color:#9FB0C3; font-size:14px; margin-top:6px;">Todos los modelos originales</div>
-      <span style="margin-top:18px; color:#8FB0FF; font-size:14px; font-weight:700;">Explorar →</span>
-    </div>
-    <div onclick="filterCatByName('accesorios')" style="cursor:pointer; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.1); border-radius:22px; padding:30px 26px; display:flex; flex-direction:column; align-items:center; text-align:center; transition:border-color .2s;" onmouseover="this.style.borderColor='rgba(74,120,255,0.5)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.1)'">
-      <div style="width:100%; display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-bottom:20px;">
-        <div style="aspect-ratio:1; background:rgba(255,255,255,0.06); border-radius:14px; display:flex; align-items:center; justify-content:center; padding:10px; overflow:hidden;">
-          <img src="./img/apple-watch-s11.png" alt="Apple Watch" style="width:100%; height:100%; object-fit:contain;">
-        </div>
-        <div style="aspect-ratio:1; background:rgba(255,255,255,0.06); border-radius:14px; display:flex; align-items:center; justify-content:center; padding:10px; overflow:hidden;">
-          <img src="./img/airtag.jpg" alt="AirTag" style="width:100%; height:100%; object-fit:contain;">
-        </div>
-        <div style="aspect-ratio:1; background:rgba(255,255,255,0.06); border-radius:14px; display:flex; align-items:center; justify-content:center; padding:10px; overflow:hidden;">
-          <img src="./img/silicone-case.png" alt="Funda Silicone" style="width:100%; height:100%; object-fit:contain;">
-        </div>
-      </div>
-      <div style="color:#fff; font-size:19px; font-weight:800; font-family:'Sora',sans-serif;">Accesorios</div>
-      <div style="color:#9FB0C3; font-size:14px; margin-top:6px;">Todo lo que complementa tu iPhone</div>
-      <span style="margin-top:18px; color:#8FB0FF; font-size:14px; font-weight:700;">Explorar →</span>
-    </div>
-  </div>
+  <div class="hero-right" id="heroCards"></div>
 </section>
 
 <!-- TOOLBAR -->
@@ -1334,17 +1310,32 @@ function addFromDetail() {
   showToast("✓ Agregado al pedido");
 }
 
-// ─── FILTRO DESDE HERO ────────────────
-function filterCatByName(cat) {
-  const btn = document.querySelector(`.nav-cat[data-cat="${cat}"]`);
-  if (btn) {
-    filterCat(btn);
-    document.getElementById("productsSection").scrollIntoView({ behavior: "smooth" });
-  }
+// ─── HERO CARDS ───────────────────────
+function renderHeroCards() {
+  const container = document.getElementById("heroCards");
+  if (!container) return;
+  container.innerHTML = `
+    <div class="hero-feature">
+      <span class="hero-feature-badge">OFERTA</span>
+      <div class="hero-feature-img">
+        <img src="./img/iphone17-pro-silver.jpg" alt="iPhone 17 Pro Silver" onerror="this.parentNode.innerHTML='<span style=&quot;font-size:64px&quot;>📱</span>'"/>
+      </div>
+      <div class="hero-feature-body">
+        <div class="hero-feature-name">iPhone 17 Pro · 256GB</div>
+        <div class="hero-feature-meta">
+          <span class="hero-feature-swatch"></span>
+          <span style="color:rgba(255,255,255,0.85)">Silver</span>
+          <span style="color:var(--blue-light)">· Sellado · Garantía 12 meses</span>
+        </div>
+        <div class="hero-feature-price"><b>USD 1.250</b></div>
+        <button class="hero-feature-btn" onclick="openDetail(3)">Ver producto →</button>
+      </div>
+    </div>`;
 }
 
 // ─── INIT ─────────────────────────────
 renderProducts();
+renderHeroCards();
 updateCartUI();
 </script>
 </body>
