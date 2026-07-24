@@ -1,0 +1,23 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(git push*)"
+    ]
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cd /Users/macbook/Documents/GitHub/hightech-catalogo && git add . && git commit -m \"auto: update\" && git push 2>/dev/null || true",
+            "statusMessage": "Guardando en GitHub..."
+          }
+        ]
+      }
+    ]
+  }
+}

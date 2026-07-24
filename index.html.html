@@ -181,6 +181,13 @@ body { font-family: 'Inter', sans-serif; background: var(--gray-50); color: var(
 }
 .hero-card:nth-child(2) { margin-right: 24px; }
 .hero-card-icon { font-size: 32px; line-height: 1; }
+.hero-card-img {
+  width: 52px; height: 52px; border-radius: 10px;
+  overflow: hidden; background: rgba(255,255,255,0.12);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.hero-card-img img { width: 100%; height: 100%; object-fit: contain; }
 .hero-card-info { display: flex; flex-direction: column; gap: 2px; }
 .hero-card-name { font-size: 13px; font-weight: 700; color: var(--white); }
 .hero-card-sub { font-size: 11px; color: rgba(255,255,255,0.45); }
@@ -196,6 +203,68 @@ body { font-family: 'Inter', sans-serif; background: var(--gray-50); color: var(
 .hero-card:nth-child(2) { animation-delay: .8s; }
 .hero-card:nth-child(3) { animation-delay: 1.6s; }
 
+<<<<<<< HEAD
+=======
+/* ── HERO FEATURE CARD (A2) ── */
+.hero-feature {
+  position: relative; width: 300px;
+  background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 22px; padding: 16px; backdrop-filter: blur(8px);
+  box-shadow: 0 18px 40px rgba(0,0,0,0.35);
+}
+.hero-feature-badge {
+  position: absolute; top: 14px; left: 14px; z-index: 2;
+  background: var(--red); color: var(--white);
+  font-size: 11px; font-weight: 800; letter-spacing: 0.5px;
+  padding: 5px 11px; border-radius: 999px;
+}
+.hero-feature-img {
+  width: 100%; height: 256px; border-radius: 14px; overflow: hidden;
+  background: var(--white); display: flex; align-items: center; justify-content: center;
+}
+.hero-feature-img img { width: 100%; height: 100%; object-fit: contain; }
+.hero-feature-body { padding: 14px 6px 4px; }
+.hero-feature-name { color: var(--white); font-size: 16px; font-weight: 800; }
+.hero-feature-meta { display: flex; align-items: center; gap: 7px; margin-top: 5px; font-size: 12px; font-weight: 600; }
+.hero-feature-swatch {
+  width: 11px; height: 11px; border-radius: 50%;
+  background: linear-gradient(135deg, #F4F5F7, #C9CDD4);
+  border: 1px solid rgba(255,255,255,0.4); display: inline-block; flex-shrink: 0;
+}
+.hero-feature-price { display: flex; align-items: baseline; gap: 8px; margin-top: 12px; }
+.hero-feature-price b { color: var(--white); font-size: 26px; font-weight: 900; letter-spacing: -1px; }
+.hero-feature-price s { color: rgba(255,255,255,0.4); font-size: 14px; }
+.hero-feature-btn {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  width: 100%; margin-top: 14px; padding: 12px; border: none;
+  background: var(--white); color: var(--navy);
+  font-size: 14px; font-weight: 800; font-family: 'Inter', sans-serif;
+  border-radius: 11px; cursor: pointer; transition: all .2s;
+}
+.hero-feature-btn:hover { background: var(--blue-pale); transform: translateY(-1px); }
+
+/* ── FILTROS / CATEGORÍAS ── */
+.filters-bar {
+  background: var(--white); border-bottom: 1px solid var(--gray-200);
+  padding: 0 20px; position: sticky; top: 60px; z-index: 90;
+  display: flex; align-items: center; gap: 0; overflow-x: auto;
+}
+.filters-bar::-webkit-scrollbar { display: none; }
+.filter-btn {
+  padding: 14px 18px; font-size: 13px; font-weight: 600;
+  color: var(--gray-600); border: none; background: none; cursor: pointer;
+  white-space: nowrap; border-bottom: 3px solid transparent;
+  transition: all .2s; font-family: 'Inter', sans-serif;
+  display: flex; align-items: center; gap: 6px;
+}
+.filter-btn:hover { color: var(--blue); }
+.filter-btn.active { color: var(--blue); border-bottom-color: var(--blue); }
+.filter-count {
+  background: var(--blue-pale); color: var(--blue);
+  font-size: 10px; font-weight: 700; padding: 2px 6px; border-radius: 10px;
+}
+
+>>>>>>> db0aec28fa8888b87e760cf8f938344bc126a5e4
 /* ── SEARCH & SORT ── */
 .toolbar {
   padding: 16px 20px; display: flex; gap: 12px; align-items: center;
@@ -255,12 +324,6 @@ body { font-family: 'Inter', sans-serif; background: var(--gray-50); color: var(
   font-size: 9px; font-weight: 700; padding: 3px 7px; border-radius: 10px;
   letter-spacing: 0.5px;
 }
-.badge-encargue {
-  position: absolute; top: 8px; right: 8px;
-  background: var(--navy); color: var(--white);
-  font-size: 9px; font-weight: 700; padding: 3px 7px; border-radius: 10px;
-  letter-spacing: 0.5px;
-}
 .badge-agotado {
   position: absolute; top: 8px; right: 8px;
   background: var(--gray-400); color: var(--white);
@@ -272,7 +335,6 @@ body { font-family: 'Inter', sans-serif; background: var(--gray-50); color: var(
 .product-name { font-size: 13px; font-weight: 700; color: var(--navy); line-height: 1.3; }
 .product-sub { font-size: 11px; color: var(--gray-600); }
 .product-price { font-size: 16px; font-weight: 800; color: var(--navy); margin-top: 6px; }
-.product-price-enc { font-size: 11px; color: var(--gray-400); font-weight: 500; }
 
 .product-actions { padding: 0 12px 12px; display: flex; gap: 6px; align-items: center; }
 .qty-control {
@@ -483,6 +545,99 @@ body { font-family: 'Inter', sans-serif; background: var(--gray-50); color: var(
   .products-grid { grid-template-columns: 1fr; }
 }
 
+
+/* ── MODAL DETALLE PRODUCTO ── */
+.detail-overlay {
+  position: fixed; inset: 0; background: rgba(0,0,0,0.55);
+  z-index: 300; display: none; align-items: center; justify-content: center; padding: 20px;
+}
+.detail-overlay.open { display: flex; }
+.detail-modal {
+  background: var(--white); border-radius: 18px;
+  width: 100%; max-width: 760px; max-height: 90vh;
+  overflow: hidden; box-shadow: var(--shadow-lg); display: flex; flex-direction: column;
+}
+.detail-header {
+  padding: 16px 20px; background: var(--navy); border-radius: 18px 18px 0 0;
+  display: flex; align-items: center; justify-content: space-between; flex-shrink: 0;
+}
+.detail-header h2 {
+  color: var(--white); font-size: 15px; font-weight: 800;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: calc(100% - 48px);
+}
+.detail-body { display: flex; flex: 1; overflow: hidden; }
+.detail-img-col {
+  width: 320px; flex-shrink: 0;
+  background: linear-gradient(135deg, #F1F3F5 0%, #E9ECEF 100%);
+  display: flex; align-items: center; justify-content: center;
+  padding: 32px; position: relative;
+}
+.detail-img-col img { width: 100%; max-height: 300px; object-fit: contain; }
+.detail-img-emoji { font-size: 80px; line-height: 1; }
+.detail-img-badge {
+  position: absolute; top: 12px; right: 12px;
+  font-size: 10px; font-weight: 700; padding: 4px 9px; border-radius: 10px;
+  letter-spacing: 0.5px; color: var(--white);
+}
+.detail-info-col {
+  flex: 1; padding: 24px; display: flex; flex-direction: column; gap: 14px; overflow-y: auto;
+}
+.detail-cat-tag {
+  font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+  color: var(--blue); background: var(--blue-pale); padding: 4px 10px;
+  border-radius: 6px; width: fit-content;
+}
+.detail-name { font-size: 20px; font-weight: 900; color: var(--navy); line-height: 1.2; }
+.detail-sub { font-size: 13px; color: var(--gray-600); margin-top: 4px; }
+.detail-price-main { font-size: 26px; font-weight: 900; color: var(--navy); }
+.detail-specs {
+  background: var(--gray-50); border-radius: 10px; padding: 14px 16px;
+  display: flex; flex-direction: column; gap: 0;
+}
+.detail-spec-row {
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: 13px; padding: 8px 0; border-bottom: 1px solid var(--gray-200);
+}
+.detail-spec-row:last-child { border-bottom: none; padding-bottom: 0; }
+.detail-spec-row:first-child { padding-top: 0; }
+.detail-spec-label { color: var(--gray-600); font-weight: 500; }
+.detail-spec-value { font-weight: 700; color: var(--navy); text-align: right; }
+.detail-actions {
+  display: flex; gap: 10px; align-items: center; margin-top: auto; padding-top: 8px;
+}
+.detail-qty {
+  display: flex; align-items: center;
+  border: 1.5px solid var(--gray-200); border-radius: var(--radius-sm); overflow: hidden;
+}
+.detail-qty-btn {
+  width: 38px; height: 42px; border: none; background: var(--gray-100);
+  font-size: 18px; cursor: pointer; color: var(--gray-800);
+  display: flex; align-items: center; justify-content: center;
+  transition: background .15s; font-family: 'Inter', sans-serif;
+}
+.detail-qty-btn:hover { background: var(--blue-pale); color: var(--blue); }
+.detail-qty-num {
+  width: 42px; text-align: center; font-size: 15px; font-weight: 700;
+  color: var(--navy); background: var(--white);
+}
+.btn-detail-add {
+  flex: 1; padding: 12px; background: var(--blue); color: var(--white);
+  border: none; border-radius: var(--radius-sm); font-size: 14px; font-weight: 800;
+  cursor: pointer; font-family: 'Inter', sans-serif; transition: all .2s;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+}
+.btn-detail-add:hover { background: var(--blue-light); }
+.btn-detail-add.added { background: var(--green); }
+.product-card-top { cursor: pointer; display: flex; flex-direction: column; }
+@media(max-width: 640px) {
+  .detail-overlay { padding: 0; align-items: flex-end; }
+  .detail-modal { border-radius: 20px 20px 0 0; max-height: 92vh; }
+  .detail-body { flex-direction: column; overflow-y: auto; }
+  .detail-img-col { width: 100%; height: 200px; padding: 20px; }
+  .detail-img-col img { max-height: 160px; }
+  .detail-info-col { overflow-y: visible; }
+}
+
 /* ── TOAST ── */
 .toast {
   position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(80px);
@@ -506,10 +661,9 @@ body { font-family: 'Inter', sans-serif; background: var(--gray-50); color: var(
   <!-- CATEGORÍAS estilo Cells Home -->
   <div class="navbar-cats">
     <button class="nav-cat active" data-cat="todos" onclick="filterCat(this)">Todos</button>
-    <button class="nav-cat" data-cat="iphones" onclick="filterCat(this)">📱 iPhones</button>
-    <button class="nav-cat" data-cat="airpods" onclick="filterCat(this)">🎧 AirPods</button>
-    <button class="nav-cat" data-cat="accesorios" onclick="filterCat(this)">🔌 Accesorios</button>
-    <button class="nav-cat" data-cat="usados" onclick="filterCat(this)">✅ Usados</button>
+    <button class="nav-cat" data-cat="sellados" onclick="filterCat(this)">Sellados</button>
+    <button class="nav-cat" data-cat="usados" onclick="filterCat(this)">Usados</button>
+    <button class="nav-cat" data-cat="accesorios" onclick="filterCat(this)">Accesorios</button>
   </div>
 
   <div class="navbar-right">
@@ -543,7 +697,11 @@ body { font-family: 'Inter', sans-serif; background: var(--gray-50); color: var(
       <span class="hero-badge">✅ Equipos verificados</span>
     </div>
   </div>
+<<<<<<< HEAD
   <div class="hero-right" id="heroRight"></div>
+=======
+  <div class="hero-right" id="heroCards"></div>
+>>>>>>> db0aec28fa8888b87e760cf8f938344bc126a5e4
 </section>
 
 <!-- TOOLBAR -->
@@ -665,10 +823,6 @@ body { font-family: 'Inter', sans-serif; background: var(--gray-50); color: var(
           <p class="faq-answer">Aceptamos efectivo (pesos o dólares), transferencia bancaria y crypto (USDT / Binance Pay).</p>
         </details>
         <details class="faq-item">
-          <summary class="faq-question">¿Qué es el precio por encargue? <span>›</span></summary>
-          <p class="faq-answer">El precio por encargue aplica a productos que no tenemos en stock inmediato pero podemos conseguir en un plazo corto. El precio puede variar respecto al stock disponible.</p>
-        </details>
-        <details class="faq-item">
           <summary class="faq-question">¿Los equipos usados son confiables? <span>›</span></summary>
           <p class="faq-answer">Sí. Todos los equipos usados son revisados punto por punto (batería, cámaras, pantalla y funcionamiento) antes de ser publicados.</p>
         </details>
@@ -678,6 +832,17 @@ body { font-family: 'Inter', sans-serif; background: var(--gray-50); color: var(
         </details>
       </div>
     </div>
+  </div>
+</div>
+
+<!-- MODAL DETALLE PRODUCTO -->
+<div class="detail-overlay" id="detailModal" onclick="if(event.target===this)closeDetail()">
+  <div class="detail-modal">
+    <div class="detail-header">
+      <h2 id="detailTitle">Detalle del producto</h2>
+      <button class="btn-close" onclick="closeDetail()">✕</button>
+    </div>
+    <div class="detail-body" id="detailContent"></div>
   </div>
 </div>
 
@@ -698,11 +863,21 @@ const CAT_LABELS = { iphones:"iPhones", airpods:"AirPods", accesorios:"Accesorio
 // de sincronización con Google Sheets
 // ═══════════════════════════════════════
 let PRODUCTOS = [
-  { id:1, cat:"iphones", nombre:"iPhone 17 Pro Max 256GB", sub:"Sellado · Nuevo", disponibilidad:"stock",    precioStock:1300, precioEnc:1280, imagen:"./img/iphone17-pro-orange.jpg.png", caracteristicas:"Orange"              },
-  { id:2, cat:"iphones", nombre:"iPhone 17 Pro Max 256GB", sub:"Sellado · Nuevo", disponibilidad:"stock",    precioStock:1300, precioEnc:1280, imagen:"./img/iphone17-pro-blue.jpg.png",   caracteristicas:"Blue"                },
-  { id:3, cat:"iphones", nombre:"iPhone 17 Pro Max 256GB", sub:"Sellado · Nuevo", disponibilidad:"stock",    precioStock:1300, precioEnc:1280, imagen:"",                                  caracteristicas:"Silver"              },
-  { id:4, cat:"airpods", nombre:"AirPods Pro 2ª Gen",      sub:"Sellado · Nuevo", disponibilidad:"stock",    precioStock:250,  precioEnc:230,  imagen:"./img/airpods-pro-2.jpg.png",       caracteristicas:"White"               },
-  { id:5, cat:"usados",  nombre:"iPhone 15 128GB",         sub:"Usado · Verificado", disponibilidad:"stock", precioStock:600,  precioEnc:null, imagen:"./img/iphone15-usado.jpg.png",      caracteristicas:"Black · Batería 89%" },
+  /* ── SELLADOS ── */
+  { id:1,  cat:"iphones", nombre:"iPhone 17 128GB",         sub:"Sellado · Nuevo",    disponibilidad:"disponible", precioStock:950,  imagen:"./img/iphone17-white.jpg",        caracteristicas:"White"                          },
+  { id:2,  cat:"iphones", nombre:"iPhone 17 Pro 256GB",     sub:"Sellado · Nuevo",    disponibilidad:"disponible", precioStock:1250, imagen:"./img/iphone17-pro-orange.jpg",   caracteristicas:"Cosmic Orange"                  },
+  { id:3,  cat:"iphones", nombre:"iPhone 17 Pro 256GB",     sub:"Sellado · Nuevo",    disponibilidad:"disponible", precioStock:1250, imagen:"./img/iphone17-pro-silver.jpg",   caracteristicas:"Silver"                         },
+  { id:4,  cat:"iphones", nombre:"iPhone 17 Pro 256GB",     sub:"Sellado · Nuevo",    disponibilidad:"disponible", precioStock:1250, imagen:"./img/iphone17-pro-blue.jpg",     caracteristicas:"Deep Blue"                      },
+  { id:5,  cat:"iphones", nombre:"iPhone 17 Pro Max 256GB", sub:"Sellado · Nuevo",    disponibilidad:"disponible", precioStock:1350, imagen:"./img/iphone17-pm-silver.jpg",    caracteristicas:"Silver"                         },
+  { id:6,  cat:"iphones", nombre:"iPhone 17 Pro Max 256GB", sub:"Sellado · Nuevo",    disponibilidad:"disponible", precioStock:1350, imagen:"./img/iphone17-pm-blue.jpg",      caracteristicas:"Blue Titanium"                  },
+  /* ── USADOS ── */
+  { id:7,  cat:"usados",  nombre:"iPhone 15 128GB",         sub:"Usado · Verificado", disponibilidad:"vendido",    precioStock:490,  imagen:"./img/iphone15-pink.jpg",         caracteristicas:"Pink · Batería 80%"             },
+  { id:8,  cat:"usados",  nombre:"iPhone 15 128GB",         sub:"Usado · Verificado", disponibilidad:"disponible", precioStock:500,  imagen:"./img/iphone15-black.jpg",        caracteristicas:"Black · Batería 100%"           },
+  { id:9,  cat:"usados",  nombre:"iPhone 15 Pro 128GB",     sub:"Usado · Verificado", disponibilidad:"disponible", precioStock:610,  imagen:"./img/iphone15-pro-blue.jpg",     caracteristicas:"Blue Titanium · Batería 87%"    },
+  { id:10, cat:"usados",  nombre:"iPhone 15 Pro 128GB",     sub:"Usado · Verificado", disponibilidad:"disponible", precioStock:610,  imagen:"./img/iphone15-pro-natural.jpg",  caracteristicas:"Natural Titanium · Batería 86%" },
+  { id:11, cat:"usados",  nombre:"iPhone 16 128GB",         sub:"Usado · Verificado", disponibilidad:"disponible", precioStock:650,  imagen:"./img/iphone16-ultramarine.jpg",  caracteristicas:"Ultramarine · Batería 100%"     },
+  { id:12, cat:"usados",  nombre:"iPhone 16 Pro 128GB",     sub:"Usado · Verificado", disponibilidad:"disponible", precioStock:830,  imagen:"./img/iphone16-pro-desert.jpg",   caracteristicas:"Desert · Batería 93%"           },
+  { id:13, cat:"usados",  nombre:"iPhone 16 Pro Max 256GB", sub:"Usado · Verificado", disponibilidad:"disponible", precioStock:950,  imagen:"./img/iphone16-pro-max-black.jpg", caracteristicas:"Black · Batería 93%"            },
 ].map(p => ({ ...p, emoji: CAT_EMOJI[p.cat] || "📦" }));
 
 // ═══════════════════════════════════════
@@ -749,15 +924,17 @@ function renderHeroCards() {
   }).join("");
 }
 function getFiltered() {
-  let list = [...PRODUCTOS];
+  let list = PRODUCTOS.filter(p => p.disponibilidad !== "vendido");
   const q = document.getElementById("searchInput").value.toLowerCase().trim();
-  if (currentCat !== "todos") list = list.filter(p => p.cat === currentCat);
+  if (currentCat === "sellados") list = list.filter(p => p.cat === "iphones");
+  else if (currentCat === "accesorios") list = list.filter(p => p.cat === "accesorios" || p.cat === "airpods");
+  else if (currentCat !== "todos") list = list.filter(p => p.cat === currentCat);
   if (q) list = list.filter(p =>
     p.nombre.toLowerCase().includes(q) || p.sub.toLowerCase().includes(q)
   );
   const sort = document.getElementById("sortSelect").value;
-  if (sort === "price-asc") list.sort((a,b) => (a.precioStock||a.precioEnc||0) - (b.precioStock||b.precioEnc||0));
-  if (sort === "price-desc") list.sort((a,b) => (b.precioStock||b.precioEnc||0) - (a.precioStock||a.precioEnc||0));
+  if (sort === "price-asc") list.sort((a,b) => (a.precioStock||0) - (b.precioStock||0));
+  if (sort === "price-desc") list.sort((a,b) => (b.precioStock||0) - (a.precioStock||0));
   if (sort === "name") list.sort((a,b) => a.nombre.localeCompare(b.nombre));
   return list;
 }
@@ -798,14 +975,11 @@ function productCard(p) {
   const noDisp = p.disponibilidad === "agotado";
 
   let badge = "";
-  if (p.disponibilidad === "stock") badge = `<span class="badge-stock">EN STOCK</span>`;
-  else if (p.disponibilidad === "encargue") badge = `<span class="badge-encargue">ENCARGUE</span>`;
+  if (p.disponibilidad === "disponible") badge = `<span class="badge-stock">EN STOCK</span>`;
   else badge = `<span class="badge-agotado">AGOTADO</span>`;
 
   let precios = "";
   if (p.precioStock) precios += `<div class="product-price">USD $${p.precioStock}</div>`;
-  if (p.precioEnc && p.precioStock) precios += `<div class="product-price-enc">Encargue: USD $${p.precioEnc}</div>`;
-  if (p.precioEnc && !p.precioStock) precios += `<div class="product-price">USD $${p.precioEnc} <span style="font-size:11px;font-weight:500;color:var(--gray-400)">(encargue)</span></div>`;
 
   const actions = noDisp
     ? `<div class="product-actions"><span style="font-size:12px;color:var(--gray-400);padding:8px 0">No disponible</span></div>`
@@ -827,12 +1001,14 @@ function productCard(p) {
        </div>`;
 
   return `<div class="product-card ${noDisp?'out-of-stock':''}" id="card-${p.id}">
-    <div class="product-img" id="img-${p.id}">${p.imagen ? `<img src="${driveUrl(p.imagen)}" alt="${p.nombre}" onload="this.style.opacity=1" onerror="this.style.display='none';document.getElementById('fb-${p.id}').style.display='block'"/>` : ""}${badge}<span class="img-fallback" id="fb-${p.id}" style="${p.imagen ? 'display:none' : ''}">${p.emoji}</span></div>
-    <div class="product-info">
-      <div class="product-cat">${CAT_LABELS[p.cat]}</div>
-      <div class="product-name">${p.nombre}</div>
-      <div class="product-sub">${p.sub}</div>
-      ${precios}
+    <div class="product-card-top" onclick="openDetail(${p.id})">
+      <div class="product-img" id="img-${p.id}">${p.imagen ? `<img src="${driveUrl(p.imagen)}" alt="${p.nombre}" onload="this.style.opacity=1" onerror="this.style.display='none';document.getElementById('fb-${p.id}').style.display='block'"/>` : ""}${badge}<span class="img-fallback" id="fb-${p.id}" style="${p.imagen ? 'display:none' : ''}">${p.emoji}</span></div>
+      <div class="product-info">
+        <div class="product-cat">${CAT_LABELS[p.cat]}</div>
+        <div class="product-name">${p.nombre}</div>
+        <div class="product-sub">${p.sub}</div>
+        ${precios}
+      </div>
     </div>
     ${actions}
   </div>`;
@@ -885,7 +1061,7 @@ function renderCartPanel() {
   items.forEach(([id, qty]) => {
     const p = PRODUCTOS.find(x => x.id == id);
     if (!p) return;
-    const precio = p.precioStock || p.precioEnc || 0;
+    const precio = p.precioStock || 0;
     subtotal += precio * qty;
     html += `<div class="cart-item">
       <div class="cart-item-emoji">${p.emoji}</div>
@@ -971,7 +1147,7 @@ function enviarWhatsapp() {
   Object.entries(items).forEach(([id, qty]) => {
     const p = PRODUCTOS.find(x => x.id == id);
     if (!p) return;
-    const precio = p.precioStock || p.precioEnc || 0;
+    const precio = p.precioStock || 0;
     msg += `• ${p.nombre} x${qty} — USD $${(precio*qty).toFixed(0)}\n`;
     total += precio * qty;
   });
@@ -990,7 +1166,7 @@ function verPedidoPDF() {
   Object.entries(items).forEach(([id, qty]) => {
     const p = PRODUCTOS.find(x => x.id == id);
     if (!p) return;
-    const precio = p.precioStock || p.precioEnc || 0;
+    const precio = p.precioStock || 0;
     total += precio * qty;
     rows += `<tr><td>${p.nombre}</td><td style="text-align:center">${qty}</td><td style="text-align:right">USD $${(precio*qty).toFixed(0)}</td></tr>`;
   });
@@ -1063,9 +1239,128 @@ function showToast(msg) {
   setTimeout(() => t.classList.remove("show"), 2000);
 }
 
+
+// ─── DETALLE PRODUCTO ─────────────────
+let detailQty = 1;
+let detailProdId = null;
+
+function openDetail(id) {
+  const p = PRODUCTOS.find(x => x.id === id);
+  if (!p) return;
+  detailProdId = id;
+  detailQty = Math.max(1, cart[id] || 1);
+
+  document.getElementById("detailTitle").textContent = p.nombre;
+
+  const badgeColor = { disponible:"var(--green)", agotado:"var(--gray-400)" };
+  const badgeTxt   = { disponible:"EN STOCK", agotado:"AGOTADO" };
+
+  const imgHtml = p.imagen
+    ? `<img src="${driveUrl(p.imagen)}" alt="${p.nombre}"/>`
+    : `<div class="detail-img-emoji">${p.emoji}</div>`;
+
+  let precios = "";
+  if (p.precioStock) precios += `<div class="detail-price-main">USD $${p.precioStock}</div>`;
+
+  const specs = [];
+  const storageMatch = p.nombre.match(/(\d+GB)/);
+  if (storageMatch) specs.push({ l:"Almacenamiento", v:storageMatch[1] });
+  specs.push({ l:"Condición", v:p.sub });
+  if (p.caracteristicas) {
+    p.caracteristicas.split("·").forEach(c => {
+      c = c.trim(); if (!c) return;
+      const isBat = /bater[ií]/i.test(c);
+      specs.push({ l: isBat ? "Batería" : "Color", v: isBat ? c.replace(/bater[ií]a\s*/i,"").trim() : c });
+    });
+  }
+  const specsHtml = `<div class="detail-specs">${specs.map(s =>
+    `<div class="detail-spec-row"><span class="detail-spec-label">${s.l}</span><span class="detail-spec-value">${s.v}</span></div>`
+  ).join("")}</div>`;
+
+  const noDisp = p.disponibilidad === "agotado";
+  const inCart = !!cart[id];
+  const actionsHtml = noDisp
+    ? `<div style="font-size:13px;color:var(--gray-400);padding:8px 0;text-align:center">No disponible</div>`
+    : `<div class="detail-actions">
+        <div class="detail-qty">
+          <button class="detail-qty-btn" onclick="changeDetailQty(-1)">−</button>
+          <span class="detail-qty-num" id="detailQtyNum">${detailQty}</span>
+          <button class="detail-qty-btn" onclick="changeDetailQty(1)">+</button>
+        </div>
+        <button class="btn-detail-add ${inCart?'added':''}" id="btnDetailAdd" onclick="addFromDetail()">
+          ${inCart ? "✓ En el pedido" : "+ Agregar al pedido"}
+        </button>
+      </div>`;
+
+  document.getElementById("detailContent").innerHTML = `
+    <div class="detail-img-col">
+      ${imgHtml}
+      <span class="detail-img-badge" style="background:${badgeColor[p.disponibilidad]||'var(--gray-400)'}">
+        ${badgeTxt[p.disponibilidad]||''}
+      </span>
+    </div>
+    <div class="detail-info-col">
+      <span class="detail-cat-tag">${CAT_LABELS[p.cat]}</span>
+      <div>
+        <div class="detail-name">${p.nombre}</div>
+        <div class="detail-sub">${p.sub}</div>
+      </div>
+      ${precios}
+      ${specsHtml}
+      ${actionsHtml}
+    </div>`;
+
+  document.getElementById("detailModal").classList.add("open");
+}
+
+function closeDetail() {
+  document.getElementById("detailModal").classList.remove("open");
+  detailProdId = null;
+}
+
+function changeDetailQty(delta) {
+  detailQty = Math.max(1, detailQty + delta);
+  const el = document.getElementById("detailQtyNum");
+  if (el) el.textContent = detailQty;
+}
+
+function addFromDetail() {
+  if (!detailProdId) return;
+  cart[detailProdId] = detailQty;
+  updateCartUI();
+  renderProducts();
+  const btn = document.getElementById("btnDetailAdd");
+  if (btn) { btn.classList.add("added"); btn.innerHTML = "✓ En el pedido"; }
+  showToast("✓ Agregado al pedido");
+}
+
+// ─── HERO CARDS ───────────────────────
+function renderHeroCards() {
+  const container = document.getElementById("heroCards");
+  if (!container) return;
+  container.innerHTML = `
+    <div class="hero-feature">
+      <span class="hero-feature-badge">OFERTA</span>
+      <div class="hero-feature-img">
+        <img src="./img/iphone17-pro-silver.jpg" alt="iPhone 17 Pro Silver" onerror="this.parentNode.innerHTML='<span style=&quot;font-size:64px&quot;>📱</span>'"/>
+      </div>
+      <div class="hero-feature-body">
+        <div class="hero-feature-name">iPhone 17 Pro · 256GB</div>
+        <div class="hero-feature-meta">
+          <span class="hero-feature-swatch"></span>
+          <span style="color:rgba(255,255,255,0.85)">Silver</span>
+          <span style="color:var(--blue-light)">· Sellado · Garantía 12 meses</span>
+        </div>
+        <div class="hero-feature-price"><b>USD 1.250</b></div>
+        <button class="hero-feature-btn" onclick="openDetail(3)">Ver producto →</button>
+      </div>
+    </div>`;
+}
+
 // ─── INIT ─────────────────────────────
 renderHeroCards();
 renderProducts();
+renderHeroCards();
 updateCartUI();
 </script>
 </body>
