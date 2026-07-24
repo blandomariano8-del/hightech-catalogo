@@ -203,8 +203,6 @@ body { font-family: 'Inter', sans-serif; background: var(--gray-50); color: var(
 .hero-card:nth-child(2) { animation-delay: .8s; }
 .hero-card:nth-child(3) { animation-delay: 1.6s; }
 
-<<<<<<< HEAD
-=======
 /* ── HERO FEATURE CARD (A2) ── */
 .hero-feature {
   position: relative; width: 300px;
@@ -242,29 +240,6 @@ body { font-family: 'Inter', sans-serif; background: var(--gray-50); color: var(
   border-radius: 11px; cursor: pointer; transition: all .2s;
 }
 .hero-feature-btn:hover { background: var(--blue-pale); transform: translateY(-1px); }
-
-/* ── FILTROS / CATEGORÍAS ── */
-.filters-bar {
-  background: var(--white); border-bottom: 1px solid var(--gray-200);
-  padding: 0 20px; position: sticky; top: 60px; z-index: 90;
-  display: flex; align-items: center; gap: 0; overflow-x: auto;
-}
-.filters-bar::-webkit-scrollbar { display: none; }
-.filter-btn {
-  padding: 14px 18px; font-size: 13px; font-weight: 600;
-  color: var(--gray-600); border: none; background: none; cursor: pointer;
-  white-space: nowrap; border-bottom: 3px solid transparent;
-  transition: all .2s; font-family: 'Inter', sans-serif;
-  display: flex; align-items: center; gap: 6px;
-}
-.filter-btn:hover { color: var(--blue); }
-.filter-btn.active { color: var(--blue); border-bottom-color: var(--blue); }
-.filter-count {
-  background: var(--blue-pale); color: var(--blue);
-  font-size: 10px; font-weight: 700; padding: 2px 6px; border-radius: 10px;
-}
-
->>>>>>> db0aec28fa8888b87e760cf8f938344bc126a5e4
 /* ── SEARCH & SORT ── */
 .toolbar {
   padding: 16px 20px; display: flex; gap: 12px; align-items: center;
@@ -697,11 +672,7 @@ body { font-family: 'Inter', sans-serif; background: var(--gray-50); color: var(
       <span class="hero-badge">✅ Equipos verificados</span>
     </div>
   </div>
-<<<<<<< HEAD
-  <div class="hero-right" id="heroRight"></div>
-=======
   <div class="hero-right" id="heroCards"></div>
->>>>>>> db0aec28fa8888b87e760cf8f938344bc126a5e4
 </section>
 
 <!-- TOOLBAR -->
@@ -900,28 +871,6 @@ function driveUrl(url) {
   if (match) return `https://drive.google.com/uc?export=view&id=${match[1]}`;
   // Si es ruta local o URL directa, la usa tal cual
   return url;
-}
-function renderHeroCards() {
-  const el = document.getElementById("heroRight");
-  if (!el) return;
-  const picks = [
-    PRODUCTOS.find(p => p.cat === "iphones" && p.disponibilidad === "stock"),
-    PRODUCTOS.find(p => p.cat === "airpods" && p.disponibilidad === "stock"),
-    PRODUCTOS.find(p => p.cat === "usados" && p.disponibilidad === "stock"),
-  ].filter(Boolean);
-  el.innerHTML = picks.map(p => {
-    const precio = p.precioStock || p.precioEnc;
-    const esUsado = p.cat === "usados";
-    return `<div class="hero-card">
-      <div class="hero-card-icon">${p.emoji}</div>
-      <div class="hero-card-info">
-        <span class="hero-card-badge"${esUsado ? ' style="background:var(--blue)"' : ""}>${esUsado ? "VERIFICADO" : "EN STOCK"}</span>
-        <div class="hero-card-name">${p.nombre}</div>
-        <div class="hero-card-sub">${p.sub}</div>
-        <div class="hero-card-price">USD $${precio}</div>
-      </div>
-    </div>`;
-  }).join("");
 }
 function getFiltered() {
   let list = PRODUCTOS.filter(p => p.disponibilidad !== "vendido");
@@ -1360,7 +1309,6 @@ function renderHeroCards() {
 // ─── INIT ─────────────────────────────
 renderHeroCards();
 renderProducts();
-renderHeroCards();
 updateCartUI();
 </script>
 </body>
