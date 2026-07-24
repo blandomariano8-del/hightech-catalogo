@@ -152,20 +152,31 @@ body { font-family: 'Inter', sans-serif; background: var(--gray-50); color: var(
 .hero-eyebrow-dot { width: 6px; height: 6px; background: var(--blue-light); border-radius: 50%; animation: pulse 2s infinite; }
 @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(1.6)} }
 .hero-title {
-  font-size: 50px; font-weight: 900; line-height: 1.02;
-  color: var(--white); letter-spacing: -2px; margin-bottom: 16px;
+  font-size: 56px; font-weight: 900; line-height: 1.0;
+  color: var(--white); letter-spacing: -2.2px; margin-bottom: 16px;
 }
 .hero-title span { color: var(--blue-light); }
 .hero-sub {
-  font-size: 15px; color: rgba(255,255,255,0.55); line-height: 1.65;
-  margin-bottom: 28px; font-weight: 400; max-width: 400px;
+  font-size: 15px; color: rgba(255,255,255,0.6); line-height: 1.65;
+  margin-bottom: 26px; font-weight: 400; max-width: 400px;
 }
+.hero-cta {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: var(--blue); color: var(--white); text-decoration: none;
+  font-size: 15px; font-weight: 800; font-family: 'Inter', sans-serif;
+  padding: 14px 26px; border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-lg);
+  margin-bottom: 26px; transition: all .2s;
+}
+.hero-cta:hover { background: var(--blue-light); transform: translateY(-2px); box-shadow: 0 12px 36px rgba(0,0,0,0.22); }
+.hero-cta span { display: inline-block; transition: transform .2s; }
+.hero-cta:hover span { transform: translateX(3px); }
 .hero-badges { display: flex; gap: 10px; flex-wrap: wrap; }
 .hero-badge {
-  display: flex; align-items: center; gap: 7px;
-  background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12);
-  color: rgba(255,255,255,0.8); font-size: 12px; font-weight: 600;
-  padding: 7px 14px; border-radius: 8px; backdrop-filter: blur(4px);
+  display: flex; align-items: center; gap: 8px;
+  background: rgba(255,255,255,0.09); border: 1px solid rgba(255,255,255,0.2);
+  color: rgba(255,255,255,0.92); font-size: 12.5px; font-weight: 700;
+  padding: 9px 16px; border-radius: 999px; backdrop-filter: blur(4px);
 }
 
 /* Lado derecho — tarjetas de producto flotantes */
@@ -212,7 +223,7 @@ body { font-family: 'Inter', sans-serif; background: var(--gray-50); color: var(
 }
 .hero-feature-badge {
   position: absolute; top: 14px; left: 14px; z-index: 2;
-  background: var(--red); color: var(--white);
+  background: var(--green); color: var(--white);
   font-size: 11px; font-weight: 800; letter-spacing: 0.5px;
   padding: 5px 11px; border-radius: 999px;
 }
@@ -231,7 +242,6 @@ body { font-family: 'Inter', sans-serif; background: var(--gray-50); color: var(
 }
 .hero-feature-price { display: flex; align-items: baseline; gap: 8px; margin-top: 12px; }
 .hero-feature-price b { color: var(--white); font-size: 26px; font-weight: 900; letter-spacing: -1px; }
-.hero-feature-price s { color: rgba(255,255,255,0.4); font-size: 14px; }
 .hero-feature-btn {
   display: flex; align-items: center; justify-content: center; gap: 8px;
   width: 100%; margin-top: 14px; padding: 12px; border: none;
@@ -513,6 +523,7 @@ body { font-family: 'Inter', sans-serif; background: var(--gray-50); color: var(
   .btn-faq { padding: 6px 9px; font-size: 11px; }
   .hero-title { font-size: 28px; }
   .hero-sub { font-size: 13px; }
+  .hero-cta { padding: 12px 20px; font-size: 14px; margin-bottom: 20px; }
   .hero-badges { gap: 7px; }
   .hero-badge { font-size: 11px; padding: 6px 10px; }
 }
@@ -660,14 +671,16 @@ body { font-family: 'Inter', sans-serif; background: var(--gray-50); color: var(
   <div class="hero-left">
     <div class="hero-eyebrow">
       <span class="hero-eyebrow-dot"></span>
-      Stock disponible · Rosario y todo el país
+      Puerto Norte, Rosario · Stock real, hoy
     </div>
     <h1 class="hero-title">
-      Tu próximo<br><span>iPhone</span><br>empieza acá.
+      La casa Apple<br>de <span>Rosario</span>.
     </h1>
-    <p class="hero-sub">Sellados, usados verificados y accesorios Apple. Garantía escrita, envíos seguros y atención real.</p>
+    <p class="hero-sub">iPhones sellados, usados verificados y accesorios originales. Garantía escrita, plan canje y envíos a todo el país.</p>
+    <a href="#productsSection" class="hero-cta">Ver catálogo <span>→</span></a>
     <div class="hero-badges">
       <span class="hero-badge">🛡️ Garantía escrita</span>
+      <span class="hero-badge">🔄 Plan canje</span>
       <span class="hero-badge">🚚 Envíos a todo el país</span>
       <span class="hero-badge">✅ Equipos verificados</span>
     </div>
@@ -1287,21 +1300,26 @@ function addFromDetail() {
 function renderHeroCards() {
   const container = document.getElementById("heroCards");
   if (!container) return;
+  const p = PRODUCTOS.find(x => x.id === 3);
+  if (!p) return;
+  const storageMatch = p.nombre.match(/(\d+GB)/);
+  const storage = storageMatch ? storageMatch[1] : "";
+  const modelo = storage ? p.nombre.replace(storage, "").trim() : p.nombre;
   container.innerHTML = `
     <div class="hero-feature">
-      <span class="hero-feature-badge">OFERTA</span>
+      <span class="hero-feature-badge">100% ORIGINAL</span>
       <div class="hero-feature-img">
-        <img src="./img/iphone17-pro-silver.jpg" alt="iPhone 17 Pro Silver" onerror="this.parentNode.innerHTML='<span style=&quot;font-size:64px&quot;>📱</span>'"/>
+        <img src="${driveUrl(p.imagen)}" alt="${p.nombre}" onerror="this.parentNode.innerHTML='<span style=&quot;font-size:64px&quot;>${p.emoji}</span>'"/>
       </div>
       <div class="hero-feature-body">
-        <div class="hero-feature-name">iPhone 17 Pro · 256GB</div>
+        <div class="hero-feature-name">${modelo}${storage ? ` · ${storage}` : ""}</div>
         <div class="hero-feature-meta">
           <span class="hero-feature-swatch"></span>
-          <span style="color:rgba(255,255,255,0.85)">Silver</span>
-          <span style="color:var(--blue-light)">· Sellado · Garantía 12 meses</span>
+          <span style="color:rgba(255,255,255,0.85)">${p.caracteristicas}</span>
+          <span style="color:var(--blue-light)">· ${p.sub} · Garantía 12 meses</span>
         </div>
-        <div class="hero-feature-price"><b>USD 1.250</b></div>
-        <button class="hero-feature-btn" onclick="openDetail(3)">Ver producto →</button>
+        <div class="hero-feature-price"><b>USD $${p.precioStock}</b></div>
+        <button class="hero-feature-btn" onclick="openDetail(${p.id})">Ver producto →</button>
       </div>
     </div>`;
 }
