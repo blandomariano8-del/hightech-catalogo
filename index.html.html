@@ -105,8 +105,7 @@ body { font-family: 'Inter', sans-serif; background: var(--gray-50); color: var(
 .hero {
   background: var(--navy);
   padding: 52px 40px 52px;
-  display: flex; align-items: center; justify-content: space-between;
-  gap: 32px; overflow: hidden; position: relative; min-height: 280px;
+  overflow: hidden; position: relative; min-height: 280px;
 }
 /* Arco azul — firma visual de HIGHTECH */
 .hero::after {
@@ -141,6 +140,66 @@ body { font-family: 'Inter', sans-serif; background: var(--gray-50); color: var(
   border: 24px solid var(--blue-light); opacity: .10;
 }
 
+/* ── HERO ROTATOR (slides) ── */
+.hero-slide { display: none; }
+.hero-slide.is-active { display: block; animation: heroSlideIn .45s ease; }
+@keyframes heroSlideIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+.hero-slide-row {
+  display: flex; align-items: center; justify-content: center;
+  gap: 64px; position: relative; z-index: 2;
+}
+.hero-glow {
+  position: absolute; top: -100px; right: -100px;
+  width: 520px; height: 520px; border-radius: 50%;
+  pointer-events: none; z-index: 0;
+}
+.hero-glow--red { background: radial-gradient(circle, rgba(239,68,68,0.30) 0%, transparent 70%); }
+.hero-glow--green { background: radial-gradient(circle, rgba(16,185,129,0.28) 0%, transparent 70%); }
+
+.hero-flash-banner {
+  position: relative; z-index: 2;
+  display: flex; align-items: center; justify-content: center; gap: 12px;
+  background: linear-gradient(90deg, var(--red), #F97316);
+  border-radius: var(--radius-sm); padding: 11px 20px; margin: 0 0 28px;
+}
+.hero-flash-icon { font-size: 16px; }
+.hero-flash-label {
+  color: var(--white); font-size: 13px; font-weight: 800;
+  letter-spacing: 0.5px; font-family: 'Inter', sans-serif;
+}
+.hero-flash-clock { display: flex; align-items: center; gap: 6px; }
+.hero-flash-clock span {
+  background: rgba(0,0,0,0.22); color: var(--white);
+  font-family: 'Inter', sans-serif; font-weight: 800; font-size: 14px;
+  padding: 3px 8px; border-radius: 6px; font-variant-numeric: tabular-nums;
+}
+.hero-flash-clock b { color: var(--white); }
+
+.hero-controls {
+  position: relative; z-index: 2;
+  display: flex; align-items: center; justify-content: center; gap: 18px;
+  padding-top: 36px;
+}
+.hero-arrow {
+  width: 36px; height: 36px; border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.18); background: rgba(255,255,255,0.05);
+  color: var(--white); font-size: 17px; cursor: pointer; transition: background .2s;
+}
+.hero-arrow:hover { background: rgba(255,255,255,0.14); }
+.hero-dots { display: flex; gap: 8px; }
+.hero-dot {
+  width: 8px; height: 8px; border-radius: 999px; border: none; padding: 0;
+  background: rgba(255,255,255,0.25); cursor: pointer; transition: all .25s;
+}
+.hero-dot.is-active { width: 24px; background: var(--blue-light); }
+
+.hero-title-accent-red { color: #FF6B5B; }
+.hero-title-accent-green { color: #4ADE94; }
+.hero-cta-red { background: var(--red); }
+.hero-cta-red:hover { background: #FF6B5B; }
+.hero-cta-green { background: var(--green); color: var(--navy); }
+.hero-cta-green:hover { background: #4ADE94; }
+
 .hero-left { position: relative; z-index: 2; max-width: 520px; }
 .hero-eyebrow {
   display: inline-flex; align-items: center; gap: 7px;
@@ -152,20 +211,31 @@ body { font-family: 'Inter', sans-serif; background: var(--gray-50); color: var(
 .hero-eyebrow-dot { width: 6px; height: 6px; background: var(--blue-light); border-radius: 50%; animation: pulse 2s infinite; }
 @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(1.6)} }
 .hero-title {
-  font-size: 50px; font-weight: 900; line-height: 1.02;
-  color: var(--white); letter-spacing: -2px; margin-bottom: 16px;
+  font-size: 56px; font-weight: 900; line-height: 1.0;
+  color: var(--white); letter-spacing: -2.2px; margin-bottom: 16px;
 }
 .hero-title span { color: var(--blue-light); }
 .hero-sub {
-  font-size: 15px; color: rgba(255,255,255,0.55); line-height: 1.65;
-  margin-bottom: 28px; font-weight: 400; max-width: 400px;
+  font-size: 15px; color: rgba(255,255,255,0.6); line-height: 1.65;
+  margin-bottom: 26px; font-weight: 400; max-width: 400px;
 }
+.hero-cta {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: var(--blue); color: var(--white); text-decoration: none;
+  font-size: 15px; font-weight: 800; font-family: 'Inter', sans-serif;
+  padding: 14px 26px; border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-lg);
+  margin-bottom: 26px; transition: all .2s;
+}
+.hero-cta:hover { background: var(--blue-light); transform: translateY(-2px); box-shadow: 0 12px 36px rgba(0,0,0,0.22); }
+.hero-cta span { display: inline-block; transition: transform .2s; }
+.hero-cta:hover span { transform: translateX(3px); }
 .hero-badges { display: flex; gap: 10px; flex-wrap: wrap; }
 .hero-badge {
-  display: flex; align-items: center; gap: 7px;
-  background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12);
-  color: rgba(255,255,255,0.8); font-size: 12px; font-weight: 600;
-  padding: 7px 14px; border-radius: 8px; backdrop-filter: blur(4px);
+  display: flex; align-items: center; gap: 8px;
+  background: rgba(255,255,255,0.09); border: 1px solid rgba(255,255,255,0.2);
+  color: rgba(255,255,255,0.92); font-size: 12.5px; font-weight: 700;
+  padding: 9px 16px; border-radius: 999px; backdrop-filter: blur(4px);
 }
 
 /* Lado derecho — tarjetas de producto flotantes */
@@ -212,7 +282,7 @@ body { font-family: 'Inter', sans-serif; background: var(--gray-50); color: var(
 }
 .hero-feature-badge {
   position: absolute; top: 14px; left: 14px; z-index: 2;
-  background: var(--red); color: var(--white);
+  background: var(--green); color: var(--white);
   font-size: 11px; font-weight: 800; letter-spacing: 0.5px;
   padding: 5px 11px; border-radius: 999px;
 }
@@ -231,7 +301,6 @@ body { font-family: 'Inter', sans-serif; background: var(--gray-50); color: var(
 }
 .hero-feature-price { display: flex; align-items: baseline; gap: 8px; margin-top: 12px; }
 .hero-feature-price b { color: var(--white); font-size: 26px; font-weight: 900; letter-spacing: -1px; }
-.hero-feature-price s { color: rgba(255,255,255,0.4); font-size: 14px; }
 .hero-feature-btn {
   display: flex; align-items: center; justify-content: center; gap: 8px;
   width: 100%; margin-top: 14px; padding: 12px; border: none;
@@ -241,26 +310,21 @@ body { font-family: 'Inter', sans-serif; background: var(--gray-50); color: var(
 }
 .hero-feature-btn:hover { background: var(--blue-pale); transform: translateY(-1px); }
 
-/* ── FILTROS / CATEGORÍAS ── */
-.filters-bar {
-  background: var(--white); border-bottom: 1px solid var(--gray-200);
-  padding: 0 20px; position: sticky; top: 60px; z-index: 90;
-  display: flex; align-items: center; gap: 0; overflow-x: auto;
+/* Variante roja — oferta relámpago */
+.hero-feature-badge--flash { background: var(--red); }
+.hero-feature-price-old { color: rgba(255,255,255,0.4); font-size: 14px; text-decoration: line-through; }
+.hero-feature-btn--flash:hover { background: #FFE3DF; }
+
+/* ── HERO TRADE-IN (canje usado → nuevo) ── */
+.hero-trade { flex-direction: row !important; align-items: center; gap: 18px; }
+.hero-trade-img {
+  width: 170px; height: 300px; border-radius: 22px; overflow: hidden;
+  background: var(--white); box-shadow: 0 18px 40px rgba(0,0,0,0.35);
 }
-.filters-bar::-webkit-scrollbar { display: none; }
-.filter-btn {
-  padding: 14px 18px; font-size: 13px; font-weight: 600;
-  color: var(--gray-600); border: none; background: none; cursor: pointer;
-  white-space: nowrap; border-bottom: 3px solid transparent;
-  transition: all .2s; font-family: 'Inter', sans-serif;
-  display: flex; align-items: center; gap: 6px;
-}
-.filter-btn:hover { color: var(--blue); }
-.filter-btn.active { color: var(--blue); border-bottom-color: var(--blue); }
-.filter-count {
-  background: var(--blue-pale); color: var(--blue);
-  font-size: 10px; font-weight: 700; padding: 2px 6px; border-radius: 10px;
-}
+.hero-trade-img img { width: 100%; height: 100%; object-fit: cover; }
+.hero-trade-img--old { opacity: .55; width: 150px; }
+.hero-trade-img--new { width: 200px; height: 340px; }
+.hero-trade-arrow { color: var(--green); font-size: 30px; font-weight: 800; }
 
 /* ── SEARCH & SORT ── */
 .toolbar {
@@ -359,7 +423,6 @@ body { font-family: 'Inter', sans-serif; background: var(--gray-50); color: var(
   transition: all .2s; font-weight: 700;
 }
 .btn-add:hover { background: var(--blue-light); transform: scale(1.08); }
-.btn-add.added { background: var(--green); }
 
 /* ── PANEL CARRITO ── */
 .cart-overlay {
@@ -519,13 +582,15 @@ body { font-family: 'Inter', sans-serif; background: var(--gray-50); color: var(
 
 /* ── RESPONSIVE ── */
 @media(max-width: 768px) {
-  .navbar-top { padding: 0 14px; height: 52px; }
-  .navbar-cats { display: none; }
+  .navbar-top { padding: 8px 14px; height: auto; flex-wrap: wrap; row-gap: 8px; }
+  .navbar-cats { order: 3; flex: 1 1 100%; margin: 0; }
   .nav-search-input { width: 130px; }
   .hero { padding: 32px 20px; min-height: auto; }
   .hero-title { font-size: 32px; letter-spacing: -1px; }
   .hero-right { display: none; }
-  .hero-arc { display: none; }
+  .hero-arc, .hero-glow { display: none; }
+  .hero-flash-banner { flex-wrap: wrap; padding: 10px 14px; }
+  .hero-flash-label { font-size: 11px; }
 }
 @media(max-width: 600px) {
   .navbar-name { font-size: 13px; }
@@ -533,9 +598,10 @@ body { font-family: 'Inter', sans-serif; background: var(--gray-50); color: var(
   .products-section { padding: 0 14px 100px; }
   .toolbar { padding: 12px 14px; }
   .cart-panel { width: 100vw; }
-  .btn-faq { display: none; }
+  .btn-faq { padding: 6px 9px; font-size: 11px; }
   .hero-title { font-size: 28px; }
   .hero-sub { font-size: 13px; }
+  .hero-cta { padding: 12px 20px; font-size: 14px; margin-bottom: 20px; }
   .hero-badges { gap: 7px; }
   .hero-badge { font-size: 11px; padding: 6px 10px; }
 }
@@ -683,24 +749,76 @@ body { font-family: 'Inter', sans-serif; background: var(--gray-50); color: var(
 </nav>
 
 <!-- HERO -->
-<section class="hero">
-  <div class="hero-arc"></div>
-  <div class="hero-left">
-    <div class="hero-eyebrow">
-      <span class="hero-eyebrow-dot"></span>
-      Stock disponible · Rosario y todo el país
-    </div>
-    <h1 class="hero-title">
-      Tu próximo<br><span>iPhone</span><br>empieza acá.
-    </h1>
-    <p class="hero-sub">Sellados, usados verificados y accesorios Apple. Garantía escrita, envíos seguros y atención real.</p>
-    <div class="hero-badges">
-      <span class="hero-badge">🛡️ Garantía escrita</span>
-      <span class="hero-badge">🚚 Envíos a todo el país</span>
-      <span class="hero-badge">✅ Equipos verificados</span>
+<section class="hero" id="heroRotator">
+
+  <!-- Slide 1 — mensaje de marca -->
+  <div class="hero-slide is-active" data-slide="0">
+    <div class="hero-arc"></div>
+    <div class="hero-slide-row">
+      <div class="hero-left">
+        <div class="hero-eyebrow">
+          <span class="hero-eyebrow-dot"></span>
+          Puerto Norte, Rosario · Stock real, hoy
+        </div>
+        <h1 class="hero-title">
+          La casa Apple<br>de <span>Rosario</span>.
+        </h1>
+        <p class="hero-sub">iPhones sellados, usados verificados y accesorios originales. Garantía escrita, plan canje y envíos a todo el país.</p>
+        <a href="#productsSection" class="hero-cta">Ver catálogo <span>→</span></a>
+        <div class="hero-badges">
+          <span class="hero-badge">🛡️ Garantía escrita</span>
+          <span class="hero-badge">🔄 Plan canje</span>
+          <span class="hero-badge">🚚 Envíos a todo el país</span>
+          <span class="hero-badge">✅ Equipos verificados</span>
+        </div>
+      </div>
+      <div class="hero-right" id="heroCards"></div>
     </div>
   </div>
-  <div class="hero-right" id="heroCards"></div>
+
+  <!-- Slide 2 — oferta relámpago con countdown real -->
+  <div class="hero-slide" data-slide="1">
+    <div class="hero-glow hero-glow--red"></div>
+    <div class="hero-flash-banner">
+      <span class="hero-flash-icon">⚡</span>
+      <span class="hero-flash-label" id="flashSaleLabel">OFERTA RELÁMPAGO</span>
+      <div class="hero-flash-clock" id="flashSaleClock" hidden>
+        <span id="flashH">00</span><b>:</b><span id="flashM">00</span><b>:</b><span id="flashS">00</span>
+      </div>
+    </div>
+    <div class="hero-slide-row">
+      <div class="hero-left">
+        <h1 class="hero-title">
+          Hasta <span class="hero-title-accent-red">20% off</span><br>en iPhones seleccionados.
+        </h1>
+        <p class="hero-sub">Stock limitado, sellados y con garantía escrita. Se agotan rápido.</p>
+        <a href="#productsSection" class="hero-cta hero-cta-red">Ver ofertas <span>→</span></a>
+      </div>
+      <div class="hero-right" id="heroFlashCard"></div>
+    </div>
+  </div>
+
+  <!-- Slide 3 — plan canje usado por nuevo -->
+  <div class="hero-slide" data-slide="2">
+    <div class="hero-glow hero-glow--green"></div>
+    <div class="hero-slide-row">
+      <div class="hero-left">
+        <div class="hero-eyebrow">♻️ Plan canje · Tasado al instante</div>
+        <h1 class="hero-title">
+          Entregá tu usado,<br><span class="hero-title-accent-green">llevate el nuevo</span>
+        </h1>
+        <p class="hero-sub">Tasamos tu equipo al toque y descontamos el valor de tu compra. Sin vueltas.</p>
+        <a href="#productsSection" class="hero-cta hero-cta-green">Cotizar mi equipo <span>→</span></a>
+      </div>
+      <div class="hero-right hero-trade" id="heroTradeCards"></div>
+    </div>
+  </div>
+
+  <div class="hero-controls">
+    <button class="hero-arrow" id="heroPrev" aria-label="Slide anterior">‹</button>
+    <div class="hero-dots" id="heroDots"></div>
+    <button class="hero-arrow" id="heroNext" aria-label="Slide siguiente">›</button>
+  </div>
 </section>
 
 <!-- TOOLBAR -->
@@ -788,8 +906,8 @@ body { font-family: 'Inter', sans-serif; background: var(--gray-50); color: var(
   <div class="modal">
     <div class="modal-success">
       <div class="success-icon">✅</div>
-      <h2>¡Pedido confirmado!</h2>
-      <p>Avisanos por WhatsApp para coordinar el pago y la entrega. Guardá el detalle de tu pedido.</p>
+      <h2>¡Ya casi! Confirmalo por WhatsApp</h2>
+      <p>Tu pedido todavía no fue enviado. Tocá "Avisarnos por WhatsApp" para mandarlo y coordinar el pago y la entrega.</p>
       <button class="btn-whatsapp" onclick="enviarWhatsapp()">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
         Avisarnos por WhatsApp
@@ -853,8 +971,14 @@ body { font-family: 'Inter', sans-serif; background: var(--gray-50); color: var(
 // CONFIG — Solo tocá esto
 // ═══════════════════════════════════════
 const IMAGES_BASE_URL = ""; // URL base imágenes Drive (cuando las tengas)
+<<<<<<< HEAD
 const CAT_EMOJI  = { iphones:"📱", samsung:"📱", applewatch:"⌚", airpods:"🎧", macbook:"💻", ipad:"🖥️", accesorios:"🔌", usados:"📲" };
 const CAT_LABELS = { iphones:"iPhones", samsung:"Samsung", applewatch:"Apple Watch", airpods:"AirPods", macbook:"MacBook", ipad:"iPad", accesorios:"Accesorios", usados:"Usados verificados" };
+=======
+const WHATSAPP_NUMBER = "5493415094312";
+const CAT_EMOJI  = { iphones:"📱", airpods:"🎧", accesorios:"🔌", usados:"📲" };
+const CAT_LABELS = { iphones:"iPhones", airpods:"AirPods", accesorios:"Accesorios", usados:"Usados verificados" };
+>>>>>>> 657d2afdec150f0ebe13d511e5bd065e5729becf
 
 // ═══════════════════════════════════════
 // PRODUCTOS — Editá acá o usá el script
@@ -863,6 +987,7 @@ const CAT_LABELS = { iphones:"iPhones", samsung:"Samsung", applewatch:"Apple Wat
 let PRODUCTOS = [
   /* ── SELLADOS ── */
   { id:1,  cat:"iphones", nombre:"iPhone 17 128GB",         sub:"Sellado · Nuevo",    disponibilidad:"disponible", precioStock:950,  imagen:"./img/iphone17-white.jpg",        caracteristicas:"White"                          },
+  { id:14, cat:"iphones", nombre:"iPhone 17 256GB",         sub:"Sellado · Nuevo",    disponibilidad:"disponible", precioStock:950,  imagen:"./img/iphone17-black.png",        caracteristicas:"Black"                          },
   { id:2,  cat:"iphones", nombre:"iPhone 17 Pro 256GB",     sub:"Sellado · Nuevo",    disponibilidad:"disponible", precioStock:1250, imagen:"./img/iphone17-pro-orange.jpg",   caracteristicas:"Cosmic Orange"                  },
   { id:3,  cat:"iphones", nombre:"iPhone 17 Pro 256GB",     sub:"Sellado · Nuevo",    disponibilidad:"disponible", precioStock:1250, imagen:"./img/iphone17-pro-silver.jpg",   caracteristicas:"Silver"                         },
   { id:4,  cat:"iphones", nombre:"iPhone 17 Pro 256GB",     sub:"Sellado · Nuevo",    disponibilidad:"disponible", precioStock:1250, imagen:"./img/iphone17-pro-blue.jpg",     caracteristicas:"Deep Blue"                      },
@@ -889,6 +1014,7 @@ let PRODUCTOS = [
 let cart = {}; // { id: qty }
 let currentCat = "todos";
 let pedidoConfirmado = null;
+let whatsappEnviado = false;
 
 function driveUrl(url) {
   if (!url) return "";
@@ -942,7 +1068,6 @@ function renderProducts() {
     html += `</div>`;
   });
   section.innerHTML = html;
-  updateCounts();
 }
 
 function productCard(p) {
@@ -968,12 +1093,11 @@ function productCard(p) {
         <button class="btn-add" onclick="addItem(${p.id})">+</button>
        </div>`
     : `<div class="product-actions">
-        <div class="qty-control">
+        <div class="qty-control" style="flex:1;justify-content:center">
           <button class="qty-btn" onclick="changeQty(${p.id},-1)">−</button>
           <span class="qty-num">${qty}</span>
           <button class="qty-btn" onclick="changeQty(${p.id},1)">+</button>
         </div>
-        <button class="btn-add added" onclick="changeQty(${p.id},1)">✓</button>
        </div>`;
 
   return `<div class="product-card ${noDisp?'out-of-stock':''}" id="card-${p.id}">
@@ -990,6 +1114,7 @@ function productCard(p) {
   </div>`;
 }
 
+<<<<<<< HEAD
 function updateCounts() {
   const cats = ["todos","iphones","samsung","applewatch","airpods","macbook","ipad","accesorios","usados"];
   cats.forEach(c => {
@@ -999,6 +1124,8 @@ function updateCounts() {
   });
 }
 
+=======
+>>>>>>> 657d2afdec150f0ebe13d511e5bd065e5729becf
 // ─── CARRITO ──────────────────────────
 function addItem(id) {
   cart[id] = 1;
@@ -1114,6 +1241,7 @@ function confirmarPedido() {
   if (!valid) return;
 
   pedidoConfirmado = { nombre, tel, pago, entrega, obs, items: {...cart} };
+  whatsappEnviado = false;
   closeCheckout();
   document.getElementById("successModal").classList.add("open");
 }
@@ -1137,8 +1265,9 @@ function enviarWhatsapp() {
   });
   msg += `\n*Total: USD $${total.toFixed(0)}*`;
   if (obs) msg += `\n\n📝 *Obs:* ${obs}`;
-  const wa = `https://wa.me/5493415000000?text=${encodeURIComponent(msg)}`;
+  const wa = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
   window.open(wa, "_blank");
+  whatsappEnviado = true;
 }
 
 function verPedidoPDF() {
@@ -1182,6 +1311,10 @@ function verPedidoPDF() {
 }
 
 function cerrarSuccess() {
+  if (!whatsappEnviado) {
+    const salir = confirm("Todavía no enviaste tu pedido por WhatsApp. Si salís ahora, se pierde el detalle. ¿Salir igual?");
+    if (!salir) return;
+  }
   document.getElementById("successModal").classList.remove("open");
   cart = {};
   renderProducts();
@@ -1317,28 +1450,166 @@ function addFromDetail() {
 function renderHeroCards() {
   const container = document.getElementById("heroCards");
   if (!container) return;
+  const p = PRODUCTOS.find(x => x.id === 3);
+  if (!p) return;
+  const storageMatch = p.nombre.match(/(\d+GB)/);
+  const storage = storageMatch ? storageMatch[1] : "";
+  const modelo = storage ? p.nombre.replace(storage, "").trim() : p.nombre;
   container.innerHTML = `
     <div class="hero-feature">
-      <span class="hero-feature-badge">OFERTA</span>
+      <span class="hero-feature-badge">100% ORIGINAL</span>
       <div class="hero-feature-img">
-        <img src="./img/iphone17-pro-silver.jpg" alt="iPhone 17 Pro Silver" onerror="this.parentNode.innerHTML='<span style=&quot;font-size:64px&quot;>📱</span>'"/>
+        <img src="${driveUrl(p.imagen)}" alt="${p.nombre}" onerror="this.parentNode.innerHTML='<span style=&quot;font-size:64px&quot;>${p.emoji}</span>'"/>
       </div>
       <div class="hero-feature-body">
-        <div class="hero-feature-name">iPhone 17 Pro · 256GB</div>
+        <div class="hero-feature-name">${modelo}${storage ? ` · ${storage}` : ""}</div>
         <div class="hero-feature-meta">
           <span class="hero-feature-swatch"></span>
-          <span style="color:rgba(255,255,255,0.85)">Silver</span>
-          <span style="color:var(--blue-light)">· Sellado · Garantía 12 meses</span>
+          <span style="color:rgba(255,255,255,0.85)">${p.caracteristicas}</span>
+          <span style="color:var(--blue-light)">· ${p.sub} · Garantía 12 meses</span>
         </div>
-        <div class="hero-feature-price"><b>USD 1.250</b></div>
-        <button class="hero-feature-btn" onclick="openDetail(3)">Ver producto →</button>
+        <div class="hero-feature-price"><b>USD $${p.precioStock}</b></div>
+        <button class="hero-feature-btn" onclick="openDetail(${p.id})">Ver producto →</button>
       </div>
     </div>`;
 }
 
+// ─── HERO — OFERTA RELÁMPAGO (slide 2) ────
+function renderHeroFlashCard() {
+  const container = document.getElementById("heroFlashCard");
+  if (!container) return;
+  const p = PRODUCTOS.find(x => x.id === 2); // iPhone 17 Pro Cosmic Orange
+  if (!p) return;
+  const discounted = Math.round(p.precioStock * 0.8);
+  const storageMatch = p.nombre.match(/(\d+GB)/);
+  const storage = storageMatch ? storageMatch[1] : "";
+  const modelo = storage ? p.nombre.replace(storage, "").trim() : p.nombre;
+  container.innerHTML = `
+    <div class="hero-feature hero-feature--flash">
+      <span class="hero-feature-badge hero-feature-badge--flash">-20%</span>
+      <div class="hero-feature-img">
+        <img src="${driveUrl(p.imagen)}" alt="${p.nombre}" onerror="this.parentNode.innerHTML='<span style=&quot;font-size:64px&quot;>${p.emoji}</span>'"/>
+      </div>
+      <div class="hero-feature-body">
+        <div class="hero-feature-name">${modelo}${storage ? ` · ${storage}` : ""}</div>
+        <div class="hero-feature-meta">
+          <span class="hero-feature-swatch"></span>
+          <span style="color:rgba(255,255,255,0.85)">${p.caracteristicas}</span>
+          <span style="color:var(--red)">· ${p.sub}</span>
+        </div>
+        <div class="hero-feature-price"><b>USD $${discounted}</b> <span class="hero-feature-price-old">$${p.precioStock}</span></div>
+        <button class="hero-feature-btn hero-feature-btn--flash" onclick="openDetail(${p.id})">Ver producto →</button>
+      </div>
+    </div>`;
+}
+
+// ─── HERO — PLAN CANJE usado → nuevo (slide 3) ────
+function renderHeroTrade() {
+  const container = document.getElementById("heroTradeCards");
+  if (!container) return;
+  const usado = PRODUCTOS.find(x => x.id === 8);  // iPhone 15 128GB usado, verificado
+  const nuevo = PRODUCTOS.find(x => x.id === 1);  // iPhone 17 128GB sellado
+  if (!usado || !nuevo) return;
+  container.innerHTML = `
+    <div class="hero-trade-img hero-trade-img--old">
+      <img src="${driveUrl(usado.imagen)}" alt="${usado.nombre} usado a entregar como parte de pago" onerror="this.parentNode.innerHTML='<span style=&quot;font-size:48px&quot;>${usado.emoji}</span>'"/>
+    </div>
+    <div class="hero-trade-arrow">→</div>
+    <div class="hero-trade-img hero-trade-img--new">
+      <img src="${driveUrl(nuevo.imagen)}" alt="${nuevo.nombre} nuevo a llevar" onerror="this.parentNode.innerHTML='<span style=&quot;font-size:48px&quot;>${nuevo.emoji}</span>'"/>
+    </div>`;
+}
+
+// ─── HERO — countdown real de la oferta relámpago ────
+// GET /api/promotions/flash-sale → { end_date: "2026-07-29T18:00:00Z" }
+function initFlashSaleCountdown() {
+  const label = document.getElementById("flashSaleLabel");
+  const clock = document.getElementById("flashSaleClock");
+  const hEl = document.getElementById("flashH");
+  const mEl = document.getElementById("flashM");
+  const sEl = document.getElementById("flashS");
+  if (!label || !clock) return;
+  let tickTimer = null;
+
+  fetch("/api/promotions/flash-sale")
+    .then(res => { if (!res.ok) throw new Error("HTTP " + res.status); return res.json(); })
+    .then(data => {
+      const target = new Date(data.end_date).getTime();
+      if (Number.isNaN(target)) throw new Error("end_date inválido");
+
+      const tick = () => {
+        const remaining = Math.max(0, target - Date.now());
+        if (remaining === 0) {
+          clearInterval(tickTimer);
+          label.textContent = "OFERTA RELÁMPAGO · FINALIZADA";
+          clock.hidden = true;
+          return;
+        }
+        const totalSeconds = Math.floor(remaining / 1000);
+        hEl.textContent = String(Math.floor(totalSeconds / 3600)).padStart(2, "0");
+        mEl.textContent = String(Math.floor((totalSeconds % 3600) / 60)).padStart(2, "0");
+        sEl.textContent = String(totalSeconds % 60).padStart(2, "0");
+        label.textContent = "OFERTA RELÁMPAGO · TERMINA EN";
+        clock.hidden = false;
+      };
+      tick();
+      tickTimer = setInterval(tick, 1000);
+    })
+    .catch(() => {
+      label.textContent = "OFERTA RELÁMPAGO";
+      clock.hidden = true;
+    });
+}
+
+// ─── HERO — rotador: autoplay 5s, pausa on hover, dots, flechas ────
+function initHeroRotator() {
+  const root = document.getElementById("heroRotator");
+  if (!root) return;
+  const slides = [...root.querySelectorAll(".hero-slide")];
+  const dotsWrap = document.getElementById("heroDots");
+  const prevBtn = document.getElementById("heroPrev");
+  const nextBtn = document.getElementById("heroNext");
+  let idx = 0;
+  let timer = null;
+
+  function renderDots() {
+    dotsWrap.innerHTML = slides
+      .map((_, i) => `<button class="hero-dot${i === idx ? " is-active" : ""}" data-i="${i}" aria-label="Ir al slide ${i + 1}"></button>`)
+      .join("");
+  }
+  function show(n) {
+    idx = ((n % slides.length) + slides.length) % slides.length;
+    slides.forEach((s, j) => s.classList.toggle("is-active", j === idx));
+    renderDots();
+  }
+  function start() {
+    clearInterval(timer);
+    timer = setInterval(() => show(idx + 1), 5000);
+  }
+  function pause() { clearInterval(timer); }
+
+  dotsWrap.addEventListener("click", (e) => {
+    const btn = e.target.closest(".hero-dot");
+    if (!btn) return;
+    show(Number(btn.dataset.i));
+    start();
+  });
+  prevBtn.addEventListener("click", () => { show(idx - 1); start(); });
+  nextBtn.addEventListener("click", () => { show(idx + 1); start(); });
+  root.addEventListener("mouseenter", pause);
+  root.addEventListener("mouseleave", start);
+
+  show(0);
+  start();
+}
+
 // ─── INIT ─────────────────────────────
-renderProducts();
 renderHeroCards();
+renderHeroFlashCard();
+renderHeroTrade();
+initFlashSaleCountdown();
+initHeroRotator();
+renderProducts();
 updateCartUI();
 </script>
 </body>
