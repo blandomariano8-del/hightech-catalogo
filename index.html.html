@@ -1475,7 +1475,6 @@ function renderHeroFlashCard() {
   if (!container) return;
   const p = PRODUCTOS.find(x => x.id === 2); // iPhone 17 Pro Cosmic Orange
   if (!p) return;
-  const discounted = Math.round(p.precioStock * 0.8);
   const storageMatch = p.nombre.match(/(\d+GB)/);
   const storage = storageMatch ? storageMatch[1] : "";
   const modelo = storage ? p.nombre.replace(storage, "").trim() : p.nombre;
@@ -1492,7 +1491,7 @@ function renderHeroFlashCard() {
           <span style="color:rgba(255,255,255,0.85)">${p.caracteristicas}</span>
           <span style="color:var(--red)">· ${p.sub}</span>
         </div>
-        <div class="hero-feature-price"><b>USD $${discounted}</b> <span class="hero-feature-price-old">$${p.precioStock}</span></div>
+        <div class="hero-feature-price"><b>USD $${p.precioStock}</b> <span class="hero-feature-price-old">$1250</span></div>
         <button class="hero-feature-btn hero-feature-btn--flash" onclick="openDetail(${p.id})">Ver producto →</button>
       </div>
     </div>`;
