@@ -1511,46 +1511,6 @@ function renderHeroTrade() {
     </div>`;
 }
 
-// ─── HERO — countdown real de la oferta relámpago ────
-// GET /api/promotions/flash-sale → { end_date: "2026-07-29T18:00:00Z" }
-function initFlashSaleCountdown() {
-  const label = document.getElementById("flashSaleLabel");
-  const clock = document.getElementById("flashSaleClock");
-  const hEl = document.getElementById("flashH");
-  const mEl = document.getElementById("flashM");
-  const sEl = document.getElementById("flashS");
-  if (!label || !clock) return;
-  let tickTimer = null;
-
-  fetch("/api/promotions/flash-sale")
-    .then(res => { if (!res.ok) throw new Error("HTTP " + res.status); return res.json(); })
-    .then(data => {
-      const target = new Date(data.end_date).getTime();
-      if (Number.isNaN(target)) throw new Error("end_date inválido");
-
-      const tick = () => {
-        const remaining = Math.max(0, target - Date.now());
-        if (remaining === 0) {
-          clearInterval(tickTimer);
-          label.textContent = "OFERTA RELÁMPAGO · FINALIZADA";
-          clock.hidden = true;
-          return;
-        }
-        const totalSeconds = Math.floor(remaining / 1000);
-        hEl.textContent = String(Math.floor(totalSeconds / 3600)).padStart(2, "0");
-        mEl.textContent = String(Math.floor((totalSeconds % 3600) / 60)).padStart(2, "0");
-        sEl.textContent = String(totalSeconds % 60).padStart(2, "0");
-        label.textContent = "OFERTA RELÁMPAGO · TERMINA EN";
-        clock.hidden = false;
-      };
-      tick();
-      tickTimer = setInterval(tick, 1000);
-    })
-    .catch(() => {
-      label.textContent = "OFERTA RELÁMPAGO";
-      clock.hidden = true;
-    });
-}
 
 // ─── HERO — rotador: autoplay 5s, pausa on hover, dots, flechas ────
 function initHeroRotator() {
