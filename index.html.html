@@ -1481,7 +1481,6 @@ function renderHeroFlashCard() {
   const modelo = storage ? p.nombre.replace(storage, "").trim() : p.nombre;
   container.innerHTML = `
     <div class="hero-feature hero-feature--flash">
-      <span class="hero-feature-badge hero-feature-badge--flash">-20%</span>
       <div class="hero-feature-img">
         <img src="${driveUrl(p.imagen)}" alt="${p.nombre}" onerror="this.parentNode.innerHTML='<span style=&quot;font-size:64px&quot;>${p.emoji}</span>'"/>
       </div>
