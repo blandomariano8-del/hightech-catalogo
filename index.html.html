@@ -147,10 +147,14 @@ body { font-family: 'Inter', sans-serif; background: var(--gray-50); color: var(
 /* ── HERO ROTATOR (slides) ── */
 .hero-slides-wrap {
   display: grid;
+  min-height: 280px;
 }
 .hero-slides-wrap > .hero-slide {
   grid-column: 1;
   grid-row: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 .hero-slide {
   opacity: 0;
