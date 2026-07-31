@@ -1469,9 +1469,7 @@ function renderHeroCards() {
       <div class="hero-feature-body">
         <div class="hero-feature-name">${modelo}${storage ? ` · ${storage}` : ""}</div>
         <div class="hero-feature-meta">
-          <span class="hero-feature-swatch"></span>
-          <span style="color:rgba(255,255,255,0.85)">${p.caracteristicas}</span>
-          <span style="color:var(--blue-light)">· ${p.sub} · Garantía 12 meses</span>
+          <span style="color:var(--blue-light)">${p.sub} · Garantía 12 meses</span>
         </div>
         <div class="hero-feature-price"><b>USD $${p.precioStock}</b></div>
         <button class="hero-feature-btn" onclick="openDetail(${p.id})">Ver producto →</button>
