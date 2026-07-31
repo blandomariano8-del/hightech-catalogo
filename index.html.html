@@ -1497,9 +1497,7 @@ function renderHeroFlashCard() {
       <div class="hero-feature-body">
         <div class="hero-feature-name">${modelo}${storage ? ` · ${storage}` : ""}</div>
         <div class="hero-feature-meta">
-          <span class="hero-feature-swatch"></span>
-          <span style="color:rgba(255,255,255,0.85)">${p.caracteristicas}</span>
-          <span style="color:var(--red)">· ${p.sub}</span>
+          <span style="color:var(--red)">${p.sub}</span>
         </div>
         <div class="hero-feature-price"><b>USD $${p.precioStock}</b> <span class="hero-feature-price-old">$1250</span></div>
         <button class="hero-feature-btn hero-feature-btn--flash" onclick="openDetail(${p.id})">Ver producto →</button>
