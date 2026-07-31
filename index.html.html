@@ -1357,6 +1357,11 @@ function filterCat(btn) {
   currentCat = btn.dataset.cat;
   document.getElementById("searchInput").value = "";
   renderProducts();
+  const section = document.getElementById("productsSection");
+  if (section) {
+    const top = section.getBoundingClientRect().top + window.scrollY - 80;
+    window.scrollTo({ top, behavior: "smooth" });
+  }
 }
 
 // ─── FAQ ──────────────────────────────
