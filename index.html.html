@@ -85,13 +85,11 @@ body { font-family: 'Inter', sans-serif; background: var(--gray-50); color: var(
 
 .btn-faq {
   background: none; border: 1.5px solid rgba(255,255,255,0.2);
-  color: rgba(255,255,255,0.7); padding: 6px 14px; border-radius: 7px;
-  font-size: 12px; font-weight: 600; cursor: pointer; transition: all .2s;
-  font-family: 'Inter', sans-serif; white-space: nowrap;
+  color: rgba(255,255,255,0.7); width: 36px; height: 36px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; transition: all .2s; flex-shrink: 0;
 }
-.btn-faq:hover { background: rgba(255,255,255,0.1); color: var(--white); }
-.btn-faq-icon { display: none; }
-.btn-faq-label { display: inline; }
+.btn-faq:hover { background: rgba(255,255,255,0.15); color: var(--white); border-color: rgba(255,255,255,0.5); }
 .btn-cart {
   background: var(--blue); color: var(--white);
   border: none; padding: 8px 16px; border-radius: 8px;
