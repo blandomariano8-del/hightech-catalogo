@@ -1066,7 +1066,7 @@ function renderProducts() {
   });
 
   let html = "";
-  const catOrder = ["iphones","samsung","applewatch","airpods","macbook","ipad","accesorios","usados"];
+  const catOrder = ["iphones","usados","samsung","applewatch","airpods","macbook","ipad","accesorios"];
   catOrder.forEach(cat => {
     if (!byCat[cat]) return;
     html += `<div class="cat-label">${CAT_LABELS[cat]}</div>`;
