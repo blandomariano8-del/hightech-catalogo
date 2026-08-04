@@ -1514,7 +1514,7 @@ function openDetail(id) {
   const badgeTxt   = { disponible:"EN STOCK", agotado:"AGOTADO" };
 
   const imgHtml = p.imagen
-    ? `<img src="${driveUrl(p.imagen)}" alt="${p.nombre}"/>`
+    ? `<img src="${driveUrl(p.imagen)}" alt="${p.nombre}" loading="lazy"/>`
     : `<div class="detail-img-emoji">${p.emoji}</div>`;
 
   let precios = "";
