@@ -1245,7 +1245,7 @@ function productCard(p) {
 
   return `<div class="product-card ${noDisp?'out-of-stock':''}" id="card-${p.id}">
     <div class="product-card-top" onclick="openDetail(${p.id})">
-      <div class="product-img" id="img-${p.id}">${p.imagen ? `<img src="${driveUrl(p.imagen)}" alt="${p.nombre}" onload="this.style.opacity=1" onerror="this.style.display='none';document.getElementById('fb-${p.id}').style.display='block'"/>` : ""}${badge}<span class="img-fallback" id="fb-${p.id}" style="${p.imagen ? 'display:none' : ''}">${p.emoji}</span></div>
+      <div class="product-img" id="img-${p.id}">${p.imagen ? `<img src="${driveUrl(p.imagen)}" alt="${p.nombre}" loading="lazy" onload="this.style.opacity=1" onerror="this.style.display='none';document.getElementById('fb-${p.id}').style.display='block'"/>` : ""}${badge}<span class="img-fallback" id="fb-${p.id}" style="${p.imagen ? 'display:none' : ''}">${p.emoji}</span></div>
       <div class="product-info">
         <div class="product-cat">${CAT_LABELS[p.cat]}</div>
         <div class="product-name">${p.nombre}</div>
