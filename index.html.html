@@ -3,10 +3,83 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>HIGHTECH Rosario — Catálogo</title>
+<title>HIGHTECH Rosario | iPhones, AirPods y Apple en Rosario</title>
+
+<!-- SEO básico -->
+<meta name="description" content="iPhones sellados y usados verificados, con garantía escrita, plan canje y envíos a todo el país. Encontranos en Puerto Norte, Rosario, Santa Fe. ¡Comprá seguro!"/>
+<meta name="keywords" content="iphone rosario, apple rosario, airpods rosario, iphone usado, iphone sellado, plan canje iphone, hightech rosario"/>
+<meta name="author" content="HIGHTECH Rosario"/>
+<meta name="robots" content="index, follow"/>
+<meta name="language" content="es-AR"/>
+<meta name="geo.region" content="AR-S"/>
+<meta name="geo.placename" content="Rosario, Santa Fe"/>
+<link rel="canonical" href="https://hightechrosario.com.ar/"/>
+
+<!-- Open Graph -->
+<meta property="og:type" content="website"/>
+<meta property="og:title" content="HIGHTECH Rosario | iPhones, AirPods y Apple en Rosario"/>
+<meta property="og:description" content="iPhones sellados y usados verificados, con garantía escrita, plan canje y envíos a todo el país. Encontranos en Puerto Norte, Rosario, Santa Fe."/>
+<meta property="og:url" content="https://hightechrosario.com.ar/"/>
+<meta property="og:image" content="https://hightechrosario.com.ar/img/iphone17-pro-blue.jpg"/>
+<meta property="og:image:alt" content="iPhone 17 Pro disponible en HIGHTECH Rosario"/>
+<meta property="og:locale" content="es_AR"/>
+<meta property="og:site_name" content="HIGHTECH Rosario"/>
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="HIGHTECH Rosario | iPhones, AirPods y Apple en Rosario"/>
+<meta name="twitter:description" content="iPhones sellados y usados verificados, con garantía escrita, plan canje y envíos a todo el país. Encontranos en Puerto Norte, Rosario, Santa Fe."/>
+<meta name="twitter:url" content="https://hightechrosario.com.ar/"/>
+<meta name="twitter:image" content="https://hightechrosario.com.ar/img/iphone17-pro-blue.jpg"/>
+
+<!-- Favicon -->
+<link rel="icon" type="image/svg+xml" href="favicon.svg"/>
+
+<!-- Preload -->
+<link rel="preload" href="favicon.svg" as="image" type="image/svg+xml"/>
+<link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" as="style"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+
+<!-- Schema.org JSON-LD -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ElectronicsStore",
+  "name": "HIGHTECH Rosario",
+  "image": "https://hightechrosario.com.ar/img/iphone17-pro-blue.jpg",
+  "url": "https://hightechrosario.com.ar/",
+  "telephone": "+5493415094312",
+  "email": "contacto.hightechrosario@gmail.com",
+  "priceRange": "$$$",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Puerto Norte",
+    "addressLocality": "Rosario",
+    "addressRegion": "Santa Fe",
+    "postalCode": "2000",
+    "addressCountry": "AR"
+  },
+  "openingHoursSpecification": {
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
+    "opens": "09:00",
+    "closes": "20:00"
+  },
+  "areaServed": "AR",
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Catálogo HIGHTECH Rosario",
+    "itemListElement": [
+      { "@type": "OfferCatalog", "name": "iPhones sellados" },
+      { "@type": "OfferCatalog", "name": "iPhones usados verificados" },
+      { "@type": "OfferCatalog", "name": "AirPods" },
+      { "@type": "OfferCatalog", "name": "Accesorios Apple" }
+    ]
+  }
+}
+</script>
 <style>
 :root {
   --navy: #0D1B2A;
@@ -715,15 +788,16 @@ body { font-family: 'Inter', sans-serif; background: var(--gray-50); color: var(
 </head>
 <body>
 
+<header>
 <!-- NAVBAR TOP -->
-<nav class="navbar-top">
-  <a class="navbar-brand" href="#">
-    <div class="navbar-logo">HT</div>
+<nav class="navbar-top" aria-label="Navegación principal">
+  <a class="navbar-brand" href="#" aria-label="HIGHTECH Rosario — Inicio">
+    <div class="navbar-logo" aria-hidden="true">HT</div>
     <span class="navbar-name">HIGHTECH <span>ROSARIO</span></span>
   </a>
 
   <!-- CATEGORÍAS estilo Cells Home -->
-  <div class="navbar-cats">
+  <div class="navbar-cats" role="tablist" aria-label="Categorías de productos">
     <button class="nav-cat active" data-cat="todos" onclick="filterCat(this)">Todos</button>
     <button class="nav-cat" data-cat="sellados" onclick="filterCat(this)">Sellados</button>
     <button class="nav-cat" data-cat="usados" onclick="filterCat(this)">Usados</button>
@@ -732,13 +806,13 @@ body { font-family: 'Inter', sans-serif; background: var(--gray-50); color: var(
 
   <div class="navbar-right">
     <div class="nav-search-wrap">
-      <span class="nav-search-icon">⌕</span>
-      <input type="text" class="nav-search-input" id="searchInput" placeholder="Buscar..." oninput="renderProducts()"/>
+      <span class="nav-search-icon" aria-hidden="true">⌕</span>
+      <input type="text" class="nav-search-input" id="searchInput" placeholder="Buscar..." aria-label="Buscar productos" oninput="renderProducts()"/>
     </div>
-    <button class="btn-faq" onclick="openFaq()">FAQ</button>
-    <button class="btn-cart" onclick="openCart()">
+    <button class="btn-faq" onclick="openFaq()" aria-label="Ver preguntas frecuentes">FAQ</button>
+    <button class="btn-cart" onclick="openCart()" aria-label="Ver carrito de pedido">
       🛒 Pedido
-      <span class="cart-badge" id="cartBadge">0</span>
+      <span class="cart-badge" id="cartBadge" aria-live="polite">0</span>
     </button>
   </div>
 </nav>
@@ -783,9 +857,9 @@ body { font-family: 'Inter', sans-serif; background: var(--gray-50); color: var(
     </div>
     <div class="hero-slide-row">
       <div class="hero-left">
-        <h1 class="hero-title">
+        <h2 class="hero-title">
           Hasta <span class="hero-title-accent-red">20% off</span><br>en iPhones seleccionados.
-        </h1>
+        </h2>
         <p class="hero-sub">Stock limitado, sellados y con garantía escrita. Se agotan rápido.</p>
         <a href="#productsSection" class="hero-cta hero-cta-red">Ver ofertas <span>→</span></a>
       </div>
@@ -799,9 +873,9 @@ body { font-family: 'Inter', sans-serif; background: var(--gray-50); color: var(
     <div class="hero-slide-row">
       <div class="hero-left">
         <div class="hero-eyebrow">♻️ Plan canje · Tasado al instante</div>
-        <h1 class="hero-title">
+        <h2 class="hero-title">
           Entregá tu usado,<br><span class="hero-title-accent-green">llevate el nuevo</span>
-        </h1>
+        </h2>
         <p class="hero-sub">Tasamos tu equipo al toque y descontamos el valor de tu compra. Sin vueltas.</p>
         <a href="#productsSection" class="hero-cta hero-cta-green">Cotizar mi equipo <span>→</span></a>
       </div>
@@ -815,9 +889,12 @@ body { font-family: 'Inter', sans-serif; background: var(--gray-50); color: var(
     <button class="hero-arrow" id="heroNext" aria-label="Slide siguiente">›</button>
   </div>
 </section>
+</header>
 
+<main>
 <!-- TOOLBAR -->
 <div class="toolbar">
+  <label class="form-label" for="sortSelect" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)">Ordenar productos</label>
   <select class="sort-select" id="sortSelect" onchange="renderProducts()">
     <option value="default">Orden original</option>
     <option value="price-asc">Precio: menor a mayor</option>
@@ -828,13 +905,23 @@ body { font-family: 'Inter', sans-serif; background: var(--gray-50); color: var(
 
 <!-- PRODUCTOS -->
 <div class="products-section" id="productsSection"></div>
+</main>
+
+<footer style="background:var(--navy);color:rgba(255,255,255,0.7);padding:32px 28px;font-size:13px;line-height:1.8">
+  <strong style="color:#fff;font-size:15px">HIGHTECH Rosario</strong><br>
+  Puerto Norte, Rosario, Santa Fe, Argentina<br>
+  Tel/WhatsApp: <a href="https://wa.me/5493415094312" style="color:rgba(255,255,255,0.7)">+54 9 341 509-4312</a> ·
+  Email: <a href="mailto:contacto.hightechrosario@gmail.com" style="color:rgba(255,255,255,0.7)">contacto.hightechrosario@gmail.com</a><br>
+  Horario de atención: Lunes a Sábado de 9 a 20hs<br>
+  <span style="opacity:.6">© <span id="footerYear"></span> HIGHTECH Rosario. Todos los derechos reservados.</span>
+</footer>
 
 <!-- CARRITO OVERLAY + PANEL -->
 <div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
 <div class="cart-panel" id="cartPanel">
   <div class="cart-header">
     <h2>🛒 Tu pedido</h2>
-    <button class="btn-close" onclick="closeCart()">✕</button>
+    <button class="btn-close" onclick="closeCart()" aria-label="Cerrar carrito">✕</button>
   </div>
   <div class="cart-body" id="cartBody"></div>
   <div class="cart-footer">
@@ -850,7 +937,7 @@ body { font-family: 'Inter', sans-serif; background: var(--gray-50); color: var(
   <div class="modal">
     <div class="modal-header">
       <h2>Completá tus datos</h2>
-      <button class="btn-close" onclick="closeCheckout()">✕</button>
+      <button class="btn-close" onclick="closeCheckout()" aria-label="Cerrar formulario">✕</button>
     </div>
     <div class="modal-body">
       <div class="form-group">
@@ -918,7 +1005,7 @@ body { font-family: 'Inter', sans-serif; background: var(--gray-50); color: var(
   <div class="modal">
     <div class="modal-header">
       <h2>Preguntas frecuentes</h2>
-      <button class="btn-close" onclick="closeFaq()">✕</button>
+      <button class="btn-close" onclick="closeFaq()" aria-label="Cerrar preguntas frecuentes">✕</button>
     </div>
     <div class="modal-body">
       <div class="faq-list">
@@ -952,7 +1039,7 @@ body { font-family: 'Inter', sans-serif; background: var(--gray-50); color: var(
   <div class="detail-modal">
     <div class="detail-header">
       <h2 id="detailTitle">Detalle del producto</h2>
-      <button class="btn-close" onclick="closeDetail()">✕</button>
+      <button class="btn-close" onclick="closeDetail()" aria-label="Cerrar detalle del producto">✕</button>
     </div>
     <div class="detail-body" id="detailContent"></div>
   </div>
@@ -1053,7 +1140,7 @@ function renderProducts() {
   const catOrder = ["iphones","airpods","accesorios","usados"];
   catOrder.forEach(cat => {
     if (!byCat[cat]) return;
-    html += `<div class="cat-label">${CAT_LABELS[cat]}</div>`;
+    html += `<h2 class="cat-label">${CAT_LABELS[cat]}</h2>`;
     html += `<div class="products-grid">`;
     byCat[cat].forEach(p => { html += productCard(p); });
     html += `</div>`;
@@ -1077,26 +1164,26 @@ function productCard(p) {
     : qty === 0
     ? `<div class="product-actions">
         <div class="qty-control" style="flex:1;justify-content:center">
-          <button class="qty-btn" disabled>−</button>
+          <button class="qty-btn" disabled aria-label="Disminuir cantidad">−</button>
           <span class="qty-num">0</span>
-          <button class="qty-btn" disabled>+</button>
+          <button class="qty-btn" disabled aria-label="Aumentar cantidad">+</button>
         </div>
-        <button class="btn-add" onclick="addItem(${p.id})">+</button>
+        <button class="btn-add" onclick="addItem(${p.id})" aria-label="Agregar ${p.nombre} al pedido">+</button>
        </div>`
     : `<div class="product-actions">
         <div class="qty-control" style="flex:1;justify-content:center">
-          <button class="qty-btn" onclick="changeQty(${p.id},-1)">−</button>
+          <button class="qty-btn" onclick="changeQty(${p.id},-1)" aria-label="Disminuir cantidad">−</button>
           <span class="qty-num">${qty}</span>
-          <button class="qty-btn" onclick="changeQty(${p.id},1)">+</button>
+          <button class="qty-btn" onclick="changeQty(${p.id},1)" aria-label="Aumentar cantidad">+</button>
         </div>
        </div>`;
 
   return `<div class="product-card ${noDisp?'out-of-stock':''}" id="card-${p.id}">
     <div class="product-card-top" onclick="openDetail(${p.id})">
-      <div class="product-img" id="img-${p.id}">${p.imagen ? `<img src="${driveUrl(p.imagen)}" alt="${p.nombre}" onload="this.style.opacity=1" onerror="this.style.display='none';document.getElementById('fb-${p.id}').style.display='block'"/>` : ""}${badge}<span class="img-fallback" id="fb-${p.id}" style="${p.imagen ? 'display:none' : ''}">${p.emoji}</span></div>
+      <div class="product-img" id="img-${p.id}">${p.imagen ? `<img src="${driveUrl(p.imagen)}" alt="${p.nombre} - ${p.sub} - HIGHTECH Rosario" loading="lazy" onload="this.style.opacity=1" onerror="this.style.display='none';document.getElementById('fb-${p.id}').style.display='block'"/>` : ""}${badge}<span class="img-fallback" id="fb-${p.id}" style="${p.imagen ? 'display:none' : ''}" aria-hidden="true">${p.emoji}</span></div>
       <div class="product-info">
         <div class="product-cat">${CAT_LABELS[p.cat]}</div>
-        <div class="product-name">${p.nombre}</div>
+        <h3 class="product-name">${p.nombre}</h3>
         <div class="product-sub">${p.sub}</div>
         ${precios}
       </div>
@@ -1163,12 +1250,12 @@ function renderCartPanel() {
       <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px;flex-shrink:0">
         <div class="cart-item-price">USD $${(precio*qty).toFixed(0)}</div>
         <div class="cart-item-qty">
-          <button onclick="changeQty(${p.id},-1)">−</button>
+          <button onclick="changeQty(${p.id},-1)" aria-label="Disminuir cantidad">−</button>
           <span>${qty}</span>
-          <button onclick="changeQty(${p.id},1)">+</button>
+          <button onclick="changeQty(${p.id},1)" aria-label="Aumentar cantidad">+</button>
         </div>
       </div>
-      <button class="btn-remove" onclick="removeFromCart(${p.id})">🗑</button>
+      <button class="btn-remove" onclick="removeFromCart(${p.id})" aria-label="Eliminar ${p.nombre} del pedido">🗑</button>
     </div>`;
   });
   body.innerHTML = html;
@@ -1347,8 +1434,8 @@ function openDetail(id) {
   const badgeTxt   = { disponible:"EN STOCK", agotado:"AGOTADO" };
 
   const imgHtml = p.imagen
-    ? `<img src="${driveUrl(p.imagen)}" alt="${p.nombre}"/>`
-    : `<div class="detail-img-emoji">${p.emoji}</div>`;
+    ? `<img src="${driveUrl(p.imagen)}" alt="${p.nombre} - ${p.sub} - HIGHTECH Rosario" loading="lazy"/>`
+    : `<div class="detail-img-emoji" aria-hidden="true">${p.emoji}</div>`;
 
   let precios = "";
   if (p.precioStock) precios += `<div class="detail-price-main">USD $${p.precioStock}</div>`;
@@ -1374,9 +1461,9 @@ function openDetail(id) {
     ? `<div style="font-size:13px;color:var(--gray-400);padding:8px 0;text-align:center">No disponible</div>`
     : `<div class="detail-actions">
         <div class="detail-qty">
-          <button class="detail-qty-btn" onclick="changeDetailQty(-1)">−</button>
+          <button class="detail-qty-btn" onclick="changeDetailQty(-1)" aria-label="Disminuir cantidad">−</button>
           <span class="detail-qty-num" id="detailQtyNum">${detailQty}</span>
-          <button class="detail-qty-btn" onclick="changeDetailQty(1)">+</button>
+          <button class="detail-qty-btn" onclick="changeDetailQty(1)" aria-label="Aumentar cantidad">+</button>
         </div>
         <button class="btn-detail-add ${inCart?'added':''}" id="btnDetailAdd" onclick="addFromDetail()">
           ${inCart ? "✓ En el pedido" : "+ Agregar al pedido"}
@@ -1583,6 +1670,8 @@ function initHeroRotator() {
 }
 
 // ─── INIT ─────────────────────────────
+const footerYearEl = document.getElementById("footerYear");
+if (footerYearEl) footerYearEl.textContent = new Date().getFullYear();
 renderHeroCards();
 renderHeroFlashCard();
 renderHeroTrade();
