@@ -1683,36 +1683,28 @@ function renderHeroFlashCard() {
 function renderHeroTrade() {
   const container = document.getElementById("heroTradeCards");
   if (!container) return;
-  const usado = PRODUCTOS.find(x => x.id === 8);
-  const nuevo = PRODUCTOS.find(x => x.id === 1);
-  const usadoSrc = usado ? driveUrl(usado.imagen) : '';
-  const newSrc = nuevo ? driveUrl(nuevo.imagen) : '';
-  const imgIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.22)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>`;
+  const modelos = [
+    PRODUCTOS.find(x => x.id === 2),  // iPhone 17 Pro
+    PRODUCTOS.find(x => x.id === 5),  // iPhone 17 Pro Max
+  ].filter(Boolean);
+  function fmtPrice(p) {
+    return `USD ${p.precioStock.toLocaleString('es-AR')}`;
+  }
   container.innerHTML = `
-    <div class="hero-trade-panel">
-      <div class="hero-trade-col">
-        <div class="hero-trade-label-top">TU EQUIPO</div>
-        <label class="hero-trade-placeholder" title="Subí la foto de tu equipo actual">
-          <input type="file" accept="image/*" onchange="previewTradeUsado(this)">
-          <div id="tradeUsadoContent" style="display:flex;flex-direction:column;align-items:center;gap:8px;pointer-events:none;">
-            ${usadoSrc
-              ? `<img src="${usadoSrc}" style="width:88%;height:88%;object-fit:contain;" alt="${usado.nombre}" onerror="this.style.display='none'">`
-              : `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.28)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span class="hero-trade-ph-text">Foto del usado</span><span class="hero-trade-ph-hint">or browse files</span>`
-            }
+    <div class="hero-trade-cards">
+      ${modelos.map(p => `
+        <a href="#productsSection" class="hero-trade-card" onclick="event.preventDefault();document.getElementById('productsSection').scrollIntoView({behavior:'smooth'});">
+          <div class="hero-trade-card-badge">♻️ Plan Canje</div>
+          <div class="hero-trade-card-img">
+            <img src="${driveUrl(p.imagen)}" alt="${p.nombre}" onerror="this.style.opacity=0">
           </div>
-        </label>
-      </div>
-      <div class="hero-trade-connector">
-        <div class="hero-trade-line"></div>
-        <div class="hero-trade-circle">→</div>
-        <div class="hero-trade-line"></div>
-      </div>
-      <div class="hero-trade-col">
-        <div class="hero-trade-label-top hero-trade-label-top--new">TE LO LLEVÁS</div>
-        <div class="hero-trade-placeholder hero-trade-placeholder--new">
-          ${newSrc ? `<img src="${newSrc}" style="width:88%;height:88%;object-fit:contain;" alt="${nuevo.nombre}" onerror="this.replaceWith(document.createElementNS('http://www.w3.org/2000/svg','svg'))">` : imgIcon}
-        </div>
-      </div>
+          <div class="hero-trade-card-body">
+            <div class="hero-trade-card-name">${p.nombre}</div>
+            <div class="hero-trade-card-sub">${p.caracteristicas}</div>
+            <div class="hero-trade-card-price">${fmtPrice(p)}<span>Precio con canje</span></div>
+          </div>
+        </a>
+      `).join('')}
     </div>`;
 }
 
