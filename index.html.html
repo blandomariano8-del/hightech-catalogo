@@ -1680,7 +1680,7 @@ function renderHeroTrade() {
     <div class="hero-trade-cards">
       ${modelos.map(p => `
         <a href="#productsSection" class="hero-trade-card" onclick="event.preventDefault();document.getElementById('productsSection').scrollIntoView({behavior:'smooth'});">
-          <div class="hero-trade-card-badge">♻️ Plan Canje</div>
+          <div class="hero-trade-card-badge">Plan Canje</div>
           <div class="hero-trade-card-img">
             <img src="${driveUrl(p.imagen)}" alt="${p.nombre}" onerror="this.style.opacity=0">
           </div>
