@@ -1291,7 +1291,7 @@ function updateCounts() {
 // ─── CARRITO ──────────────────────────
 function addItem(id) {
   cart[id] = 1;
-  showToast("✓ Agregado al pedido");
+  showToast("Agregado al pedido");
   renderProducts();
   updateCartUI();
 }
@@ -1610,7 +1610,7 @@ function addFromDetail() {
   renderProducts();
   const btn = document.getElementById("btnDetailAdd");
   if (btn) { btn.classList.add("added"); btn.innerHTML = "✓ En el pedido"; }
-  showToast("✓ Agregado al pedido");
+  showToast("Agregado al pedido");
 }
 
 // ─── HERO CARDS ───────────────────────
