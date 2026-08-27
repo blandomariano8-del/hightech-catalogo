@@ -906,76 +906,35 @@ body { font-family: 'Poppins', sans-serif; background: var(--gray-50); color: va
 
 <main id="contenido-principal">
 <!-- HERO -->
-<section class="hero" id="heroRotator" aria-label="Banner principal">
-
-  <div class="hero-slides-wrap">
-  <!-- Slide 1 — mensaje de marca -->
-  <div class="hero-slide is-active" data-slide="0">
-    <div class="hero-arc"></div>
-    <div class="hero-slide-row">
-      <div class="hero-left">
-        <div class="hero-eyebrow">
-          <span class="hero-eyebrow-dot"></span>
-          Puerto Norte, Rosario · Stock real, hoy
-        </div>
-        <h1 class="hero-title">
-          Tu próximo <span>iPhone</span><br>empieza acá.
-        </h1>
-        <p class="hero-sub">Sellados, usados verificados y accesorios Apple.<br>Garantía escrita, envíos seguros y atención real.</p>
-        <a href="#productsSection" class="hero-cta">Ver catálogo <span>→</span></a>
-        <div class="hero-badges">
-          <span class="hero-badge">🛡️ Garantía escrita</span>
-          <span class="hero-badge">🔄 Plan canje</span>
-          <span class="hero-badge">✅ Equipos verificados</span>
-        </div>
+<section class="hero" aria-label="Banner principal">
+  <div class="hero-arc"></div>
+  <div class="hero-slide-row">
+    <div class="hero-left">
+      <div class="hero-eyebrow">
+        <span class="hero-eyebrow-dot"></span>
+        Puerto Norte, Rosario · Stock real, hoy
       </div>
-      <div class="hero-right" id="heroCards"></div>
-    </div>
-  </div>
-
-  <!-- Slide 2 — oferta relámpago con countdown real -->
-  <div class="hero-slide" data-slide="1">
-    <div class="hero-glow hero-glow--red"></div>
-    <div class="hero-flash-banner">
-      <span class="hero-flash-icon">⚡</span>
-      <span class="hero-flash-label" id="flashSaleLabel">OFERTA RELÁMPAGO</span>
-    </div>
-    <div class="hero-slide-row">
-      <div class="hero-left">
-        <h2 class="hero-title">
-          Hasta <span class="hero-title-accent-red">20% off</span><br>en iPhones seleccionados.
-        </h2>
-        <p class="hero-sub">Stock limitado, sellados y con garantía escrita. Se agotan rápido.</p>
-        <a href="#productsSection" class="hero-cta hero-cta-red">Ver ofertas <span>→</span></a>
+      <h1 class="hero-title">
+        Tu próximo <span>iPhone</span><br>empieza acá.
+      </h1>
+      <p class="hero-sub">Sellados, usados verificados y accesorios Apple.<br>Garantía escrita, envíos seguros y atención real.</p>
+      <a href="#productsSection" class="hero-cta">Ver catálogo <span>→</span></a>
+      <div class="hero-badges">
+        <span class="hero-badge">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          Garantía escrita
+        </span>
+        <span class="hero-badge">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.75"/></svg>
+          Plan canje
+        </span>
+        <span class="hero-badge">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          Equipos verificados
+        </span>
       </div>
-      <div class="hero-right" id="heroFlashCard"></div>
     </div>
-  </div>
-
-  <!-- Slide 3 — plan canje usado por nuevo -->
-  <div class="hero-slide" data-slide="2">
-    <div class="hero-glow hero-glow--green"></div>
-    <div class="hero-slide-row">
-      <div class="hero-left">
-        <div class="hero-eyebrow">♻️ Plan canje · Tasado al instante</div>
-        <h2 class="hero-title">
-          Entregá tu usado,<br><span class="hero-title-accent-green">llevate el nuevo</span>
-        </h2>
-        <p class="hero-sub">Tasamos tu equipo al toque y descontamos el valor de tu compra. Sin vueltas.</p>
-        <div class="hero-cta-row">
-          <a href="#productsSection" class="hero-cta hero-cta-green">Cotizar mi equipo <span>→</span></a>
-          <a href="https://wa.me/5493415094312" target="_blank" rel="noopener" class="hero-cta hero-cta-dark">Comprar por WhatsApp</a>
-        </div>
-      </div>
-      <div class="hero-right hero-trade" id="heroTradeCards"></div>
-    </div>
-  </div>
-  </div><!-- /hero-slides-wrap -->
-
-  <div class="hero-controls">
-    <button class="hero-arrow" id="heroPrev" aria-label="Slide anterior">‹</button>
-    <div class="hero-dots" id="heroDots"></div>
-    <button class="hero-arrow" id="heroNext" aria-label="Slide siguiente">›</button>
+    <div class="hero-right" id="heroCards"></div>
   </div>
 </section>
 
