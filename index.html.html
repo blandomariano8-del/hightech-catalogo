@@ -165,31 +165,6 @@ body { font-family: 'Poppins', sans-serif; background: var(--gray-50); color: va
   border: 24px solid var(--blue-light); opacity: .10;
 }
 
-/* ── HERO ROTATOR (slides) ── */
-.hero-slides-wrap {
-  display: grid;
-  min-height: 280px;
-}
-.hero-slides-wrap > .hero-slide {
-  grid-column: 1;
-  grid-row: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-.hero-slide {
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-  transition: opacity .45s ease;
-}
-.hero-slide.is-active {
-  opacity: 1;
-  visibility: visible;
-  pointer-events: auto;
-  animation: heroSlideIn .45s ease;
-}
-@keyframes heroSlideIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 .hero-slide-row {
   display: flex; align-items: center; justify-content: center;
   gap: 64px; position: relative; z-index: 2;
