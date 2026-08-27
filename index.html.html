@@ -1124,7 +1124,7 @@ let PRODUCTOS = [
   { id:37, cat:"ipad", nombre:"iPad Air 11\" M4 128GB", sub:"Sellado · Nuevo",  disponibilidad:"disponible", precioStock:850,  imagen:"./img/ipad-air11-m4-128gb.png",      caracteristicas:"Chip M4 · 11 pulgadas"           },
   { id:38, cat:"ipad", nombre:"iPad Air 11\" M4 256GB", sub:"Sellado · Nuevo",  disponibilidad:"disponible", precioStock:950,  imagen:"./img/ipad-air11-m4-256gb.png",      caracteristicas:"Chip M4 · 11 pulgadas"           },
   { id:39, cat:"ipad", nombre:"iPad Pro M5 256GB",     sub:"Sellado · Nuevo",   disponibilidad:"disponible", precioStock:1250, imagen:"./img/ipad-pro-m5-256gb.png",        caracteristicas:"Chip M5 · OLED"                  },
-].map(p => ({ ...p, emoji: CAT_EMOJI[p.cat] || "📦" }));
+].map(p => ({ ...p, emoji: CAT_SVG[p.cat] || CAT_SVG.accesorios }));
 
 // ═══════════════════════════════════════
 // CARGA DESDE GOOGLE SHEETS
