@@ -1426,7 +1426,7 @@ function enviarWhatsapp() {
     total += precio * qty;
   });
   msg += `\n*Total: USD $${total.toFixed(0)}*`;
-  if (obs) msg += `\n\n📝 *Obs:* ${obs}`;
+  if (obs) msg += `\n\n*Obs:* ${obs}`;
   const wa = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
   window.open(wa, "_blank");
   whatsappEnviado = true;
