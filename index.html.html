@@ -1583,9 +1583,8 @@ function renderHeroCards() {
   const modelo = storage ? p.nombre.replace(storage, "").trim() : p.nombre;
   container.innerHTML = `
     <div class="hero-feature">
-      <span class="hero-feature-badge">100% ORIGINAL</span>
       <div class="hero-feature-img">
-        <img src="${driveUrl(p.imagen)}" alt="${p.nombre}" onerror="this.parentNode.innerHTML='<span style=&quot;font-size:64px&quot;>${p.emoji}</span>'"/>
+        <img src="${driveUrl(p.imagen)}" alt="${p.nombre}" onerror="this.style.display='none'"/>
       </div>
       <div class="hero-feature-body">
         <div class="hero-feature-name">${modelo}${storage ? ` · ${storage}` : ""}</div>
