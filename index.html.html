@@ -1411,11 +1411,11 @@ function confirmarPedido() {
 function enviarWhatsapp() {
   if (!pedidoConfirmado) return;
   const { nombre, tel, pago, entrega, obs, items } = pedidoConfirmado;
-  let msg = `🛒 *Nuevo pedido — HIGHTECH Rosario*\n\n`;
-  msg += `👤 *Cliente:* ${nombre}\n`;
-  msg += `📞 *Teléfono:* ${tel}\n`;
-  msg += `💳 *Pago:* ${pago}\n`;
-  msg += `🚚 *Entrega:* ${entrega}\n\n`;
+  let msg = `*Nuevo pedido — HIGHTECH Rosario*\n\n`;
+  msg += `*Cliente:* ${nombre}\n`;
+  msg += `*Teléfono:* ${tel}\n`;
+  msg += `*Pago:* ${pago}\n`;
+  msg += `*Entrega:* ${entrega}\n\n`;
   msg += `*Productos:*\n`;
   let total = 0;
   Object.entries(items).forEach(([id, qty]) => {
