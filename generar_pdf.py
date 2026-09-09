@@ -236,10 +236,7 @@ def build():
         hdr = [
             Paragraph("FOTO", sColHdr),
             Paragraph("MODELO / VARIANTE", sColHdr),
-            Paragraph("x1", sColHdr),
-            Paragraph("x3\n(-$10)", sColHdr),
-            Paragraph("x5\n(-$20)", sColHdr),
-            Paragraph("x10\n(-$25)", sColHdr),
+            Paragraph("PRECIO", sColHdr),
         ]
 
         rows = [hdr]
