@@ -187,10 +187,10 @@ def build():
     story = []
     col_w = PAGE_W - 2*MARGIN
 
-    # Anchos de columna: [foto | modelo | x1 | x3 | x5 | x10]
+    # Anchos de columna: [foto | modelo | precio]
     IC = 19 * mm                   # columna foto
     rest = col_w - IC
-    cw = [IC, rest*0.42, rest*0.145, rest*0.145, rest*0.145, rest*0.145]
+    cw = [IC, rest*0.72, rest*0.28]
 
     # ── Bloque de condiciones ──────────────────────────────────
     cond_para = Paragraph(
