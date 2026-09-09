@@ -120,7 +120,7 @@ CAT_LABELS = {
 }
 
 def qty_prices(base):
-    return [f"USD {base}", f"USD {base-10}", f"USD {base-20}", f"USD {base-25}"]
+    return [f"USD {base}"]
 
 TODAY  = date.today().strftime("%d/%m/%Y")
 PAGE_W, PAGE_H = A4
