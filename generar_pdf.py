@@ -100,7 +100,7 @@ PRODUCTOS = [
     # ACCESORIOS
     {"cat":"accesorios","nombre":"Apple Pencil Pro",     "caracteristicas":"2a Generacion",                  "disp":"vendido",   "precio":140,  "img":"img/apple-pencil-pro.png"},
     {"cat":"accesorios","nombre":"AirTag",               "caracteristicas":"x1",                             "disp":"disponible","precio":40,   "img":"img/airtag.png"},
-    {"cat":"accesorios","nombre":"Cargador 20W",         "caracteristicas":"USB-C · Original Apple",         "disp":"disponible","precio":50,   "img":"img/cargador-20w.png"},
+    {"cat":"accesorios","nombre":"Cargador 20W",         "caracteristicas":"USB-C · Original Apple",         "disp":"disponible","precio":35,   "img":"img/cargador-20w.png"},
     {"cat":"accesorios","nombre":"Cable USB-C",          "caracteristicas":"Original Apple · 1m",            "disp":"disponible","precio":20,   "img":"img/cable-usbc.png"},
     {"cat":"accesorios","nombre":"Funda MagSafe",        "caracteristicas":"Compatible iPhone",              "disp":"disponible","precio":5,    "img":"img/funda-magsafe.png"},
     {"cat":"accesorios","nombre":"Templado",             "caracteristicas":"Vidrio templado · iPhone",       "disp":"disponible","precio":3,    "img":"img/templado.png"},
