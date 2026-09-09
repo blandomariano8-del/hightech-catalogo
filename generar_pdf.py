@@ -193,10 +193,8 @@ def build():
 
     # ── Bloque de condiciones ──────────────────────────────────
     cond_para = Paragraph(
-        "<b>Metodos de pago:</b> USDT / USDC &nbsp;·&nbsp; Transferencia en pesos (+3%) &nbsp;·&nbsp; "
-        "Efectivo (pesos o dolares).<br/>"
-        "Los equipos se pueden <b>MIXEAR</b> &nbsp;·&nbsp; precios por cantidad &nbsp;·&nbsp; "
-        "precios sujetos a cambio sin previo aviso.", sCondB)
+        "<b>Metodos de pago:</b> USDT / USDC &nbsp;·&nbsp; Efectivo (pesos o dolares).<br/>"
+        "Precios sujetos a cambio sin previo aviso.", sCondB)
     cond_tbl = Table([[cond_para]], colWidths=[col_w])
     cond_tbl.setStyle(TableStyle([
         ("BACKGROUND",    (0,0),(-1,-1), CONDBG),
