@@ -62,7 +62,7 @@ PRODUCTOS = [
     # IPHONES SELLADOS
     {"cat":"iphones","nombre":"iPhone 17 256GB",         "caracteristicas":"White",                          "disp":"disponible","precio":990,  "img":"img/iphone17-white.jpg"},
     {"cat":"iphones","nombre":"iPhone 17 256GB",         "caracteristicas":"Black",                          "disp":"disponible","precio":990,  "img":"img/iphone17-black.png"},
-    {"cat":"iphones","nombre":"iPhone 17 Pro 256GB",     "caracteristicas":"Cosmic Orange",                  "disp":"disponible","precio":1190, "img":"img/iphone17-pro-orange.jpg"},
+    {"cat":"iphones","nombre":"iPhone 17 Pro 256GB",     "caracteristicas":"Cosmic Orange",                  "disp":"disponible","precio":1250, "img":"img/iphone17-pro-orange.jpg"},
     {"cat":"iphones","nombre":"iPhone 17 Pro 256GB",     "caracteristicas":"Silver",                         "disp":"disponible","precio":1250, "img":"img/iphone17-pro-silver.jpg"},
     {"cat":"iphones","nombre":"iPhone 17 Pro 256GB",     "caracteristicas":"Deep Blue",                      "disp":"disponible","precio":1250, "img":"img/iphone17-pro-blue.jpg"},
     {"cat":"iphones","nombre":"iPhone 17 Pro Max 256GB", "caracteristicas":"Silver",                         "disp":"disponible","precio":1350, "img":"img/iphone17-pm-silver.jpg"},
