@@ -155,7 +155,7 @@ def draw_page(canvas, doc):
     canvas.drawString(MARGIN, h - 9.5*mm, "HIGHTECH ROSARIO")
     canvas.setFont("Poppins-Regular", 7)
     canvas.setFillColor(BLUEL)
-    canvas.drawString(MARGIN, h - 13.5*mm, "LISTA DE PRECIOS MAYORISTA")
+    canvas.drawString(MARGIN, h - 13.5*mm, "LISTA DE PRECIOS")
 
     canvas.setFont("Poppins-Regular", 7.5)
     canvas.setFillColor(BLUEL)
