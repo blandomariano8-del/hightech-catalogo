@@ -273,7 +273,7 @@ def build():
                           Paragraph(p["caracteristicas"], sSub)]
 
             if p["disp"] == "vendido":
-                price_cells = [Paragraph("VENDIDO", sPriceNA)] + [Paragraph("—", sPriceNA)]*3
+                price_cells = [Paragraph("VENDIDO", sPriceNA)]
             else:
                 price_cells = [Paragraph(v, sPrice) for v in qty_prices(p["precio"])]
 
