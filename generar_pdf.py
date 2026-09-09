@@ -78,7 +78,7 @@ PRODUCTOS = [
     {"cat":"usados", "nombre":"iPhone 16 Pro 128GB",     "caracteristicas":"Desert · Bateria 93%",           "disp":"disponible","precio":830,  "img":"img/iphone16-pro-desert.jpg"},
     {"cat":"usados", "nombre":"iPhone 16 Pro 128GB",     "caracteristicas":"White Titanium · Bateria 91%",   "disp":"disponible","precio":810,  "img":"img/iphone16-pro-white.png"},
     # MACBOOK
-    {"cat":"macbook","nombre":"MacBook Neo 256GB",       "caracteristicas":"Silver",                         "disp":"disponible","precio":850,  "img":"img/macbook-neo-silver.png"},
+    {"cat":"macbook","nombre":"MacBook Neo 256GB",       "caracteristicas":"Silver",                         "disp":"disponible","precio":870,  "img":"img/macbook-neo-silver.png"},
     {"cat":"macbook","nombre":'MacBook Air M5 13"',      "caracteristicas":"16GB RAM · 512GB · Midnight",    "disp":"disponible","precio":1450, "img":"img/macbook-air-m5-13.png"},
     # AIRPODS
     {"cat":"airpods","nombre":"AirPods Pro 3",           "caracteristicas":"USB-C",                          "disp":"disponible","precio":270,  "img":"img/airpods-pro-3.png"},
