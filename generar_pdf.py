@@ -98,7 +98,6 @@ PRODUCTOS = [
     {"cat":"samsung","nombre":"Samsung S25 Ultra",       "caracteristicas":"12GB RAM · 256GB · Black",       "disp":"disponible","precio":950,  "img":"img/samsung-s25-ultra-black.png"},
     {"cat":"samsung","nombre":"Samsung S26 Ultra",       "caracteristicas":"12GB RAM · 512GB · Black",       "disp":"disponible","precio":1250, "img":"img/samsung-s26-ultra-black.png"},
     # ACCESORIOS
-    {"cat":"accesorios","nombre":"Apple Pencil Pro",     "caracteristicas":"2a Generacion",                  "disp":"vendido",   "precio":140,  "img":"img/apple-pencil-pro.png"},
     {"cat":"accesorios","nombre":"AirTag",               "caracteristicas":"x1",                             "disp":"disponible","precio":40,   "img":"img/airtag.png"},
     {"cat":"accesorios","nombre":"Cargador 20W",         "caracteristicas":"USB-C · Original Apple",         "disp":"disponible","precio":35,   "img":"img/cargador-20w.png"},
     {"cat":"accesorios","nombre":"Cable USB-C",          "caracteristicas":"Original Apple · 1m",            "disp":"disponible","precio":20,   "img":"img/cable-usbc.png"},
